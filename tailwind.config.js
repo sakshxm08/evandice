@@ -7,7 +7,9 @@ export default {
         primary: "#DF9438",
       },
       fontFamily: {
-        primary: "'Poppins', sans-serif",
+        primary: ["Poppins", "sans-serif"],
+        title: ["Saiba", "sans-serif"],
+        titleOutline: ["Saiba-Outline", "sans-serif"],
       },
     },
   },

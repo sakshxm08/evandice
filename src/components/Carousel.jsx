@@ -47,7 +47,7 @@ const Carousel = () => {
     {
       desc: (
         <div className="flex flex-col items-center justify-center gap-12">
-          <div className="flex flex-col font-titleFont text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
+          <div className="flex flex-col  text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
@@ -74,7 +74,7 @@ const Carousel = () => {
     {
       desc: (
         <div className="flex flex-col items-center justify-center gap-12">
-          <div className="flex flex-col font-titleFont text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
+          <div className="flex flex-col  text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
@@ -101,7 +101,7 @@ const Carousel = () => {
     {
       desc: (
         <div className="flex flex-col items-center justify-center gap-12">
-          <div className="flex flex-col font-titleFont text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
+          <div className="flex flex-col text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
