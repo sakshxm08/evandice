@@ -4,7 +4,7 @@ import { FiTwitter } from "react-icons/fi";
 const Footer = () => {
   return (
     <div className="flex flex-col max-w-5xl items-center justify-center mx-auto py-16 gap-8">
-      <h1 className="text-6xl font-title uppercase">Contact us</h1>
+      <h1 className="text-title font-title uppercase">Contact us</h1>
       <div className="grid grid-cols-4">
         <div className="flex flex-col gap-6 w-full col-span-3 pr-48">
           <EvLogo width={200} />

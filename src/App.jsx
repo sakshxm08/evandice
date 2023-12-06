@@ -27,6 +27,10 @@ function App() {
           path: "",
           element: <Home />,
         },
+        {
+          path: "try",
+          element: <Footer />,
+        },
       ],
     },
   ]);

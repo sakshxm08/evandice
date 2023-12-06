@@ -50,7 +50,10 @@ const Header = () => {
           ))}
         </div>
         <div className="flex items-center gap-4 justify-center h-8">
-          <Link className=" w-20 text-sm flex items-center justify-center h-full border-[1.5px] border-primary text-primary font-semibold hover:bg-primary hover:text-black transition-all">
+          <Link
+            to="/try"
+            className=" w-20 text-sm flex items-center justify-center h-full border-[1.5px] border-primary text-primary font-semibold hover:bg-primary hover:text-black transition-all"
+          >
             Login
           </Link>
           <Link className="w-20 text-sm flex items-center justify-center h-full bg-primary text-black font-semibold hover:bg-primary/75 hover:border-primary/75 transition-all">

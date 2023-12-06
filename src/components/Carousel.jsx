@@ -5,6 +5,7 @@ import Slider from "react-slick";
 import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import PropTypes from "prop-types";
+import { useState } from "react";
 
 function NextArrow(props) {
   const { onClick } = props;
@@ -31,6 +32,21 @@ function PrevArrow(props) {
 }
 
 const Carousel = () => {
+  const [currSlide, setCurrSlide] = useState(0);
+  const active = {
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    outline: "0",
+    width: "24px",
+    height: "6px",
+    borderRadius: "100px",
+  };
+  const inactive = {
+    backgroundColor: "rgba(255, 255, 255, 0.8)",
+    outline: "0",
+    width: "6px",
+    height: "6px",
+    borderRadius: "100%",
+  };
   const settings = {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -42,6 +58,30 @@ const Carousel = () => {
     autoplaySpeed: 5000,
     slidesToScroll: 1,
     pauseOnHover: true,
+    appendDots: (dots) => {
+      return (
+        <div>
+          <ul>
+            {dots.map((item, index) => {
+              return <li key={index}>{item.props.children}</li>;
+            })}
+          </ul>
+        </div>
+      );
+    },
+    beforeChange: (prev, next) => {
+      setCurrSlide(next);
+    },
+    customPaging: (index) => {
+      return (
+        <button
+          className="-mt-40 !p-0 mx-auto transition-all duration-500 origin-center"
+          style={index === currSlide ? active : inactive}
+        >
+          {index + 1}
+        </button>
+      );
+    },
   };
   const carousel_data = [
     {

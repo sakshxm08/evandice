@@ -11,6 +11,9 @@ export default {
         title: ["Saiba", "sans-serif"],
         titleOutline: ["Saiba-Outline", "sans-serif"],
       },
+      fontSize: {
+        title: "3.75rem",
+      },
     },
   },
   plugins: [],
