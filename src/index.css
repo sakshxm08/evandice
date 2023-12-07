@@ -23,3 +23,11 @@ body {
   min-width: 320px;
   min-height: 100vh;
 }
+
+.search-suggestions {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+.search-suggestions::-webkit-scrollbar {
+  display: none;
+}

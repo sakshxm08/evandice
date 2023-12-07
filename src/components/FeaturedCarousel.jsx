@@ -11,11 +11,11 @@ function NextArrow(props) {
   return (
     <button
       className={`absolute top-1/2 -right-20 h-20 -translate-y-1/2 z-20 ${
-        onClick ? "cursor-pointer" : "cursor-not-allowed"
+        onClick ? "cursor-pointer" : "cursor-default"
       } flex items-center justify-center`}
       onClick={onClick}
     >
-      <EvRightArrow fill={onClick ? "white" : "gray"} />
+      <EvRightArrow fill={onClick ? "white" : "none"} />
     </button>
   );
 }
@@ -25,11 +25,11 @@ function PrevArrow(props) {
   return (
     <button
       className={`absolute top-1/2 -left-20 h-20 -translate-y-1/2 z-20 ${
-        onClick ? "cursor-pointer" : "cursor-not-allowed"
+        onClick ? "cursor-pointer" : "cursor-default"
       } flex items-center justify-center`}
       onClick={onClick}
     >
-      <EvLeftArrow fill={onClick ? "white" : "gray"} />
+      <EvLeftArrow fill={onClick ? "white" : "none"} />
     </button>
   );
 }

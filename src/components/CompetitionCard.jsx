@@ -3,7 +3,7 @@ import { competition_img } from "../assets/images/images";
 
 const CompetitionCard = () => {
   return (
-    <div className="w-full bg-black/60 backdrop-blur-sm flex flex-col items-center justify-center p-4 rounded-xl gap-4">
+    <div className="w-full bg-black/40 backdrop-blur-md flex flex-col items-center justify-center p-4 rounded-xl gap-4 hover:scale-105 hover:rotate-3 duration-300 transition-all ">
       <img src={competition_img} alt="Competitions" />
       <h2 className="font-semibold text-3xl">Hackathons</h2>
       <div className="text-center text-sm">

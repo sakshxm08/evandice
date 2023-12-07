@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-const EvRightArrow = ({ fill = "white" }) => {
+const EvRightArrow = ({ fill = "white", width = 26 }) => {
   return (
     <svg
-      width="26"
-      height="46"
+      width={width}
+      height={(width * 46) / 26}
       viewBox="0 0 26 46"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -18,6 +18,7 @@ const EvRightArrow = ({ fill = "white" }) => {
 
 EvRightArrow.propTypes = {
   fill: PropTypes.string,
+  width: PropTypes.number,
 };
 
 export default EvRightArrow;
