@@ -51,7 +51,7 @@ const Header = () => {
         </div>
         <div className="flex items-center gap-4 justify-center h-8">
           <Link
-            to="/try"
+            to="/login"
             className=" w-20 text-sm flex items-center justify-center h-full border-[1.5px] border-primary text-primary font-semibold hover:bg-primary hover:text-black transition-all"
           >
             Login
