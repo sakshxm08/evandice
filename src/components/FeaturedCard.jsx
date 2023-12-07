@@ -1,10 +1,12 @@
 import PropTypes from "prop-types";
 import { card_img } from "../assets/images/images";
 import { Link } from "react-router-dom";
-const FeaturedCard = () => {
+const FeaturedCard = ({ width = "w-full" }) => {
   const keywords = ["live", "trending"];
   return (
-    <div className="w-11/12 h-96 relative mx-auto rounded-2xl overflow-hidden group">
+    <div
+      className={`${width} aspect-[3/5] relative mx-auto rounded-2xl overflow-hidden group`}
+    >
       <img
         src={card_img}
         alt=""
@@ -18,7 +20,7 @@ const FeaturedCard = () => {
         <div className="flex flex-wrap gap-2 items-center justify-center">
           {keywords.slice(0, 3).map((keyword, index) => (
             <span
-              key={{ index }}
+              key={index}
               className="rounded-full text-xs uppercase py-1 px-4 border font-medium hover:bg-white transition-all hover:text-black cursor-pointer"
             >
               {keyword}
@@ -44,6 +46,6 @@ const FeaturedCard = () => {
 };
 
 FeaturedCard.propTypes = {
-  index: PropTypes.number,
+  width: PropTypes.string,
 };
 export default FeaturedCard;

@@ -51,7 +51,7 @@ const FeaturedCarousel = () => {
       <Slider {...settings}>
         {events.map((number, index) => (
           <div key={index} className="mx-auto">
-            <FeaturedCard index={index} />
+            <FeaturedCard index={index} width="w-11/12" />
           </div>
         ))}
       </Slider>

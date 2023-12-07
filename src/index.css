@@ -31,3 +31,16 @@ body {
 .search-suggestions::-webkit-scrollbar {
   display: none;
 }
+.gallery .slick-center {
+  /* margin: auto 32px; */
+  scale: 1 !important;
+  translate: 20px;
+}
+.gallery .slick-slide {
+  scale: 0.7;
+  translate: 0;
+  /* transform: translate3d(250px, 0, 0); */
+  transform-origin: center;
+  transition-timing-function: ease-in-out;
+  transition: all 2.5s;
+}

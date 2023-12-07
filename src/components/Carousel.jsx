@@ -57,7 +57,6 @@ const Carousel = () => {
     autoplay: true,
     autoplaySpeed: 3000,
     slidesToScroll: 1,
-    pauseOnHover: false,
     appendDots: (dots) => {
       return (
         <div>

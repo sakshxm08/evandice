@@ -1,12 +1,15 @@
+import { gallery_bg, hero_img_2 } from "../assets/images/images";
 import Carousel from "../components/Carousel";
 import CompetitionCard from "../components/CompetitionCard";
+import EventSearches from "../components/EventSearches";
 import FeaturedCarousel from "../components/FeaturedCarousel";
+import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 
 const Home = () => {
   const competitions = ["", "", "", "", ""];
   return (
-    <>
+    <div className="select-none">
       <Carousel />
       <div className="flex flex-col items-center justify-center py-12 gap-16">
         <div className="flex flex-col items-center justify-center">
@@ -63,9 +66,38 @@ const Home = () => {
             </div>
           </div>
           <Search />
+          <EventSearches />
         </div>
       </div>
-    </>
+
+      <div className="flex gap-16 py-8 items-center justify-between bg-black px-20">
+        <div className="flex gap-16 flex-col">
+          <div className="flex flex-col gap-4">
+            <h3 className="text-4xl font-semibold leading-normal">
+              Boost your visibility by registering your events here
+            </h3>
+            <div>
+              Lorem ipsum dolor sit amet consectetur. Odio enim ac venenatis sed
+              vulputate volutpat sit.
+            </div>
+          </div>
+          <button className="w-fit px-6 py-3 rounded bg-[#FBBC05] font-medium text-black text-sm hover:bg-[#FBBC05]/80 active:bg-[#FBBC05]/60 transition-all">
+            Register a new fest!
+          </button>
+        </div>
+        <img src={hero_img_2} alt="" className="w-1/3" />
+      </div>
+      <div className="w-full h-[420px] relative  overflow-y-hidden gallery">
+        <img
+          src={gallery_bg}
+          alt="Background"
+          className="absolute inset-0 w-full h-auto object-cover mt-48"
+        />
+        <div className="mt-10 overflow-visible">
+          <Gallery />
+        </div>
+      </div>
+    </div>
   );
 };
 
