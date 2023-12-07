@@ -39,7 +39,7 @@ const Search = () => {
         <input
           type="text"
           placeholder="Search"
-          className="bg-transparent border font-light text-gray-200 placeholder:text-gray-500 text-lg border-gray-400  rounded-full px-4 pl-14 py-2 w-full focus:border-primary outline-none"
+          className="bg-transparent caret-primary border font-light text-gray-200 placeholder:text-gray-500 text-lg border-gray-400  rounded-full px-4 pl-14 py-2 w-full focus:border-primary outline-none"
         />
         <span className="absolute left-0 flex items-center justify-center top-0 h-full px-4">
           <EvSearch size={28} stroke="gray" />
