@@ -1,7 +1,9 @@
 import Carousel from "../components/Carousel";
+import CompetitionCard from "../components/CompetitionCard";
 import FeaturedCarousel from "../components/FeaturedCarousel";
 
 const Home = () => {
+  const competitions = ["", "", "", "", ""];
   return (
     <>
       <Carousel />
@@ -38,6 +40,14 @@ const Home = () => {
             <div className="text-7xl font-medium">&#8377; 4,000</div>
             <div>avergae cose per ticket</div>
           </div>
+        </div>
+      </div>
+      <div className="flex flex-col items-center justify-center py-6 max-w-7xl w-fit mx-auto gap-8">
+        <h1 className="uppercase text-title font-title">Competitions</h1>
+        <div className="grid grid-cols-3 w-full mx-auto gap-8">
+          {competitions.slice(0, 3).map((item, index) => (
+            <CompetitionCard key={index} />
+          ))}
         </div>
       </div>
     </>
