@@ -18,6 +18,7 @@ const Search = () => {
     "Competitions",
     "Hackathons",
   ];
+  const suggestions = useRef();
 
   const left_click = () => {
     suggestions.current.scrollTo({
@@ -33,7 +34,6 @@ const Search = () => {
     });
   };
 
-  const suggestions = useRef();
   return (
     <div className="w-full grid grid-cols-12 py-6 gap-10">
       <div className="relative col-span-5 w-full">

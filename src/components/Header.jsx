@@ -5,7 +5,7 @@ import { useEffect, useRef } from "react";
 const Header = () => {
   const nav_links = [
     { route: "Home", link: "/" },
-    { route: "Events", link: "/events" },
+    { route: "Events", link: "/all_events" },
     { route: "Register for a Fest", link: "/register_fest" },
     { route: "Add an Event", link: "/add_event" },
     { route: "About Us", link: "/about" },
@@ -17,19 +17,19 @@ const Header = () => {
       const nav = nav_ref.current;
       if (document.documentElement.scrollTop >= 80) {
         nav.classList.add("bg-black/60");
-        nav.classList.add("backdrop-blur-md");
+        nav.classList.add("backdrop-blur-xl");
         nav.classList.remove("bg-transparent");
       } else {
         nav.classList.add("bg-transparent");
         nav.classList.remove("bg-black/60");
-        nav.classList.remove("backdrop-blur-md");
+        nav.classList.remove("backdrop-blur-xl");
       }
     };
   });
 
   return (
     <div
-      className="w-screen  top-0  fixed right-0 bg-transparent z-50 transition-all duration-300 "
+      className="w-screen top-0 fixed right-0 bg-transparent z-50 transition-all duration-300"
       ref={nav_ref}
     >
       <div className="flex items-center justify-end gap-6 px-6 py-8">

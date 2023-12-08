@@ -2,7 +2,7 @@ import { gallery_bg, hero_img_2 } from "../assets/images/images";
 import Carousel from "../components/Carousel";
 import CompetitionCard from "../components/CompetitionCard";
 import EventSearches from "../components/EventSearches";
-import FeaturedCarousel from "../components/FeaturedCarousel";
+import EventCarousel from "../components/EventCarousel";
 import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 
@@ -21,7 +21,7 @@ const Home = () => {
             velit.
           </div>
         </div>
-        <FeaturedCarousel />
+        <EventCarousel />
       </div>
       <div className="max-w-7xl w-11/12 mx-auto">
         <div className="flex flex-col items-center justify-center py-12 gap-12">

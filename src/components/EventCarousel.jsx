@@ -4,7 +4,7 @@ import "slick-carousel/slick/slick-theme.css";
 import PropTypes from "prop-types";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import EvLeftArrow from "../assets/icons/EvLeftArrow";
-import FeaturedCard from "./FeaturedCard";
+import EventCard from "./EventCard";
 
 function NextArrow(props) {
   const { onClick } = props;
@@ -34,8 +34,11 @@ function PrevArrow(props) {
   );
 }
 
-const FeaturedCarousel = () => {
-  const events = ["", "", "", "", "", "", "", ""];
+const EventCarousel = () => {
+  const events = [];
+  for (let i = 0; i < 8; i++) {
+    events.push({ _id: i });
+  }
 
   const settings = {
     dots: false,
@@ -49,9 +52,9 @@ const FeaturedCarousel = () => {
   return (
     <div className="w-full max-w-5xl">
       <Slider {...settings}>
-        {events.map((number, index) => (
+        {events.map((event, index) => (
           <div key={index} className="mx-auto">
-            <FeaturedCard index={index} width="w-11/12" />
+            <EventCard index={index} event={event} width="w-11/12" />
           </div>
         ))}
       </Slider>
@@ -66,4 +69,4 @@ PrevArrow.propTypes = {
   onClick: PropTypes.func,
 };
 
-export default FeaturedCarousel;
+export default EventCarousel;

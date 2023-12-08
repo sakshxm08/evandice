@@ -9,7 +9,7 @@ import gallery_2 from "./gallery/gallery-2.png";
 import gallery_3 from "./gallery/gallery-3.png";
 import gallery_4 from "./gallery/gallery-4.png";
 import login_bg from "./login_bg.png";
-import about_bg from "./about-bg.png";
+import background from "./background.png";
 import who_are_we from "./who_are_we.png";
 import team_card_img from "./team_card_img.png";
 
@@ -25,7 +25,7 @@ export {
   gallery_3,
   gallery_4,
   login_bg,
-  about_bg,
+  background,
   who_are_we,
   team_card_img,
 };

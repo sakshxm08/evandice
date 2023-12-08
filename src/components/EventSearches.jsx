@@ -1,5 +1,5 @@
 import { useState } from "react";
-import FeaturedCard from "./FeaturedCard";
+import EventCard from "./EventCard";
 import Paginate from "./Paginate";
 
 const EventSearches = () => {
@@ -36,7 +36,7 @@ const EventSearches = () => {
         <>
           <div className="w-full grid grid-cols-5 gap-4 grid-rows-2">
             {currentEvents.map((value, index) => (
-              <FeaturedCard key={index} />
+              <EventCard key={index} />
             ))}
           </div>
           <Paginate

@@ -10,6 +10,7 @@ import Home from "./routes/Home";
 import Login from "./routes/Login";
 import About from "./routes/About";
 import Signup from "./routes/Signup";
+import Event from "./routes/Event";
 
 const Layout = () => (
   <>
@@ -41,6 +42,10 @@ function App() {
         {
           path: "about",
           element: <About />,
+        },
+        {
+          path: "events/:id",
+          element: <Event />,
         },
       ],
     },

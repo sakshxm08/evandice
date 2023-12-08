@@ -1,6 +1,6 @@
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedin } from "react-icons/fa";
-import { about_bg, who_are_we } from "../assets/images/images";
+import { background, who_are_we } from "../assets/images/images";
 import TeamCard from "../components/TeamCard";
 
 const About = () => {
@@ -8,7 +8,7 @@ const About = () => {
   return (
     <div className=" relative">
       <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden">
-        <img src={about_bg} alt="" className="" />
+        <img src={background} alt="" className="" />
         <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
       </div>
       <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">

@@ -5,6 +5,7 @@ export default {
     extend: {
       colors: {
         primary: "#DF9438",
+        yellow: "#FBBC05",
       },
       fontFamily: {
         primary: ["Poppins", "sans-serif"],

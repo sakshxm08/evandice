@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 import { card_img } from "../assets/images/images";
 import { Link } from "react-router-dom";
-const FeaturedCard = ({ width = "w-full" }) => {
+const EventCard = ({ width = "w-full", event = [] }) => {
   const keywords = ["live", "trending"];
   return (
     <div
@@ -37,7 +37,10 @@ const FeaturedCard = ({ width = "w-full" }) => {
           <span>Pilani</span>
           <span className=" text-green-600">Rs. 3400</span>
         </div>
-        <Link className="border flex items-center justify-center rounded-full py-2 hover:bg-white transition-all hover:text-black">
+        <Link
+          to={`/events/${event._id}`}
+          className="border flex items-center justify-center rounded-full py-2 hover:bg-white transition-all hover:text-black"
+        >
           Get Now
         </Link>
       </div>
@@ -45,7 +48,8 @@ const FeaturedCard = ({ width = "w-full" }) => {
   );
 };
 
-FeaturedCard.propTypes = {
+EventCard.propTypes = {
   width: PropTypes.string,
+  event: PropTypes.object,
 };
-export default FeaturedCard;
+export default EventCard;
