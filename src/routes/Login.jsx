@@ -25,7 +25,7 @@ const Login = () => {
         />
         <div className="w-full h-full bg-gradient-to-l from-25% from-black absolute top-0 -z-10 left-0"></div>
       </div>
-      <div className=" h-full flex items-center justify-between max-w-7xl w-11/12 mx-auto ">
+      <div className=" h-full flex items-center justify-between max-w-6xl w-11/12 mx-auto ">
         <h1 className=" font-title text-8xl uppercase w-2/3">
           Some text goes here
         </h1>

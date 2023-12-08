@@ -27,7 +27,7 @@ const Signup = () => {
         <div className="w-full h-full bg-gradient-to-r from-25% from-black absolute top-0 -z-10 left-0"></div>
         <div className="w-full h-full bg-gradient-to-t from-0% to-80% from-black absolute top-0 -z-10 left-0"></div>
       </div>
-      <div className=" h-full flex items-center justify-between max-w-7xl w-11/12 mx-auto ">
+      <div className=" h-full flex items-center justify-between max-w-6xl w-11/12 mx-auto ">
         <div className="w-1/3 flex flex-col justify-center gap-8 mt-14">
           <div className="flex flex-col gap-3">
             <h2 className="font-medium text-3xl">Register your account</h2>
