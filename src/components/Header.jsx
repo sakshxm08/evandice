@@ -1,5 +1,6 @@
 import { Link, NavLink } from "react-router-dom";
 import EvUserIcon from "../assets/icons/EvUserIcon";
+import EvLogo from "../assets/logo/EvLogo";
 import { useEffect, useRef } from "react";
 
 const Header = () => {
@@ -28,10 +29,13 @@ const Header = () => {
   });
 
   return (
-    <div
-      className="w-screen top-0 fixed right-0 bg-transparent z-50 transition-all duration-300"
+    <nav
+      className="w-screen top-0 fixed right-0 bg-transparent z-50 transition-all duration-300 flex items-center justify-between"
       ref={nav_ref}
     >
+      <Link to="/" className="mx-8">
+        <EvLogo width={150} />
+      </Link>
       <div className="flex items-center justify-end gap-6 px-6 py-8">
         <div className="flex gap-8 items-center">
           {nav_links.map((item) => (
@@ -68,7 +72,7 @@ const Header = () => {
           </Link>
         </div>
       </div>
-    </div>
+    </nav>
   );
 };
 

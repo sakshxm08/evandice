@@ -14,8 +14,6 @@ const Footer = () => {
             aptent taciti sociosqu ad litora torquent per .
           </div>
         </div>
-        {/* <div className="w-full"></div> */}
-        {/* <div className="w-full"></div> */}
         <div className="flex flex-col w-full gap-6 h-full">
           <h2 className="text-4xl uppercase text-primary font-medium py-7">
             About us

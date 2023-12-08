@@ -6,6 +6,7 @@ import EvRightArrow from "../assets/icons/EvRightArrow";
 import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EventCard from "./EventCard";
 
+// Custom Arrows -------------------------------------------------------------------------------------------
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -33,13 +34,17 @@ function PrevArrow(props) {
     </button>
   );
 }
+// ----------------------------------------------------------------------------------------------------------
 
+// Component ------------------------------------------------------------------------------------------------
 const EventCarousel = () => {
+  // Event for prop in event card ---------------------------------------------------------------------------
   const events = [];
   for (let i = 0; i < 8; i++) {
     events.push({ _id: i });
   }
 
+  // Settings for Slick Carousel ----------------------------------------------------------------------------
   const settings = {
     dots: false,
     infinite: false,
@@ -53,9 +58,11 @@ const EventCarousel = () => {
     <div className="w-full max-w-5xl">
       <Slider {...settings}>
         {events.map((event, index) => (
+          // mx-auto centering and w-11/12 for gap between cards -------------------------------------------
           <div key={index} className="mx-auto">
             <EventCard index={index} event={event} width="w-11/12" />
           </div>
+          // -----------------------------------------------------------------------------------------------
         ))}
       </Slider>
     </div>

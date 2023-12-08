@@ -1,8 +1,13 @@
 import PropTypes from "prop-types";
 import { card_img } from "../assets/images/images";
 import { Link } from "react-router-dom";
+
+// Width as prop because of use of component in different sections ------------------------------------------------------
 const EventCard = ({ width = "w-full", event = [] }) => {
-  const keywords = ["live", "trending"];
+  // Keywords for the event - Fetched from Props ------------------------------------------------------------------------
+  const keywords = ["live", "trending", "paid", "fest"];
+
+  // Component Starts ---------------------------------------------------------------------------------------------------
   return (
     <div
       className={`${width} aspect-[3/5] relative mx-auto rounded-2xl overflow-hidden group`}
@@ -18,6 +23,7 @@ const EventCard = ({ width = "w-full", event = [] }) => {
           <span className="text-sm uppercase font-light">oct</span>
         </div>
         <div className="flex flex-wrap gap-2 items-center justify-center">
+          {/* Keywords greater than 3 are sliced */}
           {keywords.slice(0, 3).map((keyword, index) => (
             <span
               key={index}
@@ -26,10 +32,15 @@ const EventCard = ({ width = "w-full", event = [] }) => {
               {keyword}
             </span>
           ))}
+
+          {/* More keywords open the event page */}
           {keywords.length > 3 && (
-            <span className="rounded-full text-xs py-1 px-4 border border-green-600 text-green-600 font-medium hover:bg-green-600 transition-all hover:text-white cursor-pointer">
+            <Link
+              to={`/events/${event._id}`}
+              className="rounded-full text-xs py-1 px-4 border border-green-600 text-green-600 font-medium hover:bg-green-600 transition-all hover:text-white cursor-pointer"
+            >
               more...
-            </span>
+            </Link>
           )}
         </div>
         <h2 className="font-bold text-2xl text-center">Neon Da Vista</h2>

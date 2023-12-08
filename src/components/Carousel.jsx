@@ -7,6 +7,8 @@ import EvRightArrow from "../assets/icons/EvRightArrow";
 import PropTypes from "prop-types";
 import { useState } from "react";
 
+// Custom Arrows for Slick Carousel ------------------------------------------------------------------
+
 function NextArrow(props) {
   const { onClick } = props;
   return (
@@ -18,7 +20,6 @@ function NextArrow(props) {
     </div>
   );
 }
-
 function PrevArrow(props) {
   const { onClick } = props;
   return (
@@ -30,9 +31,13 @@ function PrevArrow(props) {
     </div>
   );
 }
+// -------------------------------------------------------------------------------------------------
 
+// Carousel Component ------------------------------------------------------------------------------
 const Carousel = () => {
   const [currSlide, setCurrSlide] = useState(0);
+
+  // Custom Dots Styling ---------------------------------------------------------------------------
   const active = {
     backgroundColor: "rgba(255, 255, 255, 0.8)",
     outline: "0",
@@ -47,6 +52,9 @@ const Carousel = () => {
     height: "6px",
     borderRadius: "100%",
   };
+  // -----------------------------------------------------------------------------------------------
+
+  // Slick Carousel Settings -----------------------------------------------------------------------
   const settings = {
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
@@ -56,21 +64,13 @@ const Carousel = () => {
     slidesToShow: 1,
     autoplay: true,
     autoplaySpeed: 3000,
+    pauseOnHover: false,
     slidesToScroll: 1,
-    appendDots: (dots) => {
-      return (
-        <div>
-          <ul>
-            {dots.map((item, index) => {
-              return <li key={index}>{item.props.children}</li>;
-            })}
-          </ul>
-        </div>
-      );
-    },
+    // To determine the Current Slide
     beforeChange: (prev, next) => {
       setCurrSlide(next);
     },
+    // Setting Custom Dots
     customPaging: (index) => {
       return (
         <button
@@ -82,6 +82,9 @@ const Carousel = () => {
       );
     },
   };
+  // -------------------------------------------------------------------------------------------------
+
+  // Carousel Images and Content for easy access to Carousel Mapping ---------------------------------
   const carousel_data = [
     {
       desc: (
@@ -165,22 +168,24 @@ const Carousel = () => {
       src: hero_img_3,
     },
   ];
-  const renderSlides = carousel_data.map((slide) => (
-    <div key={slide.alt} className="relative h-screen">
-      <img
-        src={slide.src}
-        alt={slide.alt}
-        className="absoluteinset-0 w-screen object-fit object-bottom"
-      />
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black/60 w-full h-full flex items-center justify-center flex-col">
-        {slide.desc}
-      </div>
-    </div>
-  ));
+  // ----------------------------------------------------------------------------------------------------
+
+  // Returning the carousel -----------------------------------------------------------------------------
   return (
-    <div className="h-screen overflow-hidden">
+    <div className="min-h-[768px] h-screen overflow-hidden">
       <Slider className="h-full" {...settings}>
-        {renderSlides}
+        {carousel_data.map((slide) => (
+          <div key={slide.alt} className="relative min-h-[768px] h-screen">
+            <img
+              src={slide.src}
+              alt={slide.alt}
+              className="w-screen object-cover"
+            />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black/60 w-full h-full flex items-center justify-center flex-col">
+              {slide.desc}
+            </div>
+          </div>
+        ))}
       </Slider>
     </div>
   );

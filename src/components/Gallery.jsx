@@ -1,5 +1,7 @@
 import Slider from "react-slick";
 import {
+  background,
+  card_img,
   gallery_1,
   gallery_2,
   gallery_3,
@@ -8,6 +10,8 @@ import {
   hero_img_1,
   hero_img_2,
   hero_img_3,
+  login_bg,
+  who_are_we,
 } from "../assets/images/images";
 
 const Gallery = () => {
@@ -20,6 +24,10 @@ const Gallery = () => {
     hero_img_1,
     hero_img_2,
     hero_img_3,
+    background,
+    card_img,
+    login_bg,
+    who_are_we,
   ];
 
   const settings = {
@@ -40,7 +48,6 @@ const Gallery = () => {
     pauseOnHover: false,
   };
   return (
-    // <div className=" h-full overflow-x-hidden relative">
     <Slider {...settings}>
       {images.map((img, index) => (
         <div key={index} className="mx-auto w-11/12">
@@ -48,7 +55,6 @@ const Gallery = () => {
         </div>
       ))}
     </Slider>
-    // </div>
   );
 };
 

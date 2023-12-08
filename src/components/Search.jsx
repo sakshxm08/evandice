@@ -1,23 +1,10 @@
 import { useRef } from "react";
+import PropTypes from "prop-types";
 import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import EvSearch from "../assets/icons/EvSearch";
 
-const Search = () => {
-  const searches = [
-    "Sports",
-    "Music",
-    "Fest",
-    "Movies",
-    "Food",
-    "Competitions",
-    "Hackathons",
-    "Fest",
-    "Movies",
-    "Food",
-    "Competitions",
-    "Hackathons",
-  ];
+const Search = ({ searches = [] }) => {
   const suggestions = useRef();
 
   const left_click = () => {
@@ -76,6 +63,10 @@ const Search = () => {
       </div>
     </div>
   );
+};
+
+Search.propTypes = {
+  searches: PropTypes.array,
 };
 
 export default Search;

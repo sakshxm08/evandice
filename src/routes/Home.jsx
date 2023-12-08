@@ -1,4 +1,8 @@
-import { gallery_bg, hero_img_2 } from "../assets/images/images";
+import {
+  competition_img,
+  gallery_bg,
+  hero_img_2,
+} from "../assets/images/images";
 import Carousel from "../components/Carousel";
 import CompetitionCard from "../components/CompetitionCard";
 import EventSearches from "../components/EventSearches";
@@ -7,7 +11,40 @@ import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 
 const Home = () => {
-  const competitions = ["", "", "", "", ""];
+  const searches = [
+    "Sports",
+    "Music",
+    "Fest",
+    "Movies",
+    "Food",
+    "Competitions",
+    "Hackathons",
+    "Fest",
+    "Movies",
+    "Food",
+    "Competitions",
+    "Hackathons",
+  ];
+  const competitions = [
+    {
+      img: competition_img,
+      name: "Hackathons",
+      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+      link: "",
+    },
+    {
+      img: competition_img,
+      name: "Hackathons",
+      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+      link: "",
+    },
+    {
+      img: competition_img,
+      name: "Hackathons",
+      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+      link: "",
+    },
+  ];
   return (
     <div className="select-none">
       <Carousel />
@@ -50,8 +87,8 @@ const Home = () => {
         <div className="flex flex-col items-center justify-center py-12 gap-8">
           <h1 className="uppercase text-title font-title">Competitions</h1>
           <div className="grid grid-cols-3 w-full mx-auto gap-8">
-            {competitions.slice(0, 3).map((item, index) => (
-              <CompetitionCard key={index} />
+            {competitions.slice(0, 3).map((competition, index) => (
+              <CompetitionCard key={index} competition={competition} />
             ))}
           </div>
         </div>
@@ -65,7 +102,7 @@ const Home = () => {
               velit.
             </div>
           </div>
-          <Search />
+          <Search searches={searches} />
           <EventSearches />
         </div>
       </div>

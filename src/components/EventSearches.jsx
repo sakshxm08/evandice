@@ -3,22 +3,27 @@ import EventCard from "./EventCard";
 import Paginate from "./Paginate";
 
 const EventSearches = () => {
+  // Events for Pagination. Taken as prop
   const events = [];
-
-  for (let i = 0; i < 98; i++) {
+  for (let i = 0; i < 28; i++) {
     events.push("");
   }
 
+  // No. of events and pages
   const [currentPage, setCurrentPage] = useState(1);
   const [eventsPerPage] = useState(10);
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
+
+  // Current Page Events
   const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 
+  // For setting the current page number passed as prop to Paginate Component
   const paginate = (pageNumber) => {
     setCurrentPage(pageNumber);
   };
 
+  // Functions for arrows
   const previousPage = () => {
     if (currentPage !== 1) {
       setCurrentPage(currentPage - 1);

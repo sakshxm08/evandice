@@ -18,13 +18,6 @@ const Paginate = ({
 
   const totalPages = Math.ceil(totalEvents / eventsPerPage);
   useEffect(() => {
-    // currentPage !== 2 || currentPage !== totalPages - 2
-    //   ? setArr([currentPage === 3 ? currentPage : currentPage - 1, currentPage, currentPage + 1])
-    //   : currentPage === 2
-    //   ? setArr([currentPage, currentPage + 1, currentPage + 2])
-    //   : currentPage === totalPages - 2
-    //   ? setArr([currentPage - 2, currentPage - 1, currentPage])
-    //   : setArr([]);
     setArr([
       currentPage === 3
         ? currentPage
@@ -95,20 +88,6 @@ const Paginate = ({
             ) : (
               <span>. . .</span>
             )}
-            {/* {(currentPage === 3 || currentPage === totalPages - 2) && (
-              <>
-                {currentPage === totalPages - 2 && <span>. . .</span>}
-                <li
-                  key={currentPage}
-                  className={`text-sm bg-white text-black hover:bg-white hover:text-black transition-all bg-transparent select-none cursor-pointer rounded-full flex items-center justify-center p-1 w-6 h-6`}
-                  onClick={() => paginate(currentPage)}
-                >
-                  {currentPage}
-                </li>
-                {currentPage === 3 && <span>. . .</span>}
-              </>
-            )} */}
-
             {[totalPages - 1, totalPages].map((number) => (
               <li
                 key={number}
