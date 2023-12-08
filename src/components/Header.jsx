@@ -6,8 +6,9 @@ const Header = () => {
   const nav_links = [
     { route: "Home", link: "/" },
     { route: "Events", link: "/events" },
-    { route: "Register for a Fest", link: "/register" },
-    { route: "Add an Event", link: "/addevent" },
+    { route: "Register for a Fest", link: "/register_fest" },
+    { route: "Add an Event", link: "/add_event" },
+    { route: "About Us", link: "/about" },
   ];
 
   const nav_ref = useRef();
@@ -56,7 +57,10 @@ const Header = () => {
           >
             Login
           </Link>
-          <Link className="w-20 text-sm flex items-center justify-center h-full bg-primary text-black font-semibold hover:bg-primary/75 hover:border-primary/75 transition-all">
+          <Link
+            to="/register"
+            className="w-20 text-sm flex items-center justify-center h-full bg-primary text-black font-semibold hover:bg-primary/75 hover:border-primary/75 transition-all"
+          >
             Sign Up
           </Link>
           <Link className="flex items-center justify-center rounded-full  transition-all outline outline-none outline-offset-0 hover:outline-primary">

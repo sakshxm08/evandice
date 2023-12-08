@@ -14,6 +14,10 @@ export default {
       fontSize: {
         title: "3.75rem",
       },
+      backgroundImage: () => ({
+        instagram:
+          "linear-gradient(45deg, #f09433 0%,#e6683c 25%,#dc2743 50%,#cc2366 75%,#bc1888 100%)",
+      }),
     },
   },
   plugins: [],

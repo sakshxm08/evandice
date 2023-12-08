@@ -34,7 +34,10 @@ const Login = () => {
             <h2 className="font-medium text-3xl">Sign in</h2>
             <div>
               If you don&apos;t have an account,{" "}
-              <Link className="text-[#C10C99] font-medium tracking-wide relative after:content-[''] after:absolute after:-bottom-1 after:bg-[#C10C99] after:w-0 after:h-px after:left-0 hover:after:w-full after:transition-all after:duration-300">
+              <Link
+                to="/register"
+                className="text-[#C10C99] font-medium tracking-wide relative after:content-[''] after:absolute after:-bottom-1 after:bg-[#C10C99] after:w-0 after:h-px after:left-0 hover:after:w-full after:transition-all after:duration-300"
+              >
                 register here!
               </Link>{" "}
             </div>
@@ -109,13 +112,13 @@ const Login = () => {
             or continue with
           </div>
           <div className="flex items-center justify-center gap-6">
-            <span className="rounded-full  p-0 hover:bg-[#316FF6] hover:text-white transition-all cursor-pointer h-fit w-fit text-[#316FF6] bg-white">
+            <span className="rounded-full  p-0 hover:bg-[#316FF6] outline outline-transparent hover:outline-white outline-offset-8 hover:text-white transition-all cursor-pointer h-fit w-fit text-[#316FF6] bg-white">
               <BsFacebook size={32} />
             </span>
-            <span className="rounded-full  hover:bg-[#808080] hover:text-white transition-all cursor-pointer h-max p-[6px] aspect-square text-[#808080] bg-white">
+            <span className="rounded-full  hover:bg-[#808080] outline outline-transparent hover:outline-[#808080] outline-offset-8 hover:text-white transition-all cursor-pointer h-max p-[6px] aspect-square text-[#808080] bg-white">
               <FaApple size={24} />
             </span>
-            <span className="rounded-full p-0 bg-black hover:bg-white transition-all cursor-pointer w-fit h-fit">
+            <span className="rounded-full p-0 bg-black hover:bg-white outline outline-transparent hover:outline-white outline-offset-8 transition-all cursor-pointer w-fit h-fit">
               <FcGoogle size={34} />
             </span>
           </div>
