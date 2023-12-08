@@ -17,7 +17,7 @@ import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EventCarousel from "../components/EventCarousel";
 
 const Event = () => {
-  const categories = ["music", "art", "paid", "offline"];
+  const categories = ["music", "art", "paid", "offline", "fun"];
   const images = [
     gallery_1,
     gallery_2,
@@ -34,34 +34,7 @@ const Event = () => {
   const [currImg, setCurrImg] = useState(images[0]);
   const [allImgs, setAllImgs] = useState(false);
 
-  const colors = [
-    "red",
-    "lime",
-    "fuchsia",
-    "aqua",
-    "yellow",
-    "aquamarine",
-    "beige",
-    "blueviolet",
-    "chartreuse",
-    "coral",
-    "cornflowerblue",
-    "crimson",
-    "darkorange",
-    "darkseagreen",
-    "darkturquoise",
-    "deeppink",
-    "deepskyblue",
-    "greenyellow",
-    "lightpink",
-    "lightsalmon",
-    "lightskyblue",
-    "mediumaquamarine",
-    "mediumspringgreen",
-    "mediumturquoise",
-    "moccasin",
-    "orange",
-  ];
+  const colors = ["red", "lime", "fuchsia", "aqua"];
 
   return (
     <div className="relative ">
@@ -82,8 +55,7 @@ const Event = () => {
                 <span
                   key={index}
                   style={{
-                    "--variable-color":
-                      colors[Math.floor(Math.random() * colors.length)],
+                    "--variable-color": colors[index % 4],
                     color: "var(--variable-color)",
                     borderColor: "var(--variable-color)",
                   }}
