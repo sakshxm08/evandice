@@ -65,7 +65,7 @@ const Dropdown = ({ isEditable, type, value, setValue, values }) => {
             }}
           />
           <div
-            className="flex scale-y-0 flex-col max-h-72 overflow-scroll shadow-xl rounded absolute top-[48px]  w-full bg-black border origin-top transition-all duration-300"
+            className="flex scale-y-0 flex-col max-h-72 z-20 overflow-scroll shadow-xl rounded absolute top-[48px]  w-full bg-black border origin-top transition-all duration-300"
             ref={dropdownMenu}
           >
             {values.map((gender, index) => (
