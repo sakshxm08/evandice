@@ -13,7 +13,7 @@ const About = () => {
       </div>
       <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">
         <h1 className="text-title uppercase font-title">About us</h1>
-        <div className="w-full bg-gray-100 rounded-2xl p-2 flex items-center justify-between text-black gap-6">
+        <div className="w-full bg-gray-100/40 backdrop-blur-2xl rounded-2xl p-2 flex items-center justify-between text-black gap-6">
           <div className="flex flex-col justify-center gap-4 px-6 w-2/3">
             <div className="flex flex-col justify-center gap-2">
               <h4 className="font-medium uppercase">Team Evandize</h4>

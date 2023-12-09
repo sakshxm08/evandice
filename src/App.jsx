@@ -11,6 +11,7 @@ import Login from "./routes/Login";
 import About from "./routes/About";
 import Signup from "./routes/Signup";
 import Event from "./routes/Event";
+import Profile from "./routes/Profile";
 
 const Layout = () => (
   <>
@@ -46,6 +47,10 @@ function App() {
         {
           path: "events/:id",
           element: <Event />,
+        },
+        {
+          path: "profile",
+          element: <Profile />,
         },
       ],
     },

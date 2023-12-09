@@ -67,7 +67,10 @@ const Header = () => {
           >
             Sign Up
           </Link>
-          <Link className="flex items-center justify-center rounded-full  transition-all outline outline-none outline-offset-0 hover:outline-primary">
+          <Link
+            to="/profile"
+            className="flex items-center justify-center rounded-full  transition-all outline outline-none outline-offset-0 hover:outline-primary"
+          >
             <EvUserIcon className="h-full w-auto" size={40} />
           </Link>
         </div>
