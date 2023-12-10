@@ -54,7 +54,6 @@ const Login = () => {
                   id="email"
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  // placeholder="Enter your email address"
                   className="bg-transparent border-b py-2 pl-8 pr-2 font-light w-full outline-none focus:border-b-[#C10C99] transition-all [&:focus-visible+label]:left-0 [&:focus-visible+label]:-top-4 [&:focus-visible+label]:text-xs"
                 />
                 <label
@@ -72,7 +71,7 @@ const Login = () => {
                 </span>
               </div>
             </div>
-            <div className="flex flex-col gap-2">
+            <div className="flex flex-col gap-4">
               <div className="relative w-full">
                 <input
                   ref={pass_input}
@@ -107,6 +106,22 @@ const Login = () => {
                     <IoEye size={20} />
                   )}
                 </span>
+              </div>
+              <div className="flex justify-between">
+                <div className="flex items-center gap-2">
+                  <input
+                    type="checkbox"
+                    name="remember_user"
+                    id="remember_usert"
+                    className=" w-3 rounded-none aspect-square accent-[#C10C99]"
+                  />
+                  <label htmlFor="remember_user" className="text-xs">
+                    Remember me
+                  </label>
+                </div>
+                <div className="cursor-pointer font-medium text-xs relative after:content-[''] after:absolute after:-bottom-1 after:bg-[#C10C99] after:w-0 after:h-px after:left-0 hover:after:w-full after:transition-all after:duration-300">
+                  Forgot Password?
+                </div>
               </div>
             </div>
             <button className="rounded-full w-full py-3 text-sm hover:bg-[#C10C99]/70 transition-all bg-[#C10C99]">
