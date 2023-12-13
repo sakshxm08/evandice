@@ -1,9 +1,13 @@
 import { LuUser } from "react-icons/lu";
 import { background, login_bg } from "../assets/images/images";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { MdEdit, MdDelete } from "react-icons/md";
 import { FcGoogle } from "react-icons/fc";
 import Dropdown from "../components/Dropdown";
+import { State, City } from "country-state-city";
+import { FaUserEdit } from "react-icons/fa";
+import { IoMdSave } from "react-icons/io";
+import { RxCross1 } from "react-icons/rx";
 
 const Profile = () => {
   const [userImg] = useState(false);
@@ -19,35 +23,52 @@ const Profile = () => {
     "Civil Engineering",
     "Chemical Engineering",
   ];
-  // const [states] = useState([]);
-  // const [districts, setDistricts] = useState([]);
-  // const [statesData, setStatesData] = useState([]);
+  const [states] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [stateData, setStateData] = useState([]);
 
-  const [name, setName] = useState("");
-  const [clgName, setClgName] = useState("");
-  const [email, setEmail] = useState("");
-  const [gender, setGender] = useState("");
-  const [state, setState] = useState("");
-  const [city, setCity] = useState("");
-  const [contactNo, setContactNo] = useState("");
-  const [instagram, setInstagram] = useState("");
-  const [dept, setDept] = useState("");
+  const initialValues = {
+    name: "",
+    clgName: "",
+    email: "",
+    gender: "",
+    state: "",
+    city: "",
+    contactNo: "",
+    instagram: "",
+    dept: "",
+  };
 
-  // useEffect(() => {
-  //   fetch("states.json")
-  //     .then((res) => res.json())
-  //     .then((res) => setStatesData(res[0].states));
-  // }, []);
+  const [formData, setFormData] = useState(initialValues);
 
-  // useEffect(() => {
-  //   statesData.map((state) => states.push(state.state));
-  // }, [statesData, states]);
-  // useEffect(() => {
-  //   statesData
-  //     .filter((sel_state) => sel_state === state)
-  //     .map((state) => setDistricts(state.districts));
-  // }, [state, statesData]);
+  const setValues = (e) => {
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
 
+  useEffect(() => {
+    for (let state of State.getStatesOfCountry("IN")) {
+      states.push(state.name);
+    }
+  }, [states]);
+
+  useEffect(() => {
+    setFormData({ ...formData, city: "" });
+    setCities([]);
+    setStateData(
+      State.getStatesOfCountry("IN").filter((s) => s.name === formData.state)
+    );
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [formData.state]);
+
+  useEffect(() => {
+    if (stateData.length > 0) {
+      for (let city of City.getCitiesOfState("IN", stateData[0].isoCode)) {
+        cities.push(city.name);
+      }
+    }
+    console.log(stateData);
+  }, [stateData, formData.state, cities]);
   return (
     <div className="relative">
       <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden w-screen">
@@ -100,34 +121,41 @@ const Profile = () => {
         <div className="mx-auto my-8 flex border items-center justify-center w-fit py-3 font-light px-6 text-sm rounded-full gap-4 hover:bg-white hover:text-black transition-all cursor-pointer">
           <FcGoogle size={20} /> Link Google Account
         </div>
-        <form className="flex flex-col gap-4 my-16">
-          <div className="grid grid-cols-3 w-full relative gap-10 ">
-            {isEditable ? (
-              <div className="absolute right-0 -top-12 flex justify-center items-center gap-4">
-                <div
-                  className="border py-1 px-4 rounded text-sm cursor-pointer border-yellow text-yellow hover:bg-yellow hover:text-black transition-all"
-                  onClick={() => setIsEditable(false)}
-                >
-                  Save
-                </div>
-                <div
-                  className="border py-1 px-4 rounded text-sm cursor-pointer hover:bg-gray-100 hover:text-black"
-                  onClick={() => setIsEditable(false)}
-                >
-                  Cancel
-                </div>
-              </div>
-            ) : (
+        <div className="w-full flex justify-end text-xs">
+          {isEditable ? (
+            <div className="right-0 -top-12 flex justify-center items-center gap-4">
               <div
-                className="absolute right-0 -top-12 text-center border py-1 px-4 rounded text-sm hover:bg-gray-100 hover:text-black transition-colors cursor-pointer"
-                onClick={() => setIsEditable(true)}
+                className="border flex items-center justify-center h-8 gap-2 px-4 rounded cursor-pointer border-yellow text-yellow hover:bg-yellow hover:text-black transition-all"
+                onClick={() => setIsEditable(false)}
               >
-                Edit
+                <IoMdSave size={20} />
+                Save
               </div>
-            )}
-
+              <div
+                className="border flex items-center justify-center h-8 gap-2 px-4 rounded cursor-pointer hover:bg-gray-100 hover:text-black"
+                onClick={() => {
+                  setIsEditable(false);
+                  setFormData(initialValues);
+                }}
+              >
+                <RxCross1 />
+                Cancel
+              </div>
+            </div>
+          ) : (
+            <div
+              className="flex items-center justify-center gap-2 right-0 -top-12 text-center border h-8 px-4 rounded  hover:bg-yellow hover:border-yellow hover:text-black transition-colors cursor-pointer"
+              onClick={() => setIsEditable(true)}
+            >
+              <FaUserEdit size={20} />
+              Edit Details
+            </div>
+          )}
+        </div>
+        <form className="flex flex-col gap-4 my-4 text-sm">
+          <div className="grid grid-cols-3 w-full relative gap-10 ">
             <div className="flex flex-col gap-1">
-              <label htmlFor="name" className="text-yellow text-sm">
+              <label htmlFor="name" className="text-yellow text-xs">
                 Name
               </label>
               <input
@@ -135,27 +163,27 @@ const Profile = () => {
                 className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
                 name="name"
                 id="name"
-                onChange={(e) => setName(e.target.value)}
+                onChange={setValues}
                 disabled={!isEditable}
-                value={name}
+                value={formData.name}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="college-name" className="text-yellow text-sm">
+              <label htmlFor="clgName" className="text-yellow text-xs">
                 College Name
               </label>
               <input
                 type="text"
                 className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-                name="college-name"
-                id="college-name"
-                onChange={(e) => setClgName(e.target.value)}
+                name="clgName"
+                id="clgName"
+                onChange={setValues}
                 disabled={!isEditable}
-                value={clgName}
+                value={formData.clgName}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="email" className="text-yellow text-sm">
+              <label htmlFor="email" className="text-yellow text-xs">
                 Email
               </label>
               <input
@@ -163,46 +191,37 @@ const Profile = () => {
                 className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
                 name="email"
                 id="email"
-                onChange={(e) => setEmail(e.target.value)}
+                onChange={setValues}
                 disabled={!isEditable}
-                value={email}
+                value={formData.email}
               />
             </div>
             <div className="flex flex-col gap-1">
               <Dropdown
                 isEditable={isEditable}
-                value={gender}
-                setValue={setGender}
+                formData={formData}
+                setFormData={setFormData}
                 type={"gender"}
                 values={genders}
               />
             </div>
+
             <div className="flex flex-col gap-1">
-              <label htmlFor="city" className="text-yellow text-sm">
-                City
-              </label>
-              <input
-                type="text"
-                className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-                name="city"
-                id="city"
-                onChange={(e) => setCity(e.target.value)}
-                disabled={!isEditable}
-                value={city}
+              <Dropdown
+                isEditable={isEditable}
+                formData={formData}
+                setFormData={setFormData}
+                type={"state"}
+                values={states}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="state" className="text-yellow text-sm">
-                State
-              </label>
-              <input
-                type="text"
-                className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-                name="state"
-                id="state"
-                onChange={(e) => setState(e.target.value)}
-                disabled={!isEditable}
-                value={state}
+              <Dropdown
+                isEditable={isEditable}
+                formData={formData}
+                setFormData={setFormData}
+                type={"city"}
+                values={cities}
               />
             </div>
           </div>
@@ -211,21 +230,21 @@ const Profile = () => {
           </h2>
           <div className="grid grid-cols-3 w-full relative gap-10 ">
             <div className="flex flex-col gap-1">
-              <label htmlFor="contact_no" className="text-yellow text-sm">
+              <label htmlFor="contactNo" className="text-yellow text-xs">
                 Contact Number
               </label>
               <input
-                type="number"
+                type="text"
                 className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-                name="contact_no"
-                id="contact_no"
-                onChange={(e) => setContactNo(e.target.value)}
+                name="contactNo"
+                id="contactNo"
+                onChange={setValues}
                 disabled={!isEditable}
-                value={contactNo}
+                value={formData.contactNo}
               />
             </div>
             <div className="flex flex-col gap-1">
-              <label htmlFor="instagram" className="text-yellow text-sm">
+              <label htmlFor="instagram" className="text-yellow text-xs">
                 Instagram
               </label>
               <input
@@ -233,16 +252,16 @@ const Profile = () => {
                 className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
                 name="instagram"
                 id="instagram"
-                onChange={(e) => setInstagram(e.target.value)}
+                onChange={setValues}
                 disabled={!isEditable}
-                value={instagram}
+                value={formData.instagram}
               />
             </div>
             <div className="flex flex-col gap-1">
               <Dropdown
                 isEditable={isEditable}
-                value={dept}
-                setValue={setDept}
+                formData={formData}
+                setFormData={setFormData}
                 type={"college department"}
                 values={depts}
               />
