@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login_bg } from "../assets/images/images";
 import EvMail from "../assets/icons/EvMail";
 import EvLock from "../assets/icons/EvLock";
@@ -7,7 +7,10 @@ import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
+import axios from "axios";
+
 const Login = () => {
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [passHidden, setPassHidden] = useState(true);
@@ -17,6 +20,30 @@ const Login = () => {
     if (passHidden) pass_input.current.type = "text";
     else pass_input.current.type = "password";
   };
+
+  const handleSignin = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3000/auth/login", {
+        email,
+        password,
+      });
+
+      // Assuming the backend sends a token upon successful signup
+      const token = response.data.token;
+
+      // Store the token in local storage or cookies for authentication
+      localStorage.setItem("token", token);
+
+      // Redirect to the dashboard or any desired page after successful signup
+      navigate("/profile");
+    } catch (error) {
+      console.error("Signin error:", error);
+      // Handle signup error, e.g., display an error message
+    }
+  };
+
   return (
     <div className="w-screen min-h-screen">
       <div className="absolute w-full h-full top-0 -z-40">
@@ -45,7 +72,7 @@ const Login = () => {
               </Link>{" "}
             </div>
           </div>
-          <form className="flex flex-col justify-center gap-10">
+          <form className="flex flex-col justify-center gap-10" onSubmit={handleSignin}>
             <div className="flex flex-col gap-2">
               <div className="relative w-full">
                 <input

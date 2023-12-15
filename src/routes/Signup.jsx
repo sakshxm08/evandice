@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { login_bg } from "../assets/images/images";
 import EvMail from "../assets/icons/EvMail";
 import EvLock from "../assets/icons/EvLock";
@@ -7,8 +7,10 @@ import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaRegUser } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
+import axios from "axios";
 
 const Signup = () => {
+  const navigate = useNavigate();
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -28,6 +30,32 @@ const Signup = () => {
     if (confPassHidden) confirm_pass_input.current.type = "text";
     else confirm_pass_input.current.type = "password";
   };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+
+    try {
+      const response = await axios.post("http://localhost:3000/auth/signup", {
+        name,
+        email,
+        password,
+        confPassword,
+      });
+
+      // Assuming the backend sends a token upon successful signup
+      const token = response.data.token;
+
+      // Store the token in local storage or cookies for authentication
+      localStorage.setItem("token", token);
+
+      // Redirect to the dashboard or any desired page after successful signup
+      navigate("/profile");
+    } catch (error) {
+      console.error("Signup error:", error);
+      // Handle signup error, e.g., display an error message
+    }
+  };
+
   return (
     <div className="w-screen min-h-screen ">
       <div className="absolute w-full h-full top-0 -z-40">
@@ -53,7 +81,7 @@ const Signup = () => {
               </Link>
             </div>
           </div>
-          <form className="flex flex-col justify-center gap-10">
+          <form className="flex flex-col justify-center gap-10" onSubmit={handleSignup}>
             <div className="flex flex-col gap-2">
               <div className="relative w-full">
                 <input
