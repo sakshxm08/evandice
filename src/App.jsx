@@ -12,6 +12,10 @@ import About from "./routes/About";
 import Signup from "./routes/Signup";
 import Event from "./routes/Event";
 import Profile from "./routes/Profile";
+import "react-toastify/dist/ReactToastify.min.css";
+
+import { ToastContainer } from "react-toastify";
+import { AuthContextProvider } from "./context/AuthContext";
 
 const Layout = () => (
   <>
@@ -57,7 +61,10 @@ function App() {
   ]);
   return (
     <>
-      <RouterProvider router={router} />
+      <ToastContainer style={{ top: "100px" }} />
+      <AuthContextProvider>
+        <RouterProvider router={router} />
+      </AuthContextProvider>
     </>
   );
 }

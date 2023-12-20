@@ -8,13 +8,20 @@ import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
 import axios from "axios";
+import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
   const navigate = useNavigate();
+
+  const { login, isLoading } = useLogin();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+
   const [passHidden, setPassHidden] = useState(true);
+
   const pass_input = useRef();
+
   const togglePass = () => {
     setPassHidden(!passHidden);
     if (passHidden) pass_input.current.type = "text";
@@ -24,24 +31,7 @@ const Login = () => {
   const handleSignin = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
-        email,
-        password,
-      });
-
-      // Assuming the backend sends a token upon successful signup
-      const token = response.data.token;
-
-      // Store the token in local storage or cookies for authentication
-      localStorage.setItem("token", token);
-
-      // Redirect to the dashboard or any desired page after successful signup
-      navigate("/profile");
-    } catch (error) {
-      console.error("Signin error:", error);
-      // Handle signup error, e.g., display an error message
-    }
+    await login(email, password);
   };
 
   return (
@@ -72,7 +62,10 @@ const Login = () => {
               </Link>{" "}
             </div>
           </div>
-          <form className="flex flex-col justify-center gap-10" onSubmit={handleSignin}>
+          <form
+            className="flex flex-col justify-center gap-10"
+            onSubmit={handleSignin}
+          >
             <div className="flex flex-col gap-2">
               <div className="relative w-full">
                 <input

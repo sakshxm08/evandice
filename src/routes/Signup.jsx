@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login_bg } from "../assets/images/images";
 import EvMail from "../assets/icons/EvMail";
 import EvLock from "../assets/icons/EvLock";
@@ -7,53 +7,37 @@ import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple, FaRegUser } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
-import axios from "axios";
+import { useSignup } from "../hooks/useSignup";
 
 const Signup = () => {
-  const navigate = useNavigate();
+  // Signup Hook
+  const { signup, isLoading } = useSignup();
+
+  // Input States
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confPassword, setConfPassword] = useState("");
 
+  // Password hidden states
   const [passHidden, setPassHidden] = useState(true);
   const [confPassHidden, setConfPassHidden] = useState(true);
+
+  // References of DOM
   const pass_input = useRef();
   const confirm_pass_input = useRef();
-  const togglePass = () => {
-    setPassHidden(!passHidden);
-    if (passHidden) pass_input.current.type = "text";
-    else pass_input.current.type = "password";
-  };
-  const toggleConfirmPass = () => {
-    setConfPassHidden(!confPassHidden);
-    if (confPassHidden) confirm_pass_input.current.type = "text";
-    else confirm_pass_input.current.type = "password";
+
+  // Toggle Password Visibility
+  const togglePass = (hidden, setHidden, input) => {
+    setHidden(!hidden);
+    if (hidden) input.current.type = "text";
+    else input.current.type = "password";
   };
 
+  // Submitting the form
   const handleSignup = async (e) => {
     e.preventDefault();
-
-    try {
-      const response = await axios.post("http://localhost:3000/auth/signup", {
-        name,
-        email,
-        password,
-        confPassword,
-      });
-
-      // Assuming the backend sends a token upon successful signup
-      const token = response.data.token;
-
-      // Store the token in local storage or cookies for authentication
-      localStorage.setItem("token", token);
-
-      // Redirect to the dashboard or any desired page after successful signup
-      navigate("/profile");
-    } catch (error) {
-      console.error("Signup error:", error);
-      // Handle signup error, e.g., display an error message
-    }
+    await signup(name, email, password, confPassword);
   };
 
   return (
@@ -81,7 +65,10 @@ const Signup = () => {
               </Link>
             </div>
           </div>
-          <form className="flex flex-col justify-center gap-10" onSubmit={handleSignup}>
+          <form
+            className="flex flex-col justify-center gap-10"
+            onSubmit={handleSignup}
+          >
             <div className="flex flex-col gap-2">
               <div className="relative w-full">
                 <input
@@ -161,7 +148,9 @@ const Signup = () => {
                 </span>
                 <span
                   className="absolute right-0 top-[4px] cursor-pointer hover:bg-white hover:text-black rounded-full p-1 transition-all"
-                  onClick={togglePass}
+                  onClick={() =>
+                    togglePass(passHidden, setPassHidden, pass_input)
+                  }
                 >
                   {passHidden ? (
                     <IoEyeOffOutline size={20} />
@@ -198,7 +187,13 @@ const Signup = () => {
                 </span>
                 <span
                   className="absolute right-0 top-[4px] cursor-pointer hover:bg-white hover:text-black rounded-full p-1 transition-all"
-                  onClick={toggleConfirmPass}
+                  onClick={() =>
+                    togglePass(
+                      confPassHidden,
+                      setConfPassHidden,
+                      confirm_pass_input
+                    )
+                  }
                 >
                   {confPassHidden ? (
                     <IoEyeOffOutline size={20} />
@@ -208,7 +203,10 @@ const Signup = () => {
                 </span>
               </div>
             </div>
-            <button className="rounded-full w-full py-3 mt-2 text-sm hover:bg-[#C10C99]/70 transition-all bg-[#C10C99]">
+            <button
+              disabled={isLoading}
+              className="disabled:bg-[#C10C99]/50 rounded-full w-full py-3 mt-2 text-sm hover:bg-[#C10C99]/70 transition-all bg-[#C10C99]"
+            >
               Register now
             </button>
           </form>
