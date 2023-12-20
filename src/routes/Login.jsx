@@ -23,26 +23,27 @@ const Login = () => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
-
+  
     try {
       const response = await axios.post("http://localhost:3000/auth/login", {
         email,
         password,
       });
-
-      // Assuming the backend sends a token upon successful signup
+  
+      // Assuming the backend sends a token upon successful login
       const token = response.data.token;
-
+  
       // Store the token in local storage or cookies for authentication
       localStorage.setItem("token", token);
-
-      // Redirect to the dashboard or any desired page after successful signup
+  
+      // Redirect to the dashboard or any desired page after successful login
       navigate("/profile");
     } catch (error) {
       console.error("Signin error:", error);
-      // Handle signup error, e.g., display an error message
+      // Handle login error, e.g., display an error message
     }
   };
+  
 
   return (
     <div className="w-screen min-h-screen">
