@@ -30,9 +30,32 @@ const Login = () => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
+<<<<<<< HEAD
 
     await login(email, password);
+=======
+  
+    try {
+      const response = await axios.post("http://localhost:3000/auth/login", {
+        email,
+        password,
+      });
+  
+      // Assuming the backend sends a token upon successful login
+      const token = response.data.token;
+  
+      // Store the token in local storage or cookies for authentication
+      localStorage.setItem("token", token);
+  
+      // Redirect to the dashboard or any desired page after successful login
+      navigate("/profile");
+    } catch (error) {
+      console.error("Signin error:", error);
+      // Handle login error, e.g., display an error message
+    }
+>>>>>>> 879de9713eb368c83721bf1638625237de23de85
   };
+  
 
   return (
     <div className="w-screen min-h-screen">

@@ -2,6 +2,7 @@ import {
   createBrowserRouter,
   RouterProvider,
   ScrollRestoration,
+  Navigate,
 } from "react-router-dom";
 import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
@@ -25,6 +26,13 @@ const Layout = () => (
     <Footer />
   </>
 );
+
+const PrivateRoute = ({ element }) => {
+  // Check if the user is authenticated
+  const isAuthenticated = localStorage.getItem("token") !== null;
+
+  return isAuthenticated ? element : <Navigate to="/login" replace />;
+};
 
 function App() {
   const router = createBrowserRouter([
@@ -53,12 +61,14 @@ function App() {
           element: <Event />,
         },
         {
+          // Make the "profile" route protected
           path: "profile",
-          element: <Profile />,
+          element: <PrivateRoute element={<Profile />} />,
         },
       ],
     },
   ]);
+
   return (
     <>
       <ToastContainer style={{ top: "100px" }} />
