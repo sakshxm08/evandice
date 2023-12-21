@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apiRoutes";
 
 export const useSignup = () => {
   const [error, setError] = useState(null);
@@ -45,13 +46,12 @@ export const useSignup = () => {
       });
     }
 
-    axios
-      .post("http://localhost:3000/auth/signup", {
-        name,
-        email,
-        password,
-        confPassword,
-      })
+    apiConnector("POST", endpoints.SIGNUP_API, {
+      name,
+      email,
+      password,
+      confPassword,
+    })
       .then((response) => {
         // Assuming the backend sends a token upon successful signup
         console.log("clicked");

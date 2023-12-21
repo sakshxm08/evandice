@@ -1,17 +1,8 @@
+import PropTypes from "prop-types";
 import { createContext, useReducer, useEffect } from "react";
+import { authReducer } from "../reducers/authReducer";
 
 export const AuthContext = createContext();
-
-export const authReducer = (state, action) => {
-  switch (action.type) {
-    case "LOGIN":
-      return { user: action.payload };
-    case "LOGOUT":
-      return { user: null };
-    default:
-      return state;
-  }
-};
 
 export const AuthContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(authReducer, {
@@ -28,4 +19,8 @@ export const AuthContextProvider = ({ children }) => {
       {children}
     </AuthContext.Provider>
   );
+};
+
+AuthContextProvider.propTypes = {
+  children: PropTypes.node.isRequired,
 };

@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { login_bg } from "../assets/images/images";
 import EvMail from "../assets/icons/EvMail";
 import EvLock from "../assets/icons/EvLock";
@@ -7,12 +7,10 @@ import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { FaApple } from "react-icons/fa";
 import { BsFacebook } from "react-icons/bs";
-import axios from "axios";
+
 import { useLogin } from "../hooks/useLogin";
 
 const Login = () => {
-  const navigate = useNavigate();
-
   const { login, isLoading } = useLogin();
 
   const [email, setEmail] = useState("");
@@ -30,32 +28,8 @@ const Login = () => {
 
   const handleSignin = async (e) => {
     e.preventDefault();
-<<<<<<< HEAD
-
     await login(email, password);
-=======
-  
-    try {
-      const response = await axios.post("http://localhost:3000/auth/login", {
-        email,
-        password,
-      });
-  
-      // Assuming the backend sends a token upon successful login
-      const token = response.data.token;
-  
-      // Store the token in local storage or cookies for authentication
-      localStorage.setItem("token", token);
-  
-      // Redirect to the dashboard or any desired page after successful login
-      navigate("/profile");
-    } catch (error) {
-      console.error("Signin error:", error);
-      // Handle login error, e.g., display an error message
-    }
->>>>>>> 879de9713eb368c83721bf1638625237de23de85
   };
-  
 
   return (
     <div className="w-screen min-h-screen">
@@ -167,7 +141,10 @@ const Login = () => {
                 </div>
               </div>
             </div>
-            <button className="rounded-full w-full py-3 text-sm hover:bg-[#C10C99]/70 transition-all bg-[#C10C99]">
+            <button
+              disabled={isLoading}
+              className="rounded-full w-full py-3 text-sm hover:bg-[#C10C99]/70 transition-all bg-[#C10C99]"
+            >
               Login
             </button>
           </form>

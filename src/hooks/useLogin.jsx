@@ -2,7 +2,8 @@ import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
-import axios from "axios";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apiRoutes";
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
@@ -15,11 +16,10 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    await axios
-      .post("http://localhost:3000/auth/login", {
-        email,
-        password,
-      })
+    apiConnector("POST", endpoints.LOGIN_API, {
+      email,
+      password,
+    })
       .then((response) => {
         const user = response.data;
         // Store the token in local storage or cookies for authentication

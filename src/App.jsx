@@ -14,7 +14,7 @@ import Signup from "./routes/Signup";
 import Event from "./routes/Event";
 import Profile from "./routes/Profile";
 import "react-toastify/dist/ReactToastify.min.css";
-
+import PropTypes from "prop-types";
 import { ToastContainer } from "react-toastify";
 import { AuthContextProvider } from "./context/AuthContext";
 
@@ -80,3 +80,7 @@ function App() {
 }
 
 export default App;
+
+PrivateRoute.propTypes = {
+  element: PropTypes.node.isRequired,
+};
