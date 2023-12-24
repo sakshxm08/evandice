@@ -2,6 +2,7 @@ import { Link, NavLink } from "react-router-dom";
 import EvUserIcon from "../assets/icons/EvUserIcon";
 import EvLogo from "../assets/logo/EvLogo";
 import { useEffect, useRef } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Header = () => {
   const nav_links = [
@@ -11,6 +12,15 @@ const Header = () => {
     { route: "Add an Event", link: "/add_event" },
     { route: "About Us", link: "/about" },
   ];
+
+  const user = useAuthContext();
+
+  useEffect(() => {
+    console.log(user);
+    if (user.user) {
+      console.log(user.user.user);
+    }
+  }, [user]);
 
   const nav_ref = useRef();
   useEffect(() => {
@@ -55,18 +65,24 @@ const Header = () => {
           ))}
         </div>
         <div className="flex items-center gap-4 justify-center h-8">
-          <Link
-            to="/login"
-            className=" w-20 text-sm flex items-center justify-center h-full border-[1.5px] border-primary text-primary font-semibold hover:bg-primary hover:text-black transition-all"
-          >
-            Login
-          </Link>
-          <Link
-            to="/register"
-            className="w-20 text-sm flex items-center justify-center h-full bg-primary text-black font-semibold hover:bg-primary/75 hover:border-primary/75 transition-all"
-          >
-            Sign Up
-          </Link>
+          {!user.user ? (
+            <>
+              <Link
+                to="/login"
+                className=" w-20 text-sm flex items-center justify-center h-full border-[1.5px] border-primary text-primary font-semibold hover:bg-primary hover:text-black transition-all"
+              >
+                Login
+              </Link>
+              <Link
+                to="/register"
+                className="w-20 text-sm flex items-center justify-center h-full bg-primary text-black font-semibold hover:bg-primary/75 hover:border-primary/75 transition-all"
+              >
+                Sign Up
+              </Link>
+            </>
+          ) : (
+            <span>{user.user.user.email}</span>
+          )}
           <Link
             to="/profile"
             className="flex items-center justify-center rounded-full  transition-all outline outline-none outline-offset-0 hover:outline-primary"

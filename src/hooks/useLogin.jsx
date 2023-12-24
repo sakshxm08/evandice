@@ -22,10 +22,17 @@ export const useLogin = () => {
     })
       .then((response) => {
         const user = response.data;
+        console.log(user);
         // Store the token in local storage or cookies for authentication
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", JSON.stringify(user.token));
+        apiConnector("GET", endpoints.GET_USER, null, {
+          Authorization: user.token, // Replace with the actual JWT token
+        }).then((res) => {
+          dispatch({ type: "LOGIN", payload: res.data });
+          console.log(res.data);
+        });
+        // console.log(response.data);
 
-        dispatch({ type: "LOGIN", payload: user });
         setIsLoading(false);
         // Redirect to the dashboard or any desired page after successful signup
         navigate(-1);

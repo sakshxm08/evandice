@@ -9,6 +9,8 @@ import EventSearches from "../components/EventSearches";
 import EventCarousel from "../components/EventCarousel";
 import Gallery from "../components/Gallery";
 import Search from "../components/Search";
+import { useEffect } from "react";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Home = () => {
   const searches = [
@@ -45,6 +47,11 @@ const Home = () => {
       link: "",
     },
   ];
+
+  const { state } = useAuthContext();
+  useEffect(() => {
+    console.log(state);
+  });
   return (
     <div className="select-none">
       <Carousel />

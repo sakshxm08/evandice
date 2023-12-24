@@ -59,9 +59,15 @@ export const useSignup = () => {
         const user = response.data;
         console.log(response.data);
         // Store the token in local storage or cookies for authentication
-        localStorage.setItem("user", JSON.stringify(user));
+        localStorage.setItem("token", JSON.stringify(user.token));
 
-        dispatch({ type: "LOGIN", payload: user });
+        apiConnector("GET", endpoints.GET_USER, null, {
+          Authorization: user.token, // Replace with the actual JWT token
+        }).then((res) => {
+          dispatch({ type: "LOGIN", payload: res.data });
+          console.log(res.data);
+        });
+
         // React Toast
         navigate(-1);
         toast.success("Signed up successfully", {
