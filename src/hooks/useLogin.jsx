@@ -35,7 +35,7 @@ export const useLogin = () => {
 
         setIsLoading(false);
         // Redirect to the dashboard or any desired page after successful signup
-        navigate(-1);
+        navigate("/");
         toast.success("Logged in successfully", {
           position: "top-right",
           autoClose: 5000,

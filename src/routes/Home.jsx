@@ -48,9 +48,9 @@ const Home = () => {
     },
   ];
 
-  const { state } = useAuthContext();
+  const { user } = useAuthContext();
   useEffect(() => {
-    console.log(state);
+    console.log(user);
   });
   return (
     <div className="select-none">

@@ -3,6 +3,7 @@ import EvUserIcon from "../assets/icons/EvUserIcon";
 import EvLogo from "../assets/logo/EvLogo";
 import { useEffect, useRef } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { UserMenu } from "./userMenu";
 
 const Header = () => {
   const nav_links = [
@@ -13,12 +14,12 @@ const Header = () => {
     { route: "About Us", link: "/about" },
   ];
 
-  const user = useAuthContext();
+  const { user } = useAuthContext();
 
   useEffect(() => {
     console.log(user);
-    if (user.user) {
-      console.log(user.user.user);
+    if (user) {
+      console.log(user);
     }
   }, [user]);
 
@@ -65,7 +66,7 @@ const Header = () => {
           ))}
         </div>
         <div className="flex items-center gap-4 justify-center h-8">
-          {!user.user ? (
+          {!user ? (
             <>
               <Link
                 to="/login"
@@ -81,14 +82,17 @@ const Header = () => {
               </Link>
             </>
           ) : (
-            <span>{user.user.user.email}</span>
+            <>
+              <div className="group relative cursor-pointer">
+                <div className="flex items-center justify-center rounded-full  transition-all outline outline-none outline-offset-0 group-hover:outline-primary">
+                  <EvUserIcon className="h-full w-auto" size={40} />
+                </div>
+                <div className="group-hover:scale-y-100 origin-top shadow scale-y-0 flex opacity-0 group-hover:opacity-100 ease-in-out duration-500 absolute top-[calc(100%+10px)] right-0">
+                  <UserMenu />
+                </div>
+              </div>
+            </>
           )}
-          <Link
-            to="/profile"
-            className="flex items-center justify-center rounded-full  transition-all outline outline-none outline-offset-0 hover:outline-primary"
-          >
-            <EvUserIcon className="h-full w-auto" size={40} />
-          </Link>
         </div>
       </div>
     </nav>
@@ -96,3 +100,10 @@ const Header = () => {
 };
 
 export default Header;
+{
+  /* <img
+                    className="h-8 w-8 rounded-full"
+                    src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
+                    alt=""
+                  /> */
+}

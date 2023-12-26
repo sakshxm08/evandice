@@ -7,18 +7,15 @@ import { endpoints } from "../services/apiRoutes";
 export const AuthContext = createContext();
 
 export const AuthContextProvider = ({ children }) => {
-  const [state, dispatch] = useReducer(authReducer, {
-    user: null,
-  });
+  const [state, dispatch] = useReducer(authReducer, { user: null });
 
-  // console.log(state.user);
   useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("token"));
-    if (user) {
+    const token = JSON.parse(localStorage.getItem("token"));
+    if (token) {
       apiConnector("GET", endpoints.GET_USER, null, {
         Authorization: JSON.parse(localStorage.getItem("token")), // Replace with the actual JWT token
       }).then((res) => {
-        dispatch({ type: "LOGIN", payload: res.data });
+        dispatch({ type: "LOGIN", payload: res.data.user });
         console.log(res.data.user);
       });
     }

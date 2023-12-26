@@ -69,7 +69,7 @@ export const useSignup = () => {
         });
 
         // React Toast
-        navigate(-1);
+        navigate("/");
         toast.success("Signed up successfully", {
           position: "top-right",
           autoClose: 3000,
