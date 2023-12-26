@@ -3,7 +3,7 @@ import EvUserIcon from "../assets/icons/EvUserIcon";
 import EvLogo from "../assets/logo/EvLogo";
 import { useEffect, useRef } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
-import { UserMenu } from "./userMenu";
+import { UserMenu } from "./UserMenu";
 
 const Header = () => {
   const nav_links = [
