@@ -16,6 +16,7 @@ export const AuthContextProvider = ({ children }) => {
         Authorization: JSON.parse(localStorage.getItem("token")), // Replace with the actual JWT token
       }).then((res) => {
         dispatch({ type: "LOGIN", payload: res.data.user });
+
         console.log(res.data.user);
       });
     }

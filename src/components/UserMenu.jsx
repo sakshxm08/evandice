@@ -21,7 +21,7 @@ export const UserMenu = () => {
                   <span className="font-titleFont font-light text-base whitespace-nowrap">
                     Hello,{" "}
                     <span className="font-medium">
-                      {/* {user.name.split(" ")[0]} */}
+                      {user.name.split(" ")[0]}
                     </span>
                   </span>
                   <span className="text-xs text-gray-500">{user.email}</span>
