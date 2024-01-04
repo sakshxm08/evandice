@@ -7,17 +7,29 @@ const About = () => {
   const team_members = ["", "", "", "", "", ""];
   return (
     <div className=" relative">
-      <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden">
-        <img src={background} alt="" className="" />
+      <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden object-cover">
+        <img
+          src={background}
+          alt=""
+          className="h-full w-auto object-cover object-center"
+        />
         <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
       </div>
       <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">
         <h1 className="text-title uppercase font-title">About us</h1>
-        <div className="w-full bg-gray-100/40 backdrop-blur-2xl rounded-2xl p-2 flex items-center justify-between text-black gap-6">
-          <div className="flex flex-col justify-center gap-4 px-6 w-2/3">
-            <div className="flex flex-col justify-center gap-2">
-              <h4 className="font-medium uppercase">Team Evandize</h4>
-              <h1 className="text-5xl font-semibold">Who are we?</h1>
+        <div className="w-full bg-gray-100/40 backdrop-blur-2xl rounded-2xl p-6 xl:p-2 flex items-center justify-between text-black gap-6">
+          <div className="flex flex-col justify-center gap-4 xl:pl-6 w-full lg:w-2/3">
+            <div className="flex sm:flex-row flex-col sm:items-center gap-6">
+              <img
+                src={who_are_we}
+                className=" lg:hidden block w-full sm:w-1/3"
+                alt=""
+              />
+
+              <div className="flex flex-col justify-center gap-2">
+                <h4 className="font-medium uppercase">Team Evandize</h4>
+                <h1 className="text-5xl font-semibold">Who are we?</h1>
+              </div>
             </div>
             <div className="text-sm">
               Lorem ipsum dolor sit amet consectetur. Sit fermentum sed lobortis
@@ -33,7 +45,7 @@ const About = () => {
               laoreet. Id risus iaculis posuere nec enim id facilisis nascetur.
               Placerat.
             </div>
-            <div className="flex gap-4 items-center pt-6">
+            <div className="flex gap-4 items-center pt-6 md:justify-start justify-center sm:flex-row flex-col">
               <button className="text-black flex items-center justify-start text-sm font-medium h-10 w-36 bg-[#FBBC05] rounded-full group overflow-hidden relative">
                 <div className="group-hover:-translate-x-ful min-w-[9rem] h-full whitespace-nowrap transition-all duration-500 flex items-center justify-center mx-auto">
                   Our Instagram
@@ -57,7 +69,7 @@ const About = () => {
               </button>
             </div>
           </div>
-          <img src={who_are_we} className="w-1/3" alt="" />
+          <img src={who_are_we} className=" hidden lg:block w-1/3" alt="" />
         </div>
         <div className=" drop-shadow-sm">
           Lorem ipsum dolor sit amet consectetur. Massa nunc blandit justo
@@ -86,7 +98,7 @@ const About = () => {
         </div>
         <div className="w-full flex flex-col items-center justify-center gap-4">
           <h1 className="text-title uppercase font-title">the team</h1>
-          <div className="grid grid-cols-3 gap-6 w-full">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {team_members.map((member, index) => (
               <TeamCard key={index} />
             ))}

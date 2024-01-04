@@ -11,7 +11,7 @@ function NextArrow(props) {
   const { onClick } = props;
   return (
     <button
-      className={`absolute top-1/2 -right-20 h-20 -translate-y-1/2 z-20 ${
+      className={`absolute top-1/2 left-[calc(100%+10px)] right-auto xl:left-auto xl:-right-20 h-20 -translate-y-1/2 z-20 ${
         onClick ? "cursor-pointer" : "cursor-default"
       } flex items-center justify-center`}
       onClick={onClick}
@@ -25,7 +25,7 @@ function PrevArrow(props) {
   const { onClick } = props;
   return (
     <button
-      className={`absolute top-1/2 -left-20 h-20 -translate-y-1/2 z-20 ${
+      className={`absolute top-1/2 right-[calc(100%+10px)] left-auto xl:right-auto xl:-left-20 h-20 -translate-y-1/2 z-20 ${
         onClick ? "cursor-pointer" : "cursor-default"
       } flex items-center justify-center`}
       onClick={onClick}
@@ -53,6 +53,17 @@ const EventCarousel = () => {
     slidesToScroll: 2,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: false,
+        },
+      },
+    ],
   };
   return (
     <div className="w-full max-w-5xl">

@@ -34,10 +34,10 @@ const Header = () => {
 
   return (
     <nav
-      className="w-screen top-0 fixed right-0 bg-transparent z-50 transition-all duration-300 flex items-center justify-between"
+      className="w-screen  fixed top-0 left-0 bg-transparent z-50 transition-all duration-300 flex items-center justify-between"
       ref={nav_ref}
     >
-      <Link to="/" className="mx-8">
+      <Link to="/" className="pl-8">
         <EvLogo width={150} />
       </Link>
       <div className="flex items-center justify-end gap-6 px-6 py-8">
