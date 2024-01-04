@@ -14,11 +14,15 @@ export const AuthContextProvider = ({ children }) => {
     if (token) {
       apiConnector("GET", endpoints.GET_USER, null, {
         Authorization: JSON.parse(localStorage.getItem("token")), // Replace with the actual JWT token
-      }).then((res) => {
-        dispatch({ type: "LOGIN", payload: res.data.user });
+      })
+        .then((res) => {
+          dispatch({ type: "LOGIN", payload: res.data.user });
 
-        console.log(res.data.user);
-      });
+          console.log(res.data.user);
+        })
+        .catch(() => {
+          dispatch({ type: "LOGIN", payload: null });
+        });
     }
   }, []);
 

@@ -9,8 +9,8 @@ const Header = () => {
   const nav_links = [
     { route: "Home", link: "/" },
     { route: "Events", link: "/all_events" },
-    { route: "Register for a Fest", link: "/register_fest" },
-    { route: "Add an Event", link: "/add_event" },
+    { route: "Register a Fest", link: "/add_fest/form" },
+    { route: "Add an Event", link: "/add_event/form" },
     { route: "About Us", link: "/about" },
   ];
 
@@ -75,7 +75,7 @@ const Header = () => {
                 Login
               </Link>
               <Link
-                to="/register"
+                to="/signup"
                 className="w-20 text-sm flex items-center justify-center h-full bg-primary text-black font-semibold hover:bg-primary/75 hover:border-primary/75 transition-all"
               >
                 Sign Up

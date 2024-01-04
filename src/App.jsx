@@ -14,10 +14,15 @@ import Signup from "./routes/Signup";
 import Event from "./routes/Event";
 import Profile from "./routes/Profile";
 import "react-toastify/dist/ReactToastify.min.css";
-import PropTypes from "prop-types";
 import { ToastContainer } from "react-toastify";
-import { AuthContextProvider } from "./context/AuthContext";
-
+import { RegisterFest } from "./routes/RegisterFest";
+import { AddEvent } from "./routes/AddEvent/AddEvent";
+import { AllEvents } from "./routes/AllEvents";
+import { useAuthContext } from "./hooks/useAuthContext";
+import { AddFest } from "./routes/AddFest";
+import { Verify } from "./routes/AddEvent/Verify";
+import { background } from "./assets/images/images";
+import { PropTypes } from "prop-types";
 const Layout = () => (
   <>
     <Header />
@@ -27,14 +32,27 @@ const Layout = () => (
   </>
 );
 
-const PrivateRoute = ({ element }) => {
-  // Check if the user is authenticated
-  const isAuthenticated = localStorage.getItem("token") !== null;
-
-  return isAuthenticated ? element : <Navigate to="/login" replace />;
-};
-
+const AddBgLayout = ({ heading }) => (
+  <div className="relative">
+    <div className="absolute top-0 left-0 h-full min-h-screen -z-50 overflow-hidden w-screen">
+      <img
+        src={background}
+        alt="background"
+        className="w-screen h-auto brightness-90"
+      />
+      <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
+    </div>
+    <div className="py-32 max-w-7xl w-11/12 mx-auto">
+      <h1 className="text-title font-title uppercase mx-auto text-center mb-16">
+        {heading}
+      </h1>
+      <Outlet />
+    </div>
+  </div>
+);
 function App() {
+  const { user } = useAuthContext();
+
   const router = createBrowserRouter([
     {
       path: "/",
@@ -46,11 +64,11 @@ function App() {
         },
         {
           path: "login",
-          element: <Login />,
+          element: user ? <Navigate to="/" /> : <Login />,
         },
         {
-          path: "register",
-          element: <Signup />,
+          path: "signup",
+          element: user ? <Navigate to="/" /> : <Signup />,
         },
         {
           path: "about",
@@ -61,9 +79,50 @@ function App() {
           element: <Event />,
         },
         {
+          path: "register_fest",
+          element: <RegisterFest />,
+        },
+        {
+          path: "add_event",
+          element: <AddBgLayout heading={"add an event"} />,
+          children: [
+            {
+              path: "form",
+              element: <AddEvent />,
+            },
+            {
+              path: "verify",
+              element: <Verify />,
+            },
+          ],
+        },
+        {
+          path: "add_fest",
+          element: <AddBgLayout heading={"create a new fest"} />,
+          children: [
+            {
+              path: "form",
+              element: <AddFest />,
+            },
+            {
+              path: "verify",
+              element: <Verify />,
+            },
+          ],
+        },
+        {
+          path: "add_fest",
+          element: <AddFest />,
+        },
+        {
+          path: "all_events",
+          element: <AllEvents />,
+        },
+
+        {
           // Make the "profile" route protected
           path: "profile",
-          element: <PrivateRoute element={<Profile />} />,
+          element: !user ? <Navigate to="/login" replace /> : <Profile />,
         },
       ],
     },
@@ -72,15 +131,14 @@ function App() {
   return (
     <>
       <ToastContainer style={{ top: "100px" }} />
-      <AuthContextProvider>
-        <RouterProvider router={router} />
-      </AuthContextProvider>
+
+      <RouterProvider router={router} />
     </>
   );
 }
 
 export default App;
 
-PrivateRoute.propTypes = {
-  element: PropTypes.node.isRequired,
+AddBgLayout.propTypes = {
+  heading: PropTypes.string,
 };

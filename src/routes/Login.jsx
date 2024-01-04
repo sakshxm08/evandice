@@ -52,7 +52,7 @@ const Login = () => {
             <div>
               If you don&apos;t have an account,{" "}
               <Link
-                to="/register"
+                to="/signup"
                 className="text-[#C10C99] font-medium tracking-wide relative after:content-[''] after:absolute after:-bottom-1 after:bg-[#C10C99] after:w-0 after:h-px after:left-0 hover:after:w-full after:transition-all after:duration-300"
               >
                 register here!
