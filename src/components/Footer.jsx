@@ -3,10 +3,10 @@ import { FiFacebook, FiInstagram, FiYoutube } from "react-icons/fi";
 import { FiTwitter } from "react-icons/fi";
 const Footer = () => {
   return (
-    <div className="flex flex-col max-w-5xl items-center justify-center mx-auto py-16 gap-8">
+    <div className="flex flex-col max-w-5xl w-4/5 items-center justify-center mx-auto py-16 gap-8">
       <h1 className="text-title font-title uppercase">Contact us</h1>
-      <div className="grid grid-cols-4">
-        <div className="flex flex-col gap-6 w-full col-span-3 pr-48">
+      <div className="flex flex-col gap-4 lg:gap-0 lg:grid grid-cols-4">
+        <div className="flex flex-col gap-3 sm:gap-6 w-full col-span-3 pr-0 lg:pr-48">
           <EvLogo width={200} />
           <div>
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -15,7 +15,7 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col w-full gap-6 h-full">
-          <h2 className="text-4xl uppercase text-primary font-medium py-7">
+          <h2 className="text-4xl uppercase text-primary font-medium pt-7 sm:py-7">
             About us
           </h2>
           <div className="flex flex-col gap-3 justify-center font-light">
