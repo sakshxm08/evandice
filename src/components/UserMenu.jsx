@@ -4,7 +4,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 export const UserMenu = () => {
   const { user } = useAuthContext();
 
-  console.log(user);
   const { logout } = useLogout();
 
   const signout = () => {

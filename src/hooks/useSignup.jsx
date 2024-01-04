@@ -54,10 +54,8 @@ export const useSignup = () => {
     })
       .then((response) => {
         // Assuming the backend sends a token upon successful signup
-        console.log("clicked");
         setIsLoading(false);
         const user = response.data;
-        console.log(response.data);
         // Store the token in local storage or cookies for authentication
         localStorage.setItem("token", JSON.stringify(user.token));
 
@@ -65,8 +63,6 @@ export const useSignup = () => {
           Authorization: user.token, // Replace with the actual JWT token
         }).then((res) => {
           dispatch({ type: "LOGIN", payload: res.data.user });
-
-          console.log(res.data);
         });
 
         // React Toast

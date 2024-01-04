@@ -16,13 +16,6 @@ const Header = () => {
 
   const { user } = useAuthContext();
 
-  useEffect(() => {
-    console.log(user);
-    if (user) {
-      console.log(user);
-    }
-  }, [user]);
-
   const nav_ref = useRef();
   useEffect(() => {
     window.onscroll = function () {

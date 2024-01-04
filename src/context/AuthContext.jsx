@@ -17,8 +17,6 @@ export const AuthContextProvider = ({ children }) => {
       })
         .then((res) => {
           dispatch({ type: "LOGIN", payload: res.data.user });
-
-          console.log(res.data.user);
         })
         .catch(() => {
           dispatch({ type: "LOGIN", payload: null });
