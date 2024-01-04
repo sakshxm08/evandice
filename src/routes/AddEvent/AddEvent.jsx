@@ -1,37 +1,17 @@
 import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { State, City } from "country-state-city";
+import { useEventContext } from "../../hooks/useEventContext";
 
 export const AddEvent = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
   const [stateData, setStateData] = useState([]);
 
-  const eventValues = {
-    name: "",
-    dates: "",
-    address: "",
-    state: "",
-    city: "",
-    gmap_link: "",
-    contact_no: "",
-    type: null,
-    accomodation: null,
-    depts: [],
-    instagram: "",
-    facebook: "",
-    twitter: "",
-    sponsors: "",
-    foodstalls: "",
-    accomodations: "",
-    registerfees: null,
-    desc: "",
-    winner: "",
-    participant: "",
-    certificates: null,
-    email: "",
-  };
+  const { dispatch, event } = useEventContext();
+
+  const navigate = useNavigate();
 
   const depts = [
     "Computer Science Engineering",
@@ -43,10 +23,8 @@ export const AddEvent = () => {
     "Chemical Engineering",
   ];
 
-  const location = useLocation();
-  console.log(location.state);
   const [formData, setFormData] = useState(
-    location.state ? location.state.formData : eventValues
+    location.state ? location.state.formData : event
   );
 
   const setValues = (e) => {
@@ -87,7 +65,6 @@ export const AddEvent = () => {
         cities.push(city.name);
       }
     }
-    console.log(stateData);
   }, [stateData, formData.state, cities]);
   return (
     <div className="relative">
@@ -140,29 +117,29 @@ export const AddEvent = () => {
       <form className="flex flex-col gap-4 my-4 text-sm">
         <div className="grid grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="event_name" className="text-yellow text-xs">
+            <label htmlFor="name" className="text-yellow text-xs">
               Event Name
             </label>
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="event_name"
-              id="event_name"
+              name="name"
+              id="name"
               onChange={setValues}
-              value={formData.event_name}
+              value={formData.name}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="event_date" className="text-yellow text-xs">
+            <label htmlFor="date" className="text-yellow text-xs">
               Event Date/s
             </label>
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="event_date"
-              id="event_date"
+              name="date"
+              id="date"
               onChange={setValues}
-              value={formData.event_date}
+              value={formData.date}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -197,14 +174,14 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="map_link" className="text-yellow text-xs">
+            <label htmlFor="gmap_link" className="text-yellow text-xs">
               Google Maps Link
             </label>
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="map_link"
-              id="map_link"
+              name="gmap_link"
+              id="gmap_link"
               onChange={setValues}
               value={formData.gmap_link}
             />
@@ -577,13 +554,16 @@ export const AddEvent = () => {
           </div>
         </div>
 
-        <Link
-          to="/add_event/verify"
-          state={{ formData }}
+        <button
+          onClick={(e) => {
+            e.preventDefault();
+            dispatch({ type: "EVENT", payload: formData });
+            navigate("/add_event/verify");
+          }}
           className="mx-auto py-3 px-32 text-black bg-yellow mt-8 hover:bg-yellow/90 transition-all font-bold text-base rounded-md"
         >
           Submit
-        </Link>
+        </button>
       </form>
     </div>
   );

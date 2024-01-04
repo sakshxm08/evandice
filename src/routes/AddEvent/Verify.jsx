@@ -1,13 +1,13 @@
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
+import { useEventContext } from "../../hooks/useEventContext";
 export const Verify = () => {
-  const location = useLocation();
-  console.log(location.state.formData);
+  const { event } = useEventContext();
+  console.log(event);
   return (
     <div>
       <Link
-        to="/add_event/form"
-        state={{ formData: location.state.formData }}
+        to={-1}
         className="absolute left-10 top-40 flex font-bold hover:text-yellow transition-all cursor-pointer justify-center items-center gap-2 text-xl"
       >
         <IoIosArrowRoundBack size={40} />

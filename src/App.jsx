@@ -15,11 +15,10 @@ import Event from "./routes/Event";
 import Profile from "./routes/Profile";
 import "react-toastify/dist/ReactToastify.min.css";
 import { ToastContainer } from "react-toastify";
-import { RegisterFest } from "./routes/RegisterFest";
 import { AddEvent } from "./routes/AddEvent/AddEvent";
 import { AllEvents } from "./routes/AllEvents";
 import { useAuthContext } from "./hooks/useAuthContext";
-import { AddFest } from "./routes/AddFest";
+import { AddFest } from "./routes/RegisterFest/AddFest";
 import { Verify } from "./routes/AddEvent/Verify";
 import { background } from "./assets/images/images";
 import { PropTypes } from "prop-types";
@@ -78,10 +77,7 @@ function App() {
           path: "events/:id",
           element: <Event />,
         },
-        {
-          path: "register_fest",
-          element: <RegisterFest />,
-        },
+
         {
           path: "add_event",
           element: <AddBgLayout heading={"add an event"} />,
@@ -109,10 +105,6 @@ function App() {
               element: <Verify />,
             },
           ],
-        },
-        {
-          path: "add_fest",
-          element: <AddFest />,
         },
         {
           path: "all_events",

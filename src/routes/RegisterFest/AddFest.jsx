@@ -1,33 +1,18 @@
 import { useEffect, useState } from "react";
-import Dropdown from "../components/Dropdown";
+import Dropdown from "../../components/Dropdown";
 import { State, City } from "country-state-city";
+import { useNavigate } from "react-router-dom";
+import { useEventContext } from "../../hooks/useEventContext";
 
 export const AddFest = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
   const [stateData, setStateData] = useState([]);
 
-  const festValues = {
-    name: "",
-    dates: "",
-    address: "",
-    state: "",
-    city: "",
-    gmap_link: "",
-    contact_no: "",
-    type: null,
-    depts: [],
-    instagram: "",
-    facebook: "",
-    twitter: "",
-    sponsors: "",
-    foodstalls: "",
-    accomodations: "",
-    registerfees: null,
-    poc_name: "",
-    poc_contact: "",
-    poc_email: "",
-  };
+  const { dispatch, fest } = useEventContext();
+
+  const navigate = useNavigate();
+
   const depts = [
     "Computer Science Engineering",
     "Information Technology",
@@ -38,13 +23,15 @@ export const AddFest = () => {
     "Chemical Engineering",
   ];
 
-  const [formData, setFormData] = useState(festValues);
+  const [formData, setFormData] = useState(
+    location.state ? location.state.formData : fest
+  );
 
   const setValues = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const [checked, setChecked] = useState([]);
+  const [checked, setChecked] = useState(formData.depts);
   // Add/Remove checked item from list
   const handleCheck = (event) => {
     var updatedList = [...checked];
@@ -78,36 +65,35 @@ export const AddFest = () => {
         cities.push(city.name);
       }
     }
-    console.log(stateData);
   }, [stateData, formData.state, cities]);
   return (
     <div className="relative">
       <form className="flex flex-col gap-4 my-4 text-sm">
         <div className="grid grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="event_name" className="text-yellow text-xs">
+            <label htmlFor="name" className="text-yellow text-xs">
               Fest Name
             </label>
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="event_name"
-              id="event_name"
+              name="name"
+              id="name"
               onChange={setValues}
-              value={formData.event_name}
+              value={formData.name}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="event_date" className="text-yellow text-xs">
+            <label htmlFor="date" className="text-yellow text-xs">
               Fest Date/s
             </label>
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="event_date"
-              id="event_date"
+              name="date"
+              id="date"
               onChange={setValues}
-              value={formData.event_date}
+              value={formData.date}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -142,14 +128,14 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="map_link" className="text-yellow text-xs">
+            <label htmlFor="gmap_link" className="text-yellow text-xs">
               Google Maps Link
             </label>
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="map_link"
-              id="map_link"
+              name="gmap_link"
+              id="gmap_link"
               onChange={setValues}
               value={formData.gmap_link}
             />
@@ -177,6 +163,7 @@ export const AddFest = () => {
                   id="offline"
                   name="type"
                   className="accent-yellow"
+                  checked={formData.type === "offline"}
                   onChange={setValues}
                   value={"offline"}
                 />
@@ -188,6 +175,7 @@ export const AddFest = () => {
                   id="online"
                   name="type"
                   onChange={setValues}
+                  checked={formData.type === "online"}
                   value={"online"}
                   className="accent-yellow"
                 />
@@ -200,6 +188,7 @@ export const AddFest = () => {
                   name="type"
                   className="accent-yellow"
                   onChange={setValues}
+                  checked={formData.type === "hybrid"}
                   value={"hybrid"}
                 />
                 <label htmlFor="hybrid">Hybrid</label>
@@ -214,6 +203,7 @@ export const AddFest = () => {
                   type="radio"
                   id="free_accomod"
                   name="accomodation"
+                  checked={formData.accomodation === "free"}
                   onChange={setValues}
                   value={"free"}
                   className="accent-yellow"
@@ -226,6 +216,7 @@ export const AddFest = () => {
                   id="paid_accomod"
                   name="accomodation"
                   onChange={setValues}
+                  checked={formData.accomodation === "paid"}
                   value={"paid"}
                   className="accent-yellow"
                 />
@@ -237,6 +228,7 @@ export const AddFest = () => {
                   id="no_accomod"
                   name="accomodation"
                   className="accent-yellow"
+                  checked={formData.accomodation === "no"}
                   onChange={setValues}
                   value={"no"}
                 />
@@ -260,6 +252,7 @@ export const AddFest = () => {
                     id={item}
                     type="checkbox"
                     onChange={handleCheck}
+                    checked={formData.depts.includes(item)}
                     className="accent-yellow mt-[3px]"
                   />
                   <label htmlFor={item}>{item}</label>
@@ -425,6 +418,7 @@ export const AddFest = () => {
                   id="paid_plan"
                   name="registerfees"
                   onChange={setValues}
+                  checked={formData.registerfees === "paid"}
                   value={"paid"}
                   className="accent-yellow"
                 />
@@ -436,6 +430,7 @@ export const AddFest = () => {
                   id="free_plan"
                   name="registerfees"
                   onChange={setValues}
+                  checked={formData.registerfees === "free"}
                   value={"free"}
                   className="accent-yellow"
                 />
@@ -447,6 +442,7 @@ export const AddFest = () => {
                   id="multiple_plan"
                   name="registerfees"
                   onChange={setValues}
+                  checked={formData.registerfees === "multiple"}
                   value={"multiple"}
                   className="accent-yellow"
                 />
@@ -459,7 +455,8 @@ export const AddFest = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            console.log(formData);
+            dispatch({ type: "EVENT", payload: formData });
+            navigate("/add_fest/verify");
           }}
           className="mx-auto py-3 px-32 text-black bg-yellow mt-8 hover:bg-yellow/90 transition-all font-bold text-base rounded-md"
         >
