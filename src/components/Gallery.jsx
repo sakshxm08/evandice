@@ -46,12 +46,25 @@ const Gallery = () => {
     arrows: false,
     cssEase: "linear",
     pauseOnHover: false,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
   };
   return (
     <Slider {...settings}>
       {images.map((img, index) => (
         <div key={index} className="mx-auto w-11/12">
-          <img src={img} alt="" className="w-auto h-[300px] mx-2 shadow-lg" />
+          <img
+            src={img}
+            alt=""
+            className="w-auto h-[200px] sm:h-[300px] mx-2 shadow-lg"
+          />
         </div>
       ))}
     </Slider>
