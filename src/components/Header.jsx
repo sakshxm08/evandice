@@ -49,6 +49,16 @@ const Header = () => {
       ? (document.body.style.overflow = "hidden")
       : (document.body.style.overflow = "unset");
   }, [open]);
+  const hamburger = useRef(null);
+  const sidebar = useRef(null);
+  document.onclick = function (e) {
+    if (
+      !hamburger.current.contains(e.target) &&
+      !sidebar.current.contains(e.target)
+    ) {
+      setOpen(false);
+    }
+  };
   return (
     <>
       <nav
@@ -111,6 +121,7 @@ const Header = () => {
           className={`h-screen flex flex-col justify-between pt-20 pb-32 gap-6 lg:hidden fixed top-0  w-2/3 bg-primary max-w-[350px] shadow-2xl ${
             open ? "right-0" : "-right-full"
           } transition-all duration-500 ease-in-out px-8 text-lg`}
+          ref={sidebar}
         >
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4 pb-8 border-b border-b-gray-50">
@@ -185,6 +196,7 @@ const Header = () => {
         <div
           className="flex lg:hidden flex-col gap-2 w-8 mr-8 transition-all z-[100]"
           onClick={openMenu}
+          ref={hamburger}
         >
           <span
             className={`h-px w-full ${
