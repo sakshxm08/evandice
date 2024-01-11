@@ -113,7 +113,7 @@ const Header = () => {
         >
           <div className="flex flex-col gap-6">
             <div className="flex items-center gap-4 pb-8 border-b border-b-gray-50">
-              {user ? (
+              {!user ? (
                 <>
                   <Link
                     to="/login"
