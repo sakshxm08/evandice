@@ -108,7 +108,7 @@ const Carousel = () => {
               Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
-          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light">
+          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -135,7 +135,7 @@ const Carousel = () => {
               Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
-          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light">
+          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -162,7 +162,7 @@ const Carousel = () => {
               Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
-          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light">
+          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per
