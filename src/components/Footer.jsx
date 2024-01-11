@@ -9,7 +9,7 @@ const Footer = () => {
       </h1>
       <div className="flex flex-col gap-4 lg:gap-0 lg:grid grid-cols-4">
         <div className="flex flex-col gap-3 sm:gap-6 w-full col-span-3 pr-0 lg:pr-48">
-          <EvLogo width={200} />
+          <EvLogo className="w-48 md:w-60" />
           <div>
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class

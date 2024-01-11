@@ -1,9 +1,10 @@
 import PropTypes from "prop-types";
-const EvLogo = ({ width = 1200 }) => {
+const EvLogo = ({ className }) => {
   return (
     <svg
-      width={width}
-      height={width * (82.87 / 164.98)}
+      // width={width}
+      className={className}
+      // height={width * (82.87 / 164.98)}
       viewBox="0 0 2172 1091"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -33,6 +34,6 @@ const EvLogo = ({ width = 1200 }) => {
   );
 };
 
-EvLogo.propTypes = { width: PropTypes.number };
+EvLogo.propTypes = { width: PropTypes.number, className: PropTypes.string };
 
 export default EvLogo;
