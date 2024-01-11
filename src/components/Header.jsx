@@ -43,6 +43,11 @@ const Header = () => {
   const signout = () => {
     logout();
   };
+  useEffect(() => {
+    open
+      ? (document.body.style.overflow = "hidden")
+      : (document.body.style.overflow = "unset");
+  }, [open]);
   return (
     <>
       <nav
@@ -50,7 +55,7 @@ const Header = () => {
         ref={nav_ref}
       >
         <Link to="/" className="pl-8 py-2">
-          <EvLogo className="w-28 md:w-40" />
+          <EvLogo className="w-32 md:w-40" />
         </Link>
         <div className="lg:flex hidden items-center justify-end gap-6 px-6">
           <div className="flex gap-8 items-center">
@@ -71,7 +76,7 @@ const Header = () => {
             ))}
           </div>
           <div className="flex items-center gap-4 justify-center h-8">
-            {!user ? (
+            {user ? (
               <>
                 <Link
                   to="/login"
@@ -102,7 +107,7 @@ const Header = () => {
         </div>
 
         <div
-          className={`h-screen flex flex-col justify-between pt-20 pb-10 gap-6 lg:hidden fixed top-0  w-2/3 bg-yellow max-w-[350px] shadow-2xl ${
+          className={`h-screen flex flex-col justify-between py-20 gap-6 lg:hidden fixed top-0  w-2/3 bg-primary max-w-[350px] shadow-2xl ${
             open ? "right-0" : "-right-full"
           } transition-all duration-500 ease-in-out px-8 text-lg`}
         >
@@ -112,13 +117,13 @@ const Header = () => {
                 <>
                   <Link
                     to="/login"
-                    className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white text-white font-semibold hover:bg-white hover:text-yellow transition-all"
+                    className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white text-white font-semibold hover:bg-white hover:text-primary transition-all"
                   >
                     Login
                   </Link>
                   <Link
                     to="/signup"
-                    className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white bg-white text-yellow font-semibold hover:bg-white/75 hover:border-primary/75 transition-all"
+                    className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white bg-white text-primary font-semibold hover:bg-white/75 hover:border-primary/75 transition-all"
                   >
                     Sign Up
                   </Link>
@@ -136,6 +141,13 @@ const Header = () => {
                     <span className="text-sm text-white/80">
                       saksham2211gambhir@gmail.com
                     </span>
+                    <Link
+                      to="/profile"
+                      className="active:text-black cursor-pointer flex gap-2 items-center mt-4"
+                    >
+                      <CiEdit size={20} />
+                      Edit Profile
+                    </Link>
                     {/* <span className="text-xs text-gray-500">{user.email}</span> */}
                   </div>
                 </>
@@ -160,15 +172,8 @@ const Header = () => {
           </div>
           {!user && (
             <div className="flex flex-col gap-4 pt-8 border-t border-t-gray-50">
-              <Link
-                to="/profile"
-                className="active:text-black cursor-pointer flex gap-2 items-center"
-              >
-                <CiEdit size={20} />
-                Edit Profile
-              </Link>
               <span
-                className="text-red-500 active:text-red-800 cursor-pointer flex gap-2 items-center"
+                className="text-red-500 bg-white w-full py-2 text-center rounded-full justify-center active:text-red-800 cursor-pointer flex gap-2 items-center"
                 onClick={signout}
               >
                 <CiLogout size={20} />
