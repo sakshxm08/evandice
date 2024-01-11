@@ -134,15 +134,16 @@ const Header = () => {
                     <span className="font-titleFont font-light text-lg whitespace-nowrap">
                       Hello,{" "}
                       <span className="font-medium text-xl">
-                        {/* {user.name.split(" ")[0]} */}
-                        Saksham
+                        {user.name.split(" ")[0]}
                       </span>
                     </span>
-                    <span className="text-sm text-white/80">
-                      saksham2211gambhir@gmail.com
-                    </span>
-
-                    {/* <span className="text-xs text-gray-500">{user.email}</span> */}
+                    <span className="text-xs text-gray-500">{user.email}</span>
+                    <Link
+                      to="/profile"
+                      className="active:text-black cursor-pointer mt-4"
+                    >
+                      Edit Profile
+                    </Link>
                   </div>
                 </>
               )}
