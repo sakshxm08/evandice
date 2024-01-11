@@ -42,6 +42,7 @@ const Header = () => {
 
   const signout = () => {
     logout();
+    openMenu();
   };
   useEffect(() => {
     open
@@ -117,12 +118,14 @@ const Header = () => {
                 <>
                   <Link
                     to="/login"
+                    onClick={openMenu}
                     className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white text-white font-semibold hover:bg-white hover:text-primary transition-all"
                   >
                     Login
                   </Link>
                   <Link
                     to="/signup"
+                    onClick={openMenu}
                     className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white bg-white text-primary font-semibold hover:bg-white/75 hover:border-primary/75 transition-all"
                   >
                     Sign Up
@@ -140,6 +143,7 @@ const Header = () => {
                     <span className="text-xs text-gray-500">{user.email}</span>
                     <Link
                       to="/profile"
+                      onClick={openMenu}
                       className="active:text-black cursor-pointer mt-4"
                     >
                       Edit Profile
