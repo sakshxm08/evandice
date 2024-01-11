@@ -46,27 +46,55 @@ const EventCarousel = () => {
 
   // Settings for Slick Carousel ----------------------------------------------------------------------------
   const settings = {
-    dots: false,
+    dots: true,
     infinite: false,
     speed: 500,
+    // arrows: false,
     slidesToShow: 4,
     slidesToScroll: 2,
     nextArrow: <NextArrow />,
     prevArrow: <PrevArrow />,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1100,
         settings: {
           slidesToShow: 3,
           slidesToScroll: 1,
           infinite: false,
-          dots: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 868,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 500,
+        settings: {
+          slidesToShow: 1.2,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 380,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          infinite: false,
+          dots: true,
         },
       },
     ],
   };
   return (
-    <div className="w-full max-w-5xl">
+    <div className="w-5/6 mx-auto max-w-5xl">
       <Slider {...settings}>
         {events.map((event, index) => (
           // mx-auto centering and w-11/12 for gap between cards -------------------------------------------

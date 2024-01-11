@@ -9,9 +9,43 @@ const EventSearches = () => {
     events.push("");
   }
 
+  const mediaQueries = {
+    mobiles: window.matchMedia("(min-width: 500px)"),
+    sm: window.matchMedia("(min-width: 640px)"),
+    md: window.matchMedia("(min-width: 768px)"),
+    tablets: window.matchMedia("(min-width: 900px)"),
+    xl: window.matchMedia("(min-width: 1250px)"),
+  };
   // No. of events and pages
   const [currentPage, setCurrentPage] = useState(1);
-  const [eventsPerPage] = useState(10);
+
+  const [eventsPerPage, setEventsPerPage] = useState(
+    mediaQueries.xl.matches
+      ? 10
+      : mediaQueries.tablets.matches
+      ? 8
+      : mediaQueries.md.matches
+      ? 6
+      : mediaQueries.mobiles.matches
+      ? 4
+      : 2
+  );
+
+  for (let i = 0; i < Object.keys(mediaQueries).length; i++) {
+    mediaQueries[Object.keys(mediaQueries)[i]].addEventListener("change", () =>
+      setEventsPerPage(
+        mediaQueries.xl.matches
+          ? 10
+          : mediaQueries.tablets.matches
+          ? 8
+          : mediaQueries.md.matches
+          ? 6
+          : mediaQueries.mobiles.matches
+          ? 4
+          : 2
+      )
+    );
+  }
   const indexOfLastEvent = currentPage * eventsPerPage;
   const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
 
@@ -39,7 +73,9 @@ const EventSearches = () => {
     <>
       {events.length > 0 ? (
         <>
-          <div className="w-full grid grid-cols-5 gap-4 grid-rows-2">
+          <div
+            className={`max-w-[300px] mobiles:max-w-full w-5/6 mx-auto mobiles:w-full grid grid-cols-1 mobiles:grid-cols-2 md:grid-cols-3 tablets:grid-cols-4 xl:grid-cols-5 gap-4 grid-rows-2`}
+          >
             {currentEvents.map((value, index) => (
               <EventCard key={index} />
             ))}

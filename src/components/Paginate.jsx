@@ -40,7 +40,7 @@ const Paginate = ({
   return (
     <div
       className={`flex ${
-        totalPages > 10 ? "w-[420px]" : "gap-4"
+        totalPages > 10 ? "w-[300px] sm:w-[420px]" : "gap-4"
       } items-center justify-between`}
     >
       <span

@@ -16,7 +16,9 @@ const About = () => {
         <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
       </div>
       <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">
-        <h1 className="text-title uppercase font-title">About us</h1>
+        <h1 className="text-5xl md:text-title uppercase font-title">
+          About us
+        </h1>
         <div className="w-full bg-gray-100/40 backdrop-blur-2xl rounded-2xl p-6 xl:p-2 flex items-center justify-between text-black gap-6">
           <div className="flex flex-col justify-center gap-4 xl:pl-6 w-full lg:w-2/3">
             <div className="flex sm:flex-row flex-col sm:items-center gap-6">
@@ -97,7 +99,9 @@ const About = () => {
           suspendisse vitae risus posuere. At eget volutpat porttitor egestas.
         </div>
         <div className="w-full flex flex-col items-center justify-center gap-4">
-          <h1 className="text-title uppercase font-title">the team</h1>
+          <h1 className="text-5xl md:text-title uppercase font-title">
+            the team
+          </h1>
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 w-full">
             {team_members.map((member, index) => (
               <TeamCard key={index} />

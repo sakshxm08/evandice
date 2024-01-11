@@ -22,7 +22,7 @@ const Search = ({ searches = [] }) => {
   };
 
   return (
-    <div className="w-full grid grid-cols-12 py-6 gap-10">
+    <div className="w-full flex flex-col md:grid grid-cols-12 py-6 gap-10">
       <div className="relative col-span-5 w-full">
         <input
           type="text"

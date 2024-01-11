@@ -42,7 +42,7 @@ const AddBgLayout = ({ heading }) => (
       <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
     </div>
     <div className="py-32 max-w-7xl w-11/12 mx-auto">
-      <h1 className="text-title font-title uppercase mx-auto text-center mb-16">
+      <h1 className="text-5xl md:text-title font-title uppercase mx-auto text-center mb-16">
         {heading}
       </h1>
       <Outlet />

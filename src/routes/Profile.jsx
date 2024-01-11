@@ -80,7 +80,7 @@ const Profile = () => {
         <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
       </div>
       <div className="py-32 max-w-7xl w-11/12 mx-auto">
-        <h1 className="text-title font-title uppercase mx-auto text-center">
+        <h1 className="text-5xl md:text-title font-title uppercase mx-auto text-center">
           My profile
         </h1>
         <div className="hover:bg-gray-400 bg-gray-200  mx-auto my-4  rounded-full  w-32 aspect-square transition-all overflow-hidden group">

@@ -13,7 +13,7 @@ function NextArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 right-20 h-20 -translate-y-1/2 z-20 cursor-pointer"
+      className="absolute top-1/2 right-20 h-min -translate-y-1/2 z-20 cursor-pointer"
       onClick={onClick}
     >
       <EvRightArrow />
@@ -24,7 +24,7 @@ function PrevArrow(props) {
   const { onClick } = props;
   return (
     <div
-      className="absolute top-1/2 left-20 h-20 -translate-y-1/2 z-20 cursor-pointer"
+      className="absolute top-1/2 left-20 h-min -translate-y-1/2 z-20 cursor-pointer"
       onClick={onClick}
     >
       <EvLeftArrow />
@@ -74,13 +74,24 @@ const Carousel = () => {
     customPaging: (index) => {
       return (
         <button
-          className="-mt-40 !p-0 mx-auto transition-all duration-500 origin-center"
+          className="-mt-16 tablets:-mt-28 xl:-mt-40 !p-0 mx-auto transition-all duration-500 origin-center"
           style={index === currSlide ? active : inactive}
         >
           {index + 1}
         </button>
       );
     },
+    responsive: [
+      {
+        breakpoint: 900,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+          dots: true,
+          arrows: false,
+        },
+      },
+    ],
   };
   // -------------------------------------------------------------------------------------------------
 
@@ -88,8 +99,8 @@ const Carousel = () => {
   const carousel_data = [
     {
       desc: (
-        <div className="flex flex-col items-center justify-center gap-12">
-          <div className="flex flex-col  text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
+        <div className="flex flex-col items-center justify-center gap-6 lg:gap-12">
+          <div className="flex flex-col  text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
@@ -97,7 +108,7 @@ const Carousel = () => {
               Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
-          <div className="flex justify-center items-center max-w-xl text-center text-white text-lg font-light">
+          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -115,8 +126,8 @@ const Carousel = () => {
     },
     {
       desc: (
-        <div className="flex flex-col items-center justify-center gap-12">
-          <div className="flex flex-col  text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
+        <div className="flex flex-col items-center justify-center gap-6 lg:gap-12">
+          <div className="flex flex-col  text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
@@ -124,7 +135,7 @@ const Carousel = () => {
               Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
-          <div className="flex justify-center items-center max-w-xl text-center text-white text-lg font-light">
+          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -142,8 +153,8 @@ const Carousel = () => {
     },
     {
       desc: (
-        <div className="flex flex-col items-center justify-center gap-12">
-          <div className="flex flex-col text-7xl items-center justify-center font-bold text-white drop-shadow-2xl">
+        <div className="flex flex-col items-center justify-center gap-6 lg:gap-12">
+          <div className="flex flex-col text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
@@ -151,7 +162,7 @@ const Carousel = () => {
               Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
-          <div className="flex justify-center items-center max-w-xl text-center text-white text-lg font-light">
+          <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
             vulputate libero et velit interdum, ac aliquet odio mattis. Class
             aptent taciti sociosqu ad litora torquent per conubia nostra, per
@@ -172,14 +183,17 @@ const Carousel = () => {
 
   // Returning the carousel -----------------------------------------------------------------------------
   return (
-    <div className="min-h-[768px] h-screen overflow-hidden">
+    <div className=" min-h-[368px] md:min-h-0 md:min-w-screen md:aspect-video overflow-hidden relative">
       <Slider className="h-full" {...settings}>
         {carousel_data.map((slide) => (
-          <div key={slide.alt} className="relative min-h-[768px] h-screen">
+          <div
+            key={slide.alt}
+            className="relative min-h-[368px] md:min-h-0  md:min-w-screen md:aspect-video"
+          >
             <img
               src={slide.src}
               alt={slide.alt}
-              className="w-screen object-cover"
+              className="w-full min-h-[368px] md:min-h-0 h-full object-cover"
             />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black/60 w-full h-full flex items-center justify-center flex-col">
               {slide.desc}
