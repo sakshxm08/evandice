@@ -5,7 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { UserMenu } from "./UserMenu";
 import { useLogout } from "../hooks/useLogout";
-import { CiLogout, CiEdit } from "react-icons/ci";
+import { CiLogout } from "react-icons/ci";
 const Header = () => {
   const nav_links = [
     { route: "Home", link: "/" },
@@ -107,7 +107,7 @@ const Header = () => {
         </div>
 
         <div
-          className={`h-screen flex flex-col justify-between py-20 gap-6 lg:hidden fixed top-0  w-2/3 bg-primary max-w-[350px] shadow-2xl ${
+          className={`h-screen flex flex-col justify-between pt-20 pb-32 gap-6 lg:hidden fixed top-0  w-2/3 bg-primary max-w-[350px] shadow-2xl ${
             open ? "right-0" : "-right-full"
           } transition-all duration-500 ease-in-out px-8 text-lg`}
         >
@@ -141,13 +141,7 @@ const Header = () => {
                     <span className="text-sm text-white/80">
                       saksham2211gambhir@gmail.com
                     </span>
-                    <Link
-                      to="/profile"
-                      className="active:text-black cursor-pointer flex gap-2 items-center mt-4"
-                    >
-                      <CiEdit size={20} />
-                      Edit Profile
-                    </Link>
+
                     {/* <span className="text-xs text-gray-500">{user.email}</span> */}
                   </div>
                 </>
