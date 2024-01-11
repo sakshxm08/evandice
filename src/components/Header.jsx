@@ -76,7 +76,7 @@ const Header = () => {
             ))}
           </div>
           <div className="flex items-center gap-4 justify-center h-8">
-            {user ? (
+            {!user ? (
               <>
                 <Link
                   to="/login"
@@ -165,7 +165,7 @@ const Header = () => {
               </NavLink>
             ))}
           </div>
-          {!user && (
+          {user && (
             <div className="flex flex-col gap-4 pt-8 border-t border-t-gray-50">
               <span
                 className="text-red-500 bg-white w-full py-2 text-center rounded-full justify-center active:text-red-800 cursor-pointer flex gap-2 items-center"
