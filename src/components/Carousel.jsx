@@ -74,7 +74,7 @@ const Carousel = () => {
     customPaging: (index) => {
       return (
         <button
-          className="-mt-16 tablets:-mt-28 xl:-mt-40 !p-0 mx-auto transition-all duration-500 origin-center"
+          className="-mt-16 tablets:-mt-28 xl:-mt-36 !p-0 mx-auto transition-all duration-500 origin-center"
           style={index === currSlide ? active : inactive}
         >
           {index + 1}
@@ -99,7 +99,7 @@ const Carousel = () => {
   const carousel_data = [
     {
       desc: (
-        <div className="flex flex-col items-center justify-center gap-6 lg:gap-12">
+        <div className="flex flex-col items-center justify-center gap-6 lg:gap-8">
           <div className="flex flex-col  text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
@@ -126,7 +126,7 @@ const Carousel = () => {
     },
     {
       desc: (
-        <div className="flex flex-col items-center justify-center gap-6 lg:gap-12">
+        <div className="flex flex-col items-center justify-center gap-6 lg:gap-8">
           <div className="flex flex-col  text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
@@ -153,7 +153,7 @@ const Carousel = () => {
     },
     {
       desc: (
-        <div className="flex flex-col items-center justify-center gap-6 lg:gap-12">
+        <div className="flex flex-col items-center justify-center gap-6 lg:gap-8">
           <div className="flex flex-col text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
