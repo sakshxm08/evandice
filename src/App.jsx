@@ -33,15 +33,15 @@ const Layout = () => (
 
 const AddBgLayout = ({ heading }) => (
   <div className="relative">
-    <div className="absolute top-0 left-0 h-full min-h-screen -z-50 overflow-hidden w-screen">
+    <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden object-cover">
       <img
         src={background}
-        alt="background"
-        className="w-screen h-auto brightness-90"
+        alt=""
+        className="h-full w-screen object-cover object-center"
       />
       <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
     </div>
-    <div className="py-32 max-w-7xl w-11/12 mx-auto">
+    <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">
       <h1 className="text-5xl md:text-title font-title uppercase mx-auto text-center mb-16">
         {heading}
       </h1>

@@ -69,7 +69,7 @@ export const AddFest = () => {
   return (
     <div className="relative">
       <form className="flex flex-col gap-4 my-4 text-sm">
-        <div className="grid grid-cols-3 w-full relative gap-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
             <label htmlFor="name" className="text-yellow text-xs">
               Fest Name
@@ -109,7 +109,7 @@ export const AddFest = () => {
               value={formData.address}
             />
           </div>
-          <div className="flex flex-col gap-1">
+          <div className="flex flex-col h-full gap-1">
             <Dropdown
               isEditable={true}
               formData={formData}
@@ -140,7 +140,6 @@ export const AddFest = () => {
               value={formData.gmap_link}
             />
           </div>
-
           <div className="flex flex-col gap-1">
             <label htmlFor="contact_no" className="text-yellow text-xs">
               Contact Number
@@ -236,12 +235,11 @@ export const AddFest = () => {
               </div>
             </div>
           </div>
-
-          <div className="flex flex-col gap-1 col-span-3">
+          <div className="flex flex-col gap-1 col-span-1 md:col-span-2 lg:col-span-3">
             <div className="text-yellow text-xs">
               Relevant College Departments
             </div>
-            <div className="grid grid-cols-4 items-cente gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-cente gap-4">
               {depts.map((item, index) => (
                 <div
                   key={index}
@@ -272,7 +270,7 @@ export const AddFest = () => {
               Choose file
             </label>
           </div>
-          <div className="flex flex-col gap-1 col-span-2">
+          <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
             <label htmlFor="images" className="text-yellow text-xs mb-1">
               Add Images
             </label>

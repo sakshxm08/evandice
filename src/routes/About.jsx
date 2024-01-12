@@ -10,8 +10,8 @@ const About = () => {
       <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden object-cover">
         <img
           src={background}
-          alt=""
-          className="h-full w-auto object-cover object-center"
+          alt="background"
+          className="h-full w-screen object-cover object-center"
         />
         <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
       </div>
