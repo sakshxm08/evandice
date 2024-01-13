@@ -68,7 +68,7 @@ export const AddFest = () => {
   }, [stateData, formData.state, cities]);
   return (
     <div className="relative">
-      <form className="flex flex-col gap-4 my-4 text-sm">
+      <form className="flex flex-col gap-4 my-4 lg:text-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
             <label htmlFor="name" className="text-yellow text-sm lg:text-xs">
@@ -247,11 +247,11 @@ export const AddFest = () => {
             <div className="text-yellow text-sm lg:text-xs">
               Relevant College Departments
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-cente gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-4">
               {depts.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-start justify-start gap-2 whitespace-nowra"
+                  className="flex items-start justify-start gap-2"
                 >
                   <input
                     value={item}

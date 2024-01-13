@@ -193,7 +193,7 @@ const Carousel = () => {
             <img
               src={slide.src}
               alt={slide.alt}
-              className="w-full min-h-[368px] md:min-h-0 h-full object-cover"
+              className="w-full min-h-[400px] md:min-h-0 h-full object-cover"
             />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black/60 w-full h-full flex items-center justify-center flex-col">
               {slide.desc}

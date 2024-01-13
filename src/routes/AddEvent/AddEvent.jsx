@@ -68,10 +68,10 @@ export const AddEvent = () => {
   }, [stateData, formData.state, cities]);
   return (
     <div className="relative">
-      <div className="grid grid-cols-3 mx-auto w-11/12 mb-16">
-        <div className="flex items-center flex-col justify-center gap-2 text-sm">
+      <div className="grid grid-cols-1 gap-8 tablets:gap-0 tablets:grid-cols-3 mx-auto w-11/12 pb-8 mb-12 border-b-gray-400 border-b-[0.5px]">
+        <div className="flex items-center flex-col justify-center gap-2 lg:text-sm">
           <div className="text-yellow">Event Category</div>
-          <div className="flex items-center gap-4">
+          <div className="flex  flex-col lg:flex-row lg:items-center lg:gap-4">
             <div className="flex gap-2 items-center">
               <input
                 type="radio"
@@ -93,7 +93,7 @@ export const AddEvent = () => {
           </div>
         </div>
         <div className="flex flex-col items-center justify-center gap-1">
-          <div className="text-yellow">Find a fest</div>
+          <div className="text-yellow lg:text-sm">Find a fest</div>
           <div className="flex flex-col w-4/5 gap-1">
             <Dropdown
               isEditable={true}
@@ -107,17 +107,17 @@ export const AddEvent = () => {
         <div className="flex items-center justify-center">
           <Link
             to="/add_fest/form"
-            className="py-3 px-6 bg-yellow rounded-md font-bold text-black w-fit h-fit hover:bg-yellow/80 transition-all"
+            className="py-3 px-6 w-4/5 text-center tablets:w-fit bg-yellow rounded-md font-bold text-black h-fit hover:bg-yellow/80 transition-all"
           >
             Create a new fest
           </Link>
         </div>
       </div>
 
-      <form className="flex flex-col gap-4 my-4 text-sm">
-        <div className="grid grid-cols-3 w-full relative gap-10 ">
+      <form className="flex flex-col gap-4 my-4 lg:text-sm">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-yellow text-xs">
+            <label htmlFor="name" className="text-yellow text-sm lg:text-xs">
               Event Name
             </label>
             <input
@@ -130,7 +130,7 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="date" className="text-yellow text-xs">
+            <label htmlFor="date" className="text-yellow text-sm lg:text-xs">
               Event Date/s
             </label>
             <input
@@ -143,7 +143,7 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="address" className="text-yellow text-xs">
+            <label htmlFor="address" className="text-yellow text-sm lg:text-xs">
               Address
             </label>
             <input
@@ -174,7 +174,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="gmap_link" className="text-yellow text-xs">
+            <label
+              htmlFor="gmap_link"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Google Maps Link
             </label>
             <input
@@ -188,7 +191,10 @@ export const AddEvent = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="contact_no" className="text-yellow text-xs">
+            <label
+              htmlFor="contact_no"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Contact Number
             </label>
             <input
@@ -201,7 +207,7 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Event Type</div>
+            <div className="text-yellow text-sm lg:text-xs">Event Type</div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
@@ -242,7 +248,9 @@ export const AddEvent = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Accomodation Provided</div>
+            <div className="text-yellow text-sm lg:text-xs">
+              Accomodation Provided
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
@@ -283,15 +291,15 @@ export const AddEvent = () => {
             </div>
           </div>
 
-          <div className="flex flex-col gap-1 col-span-3">
-            <div className="text-yellow text-xs">
+          <div className="flex flex-col gap-1 col-span-1 md:col-span-2 lg:col-span-3">
+            <div className="text-yellow text-sm lg:text-xs">
               Relevant College Departments
             </div>
-            <div className="grid grid-cols-4 items-cente gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-4">
               {depts.map((item, index) => (
                 <div
                   key={index}
-                  className="flex items-start justify-start gap-2 whitespace-nowra"
+                  className="flex items-start justify-start gap-2"
                 >
                   <input
                     value={item}
@@ -307,7 +315,10 @@ export const AddEvent = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="poster" className="text-yellow text-xs mb-1">
+            <label
+              htmlFor="poster"
+              className="text-yellow text-sm lg:text-xs mb-1"
+            >
               Add Main Poster
             </label>
             <input type="file" name="poster" id="poster" className="hidden" />
@@ -318,8 +329,11 @@ export const AddEvent = () => {
               Choose file
             </label>
           </div>
-          <div className="flex flex-col gap-1 col-span-2">
-            <label htmlFor="images" className="text-yellow text-xs mb-1">
+          <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
+            <label
+              htmlFor="images"
+              className="text-yellow text-sm lg:text-xs mb-1"
+            >
               Add Images
             </label>
             <input
@@ -337,7 +351,10 @@ export const AddEvent = () => {
             </label>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="instagram" className="text-yellow text-xs">
+            <label
+              htmlFor="instagram"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Add Instagram Link
             </label>
             <input
@@ -350,7 +367,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="facebook" className="text-yellow text-xs">
+            <label
+              htmlFor="facebook"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Add Facebook Link
             </label>
             <input
@@ -363,7 +383,7 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="twitter" className="text-yellow text-xs">
+            <label htmlFor="twitter" className="text-yellow text-sm lg:text-xs">
               Add Twitter Link
             </label>
             <input
@@ -376,7 +396,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="sponsors" className="text-yellow text-xs">
+            <label
+              htmlFor="sponsors"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Event Sponsors
             </label>
             <input
@@ -389,7 +412,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="foodstalls" className="text-yellow text-xs">
+            <label
+              htmlFor="foodstalls"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Event Food Stalls
             </label>
             <input
@@ -402,7 +428,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="accomodations" className="text-yellow text-xs">
+            <label
+              htmlFor="accomodations"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Event Accomodations
             </label>
             <input
@@ -416,7 +445,9 @@ export const AddEvent = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Registration Fees</div>
+            <div className="text-yellow text-sm lg:text-xs">
+              Registration Fees
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
@@ -459,7 +490,7 @@ export const AddEvent = () => {
         </div>
 
         <div className="flex flex-col gap-2 my-5">
-          <label htmlFor="desc" className="text-yellow text-xs">
+          <label htmlFor="desc" className="text-yellow text-sm lg:text-xs">
             Important Rules and Regulations
           </label>
           <textarea
@@ -471,9 +502,9 @@ export const AddEvent = () => {
             value={formData.desc}
           ></textarea>
         </div>
-        <div className="grid grid-cols-3 w-full relative gap-10 ">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="winner" className="text-yellow text-xs">
+            <label htmlFor="winner" className="text-yellow text-sm lg:text-xs">
               Winner Prizes
             </label>
             <input
@@ -486,7 +517,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="participant" className="text-yellow text-xs">
+            <label
+              htmlFor="participant"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Participant Prizes
             </label>
             <input
@@ -499,7 +533,9 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Certificates Available</div>
+            <div className="text-yellow text-sm lg:text-xs">
+              Certificates Available
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
@@ -540,7 +576,7 @@ export const AddEvent = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-yellow text-xs">
+            <label htmlFor="email" className="text-yellow text-sm lg:text-xs">
               Email*
             </label>
             <input

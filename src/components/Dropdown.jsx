@@ -23,7 +23,7 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
 
   return (
     <>
-      <label htmlFor={type} className="text-yellow text-xs">
+      <label htmlFor={type} className="text-yellow text-sm lg:text-xs">
         {type.charAt(0).toUpperCase() + type.slice(1)}
       </label>
       <div className="relative h-full">
@@ -34,7 +34,7 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
               : formData[type]
               ? "text-white cursor-pointer"
               : "text-gray-400 cursor-pointer"
-          } relative w-full border md:h-full h-[32px] px-4 outline-none rounded flex items-center text-sm `}
+          } relative w-full border md:h-[38px] h-[37px] px-4 outline-none rounded flex items-center text-sm `}
           onClick={() => {
             if (isEditable) {
               setDropdown(!dropdown);
