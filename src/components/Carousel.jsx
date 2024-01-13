@@ -183,12 +183,12 @@ const Carousel = () => {
 
   // Returning the carousel -----------------------------------------------------------------------------
   return (
-    <div className=" min-h-[368px] md:min-h-0 md:min-w-screen md:aspect-video overflow-hidden relative">
+    <div className=" min-h-[400px] md:min-h-0 md:min-w-screen md:aspect-video overflow-hidden relative">
       <Slider className="h-full" {...settings}>
         {carousel_data.map((slide) => (
           <div
             key={slide.alt}
-            className="relative min-h-[368px] md:min-h-0  md:min-w-screen md:aspect-video"
+            className="relative min-h-[400px] md:min-h-0  md:min-w-screen md:aspect-video"
           >
             <img
               src={slide.src}

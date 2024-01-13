@@ -88,7 +88,7 @@ export const AddFest = () => {
               Fest Date/s
             </label>
             <input
-              type="text"
+              type="date"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
               name="date"
               id="date"
