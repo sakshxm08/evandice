@@ -71,7 +71,7 @@ export const AddFest = () => {
       <form className="flex flex-col gap-4 my-4 text-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-yellow text-xs">
+            <label htmlFor="name" className="text-yellow text-sm lg:text-xs">
               Fest Name
             </label>
             <input
@@ -84,7 +84,7 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="date" className="text-yellow text-xs">
+            <label htmlFor="date" className="text-yellow text-sm lg:text-xs">
               Fest Date/s
             </label>
             <input
@@ -97,7 +97,7 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="address" className="text-yellow text-xs">
+            <label htmlFor="address" className="text-yellow text-sm lg:text-xs">
               Address
             </label>
             <input
@@ -128,7 +128,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="gmap_link" className="text-yellow text-xs">
+            <label
+              htmlFor="gmap_link"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Google Maps Link
             </label>
             <input
@@ -141,7 +144,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="contact_no" className="text-yellow text-xs">
+            <label
+              htmlFor="contact_no"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Contact Number
             </label>
             <input
@@ -154,7 +160,7 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Fest Type</div>
+            <div className="text-yellow text-sm lg:text-xs">Fest Type</div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
@@ -195,7 +201,9 @@ export const AddFest = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Accomodation Provided</div>
+            <div className="text-yellow text-sm lg:text-xs">
+              Accomodation Provided
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
@@ -236,7 +244,7 @@ export const AddFest = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1 col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="text-yellow text-xs">
+            <div className="text-yellow text-sm lg:text-xs">
               Relevant College Departments
             </div>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-cente gap-4">
@@ -259,7 +267,10 @@ export const AddFest = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="poster" className="text-yellow text-xs mb-1">
+            <label
+              htmlFor="poster"
+              className="text-yellow text-sm lg:text-xs mb-1"
+            >
               Add Main Poster
             </label>
             <input type="file" name="poster" id="poster" className="hidden" />
@@ -271,7 +282,10 @@ export const AddFest = () => {
             </label>
           </div>
           <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
-            <label htmlFor="images" className="text-yellow text-xs mb-1">
+            <label
+              htmlFor="images"
+              className="text-yellow text-sm lg:text-xs mb-1"
+            >
               Add Images
             </label>
             <input
@@ -289,7 +303,10 @@ export const AddFest = () => {
             </label>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="instagram" className="text-yellow text-xs">
+            <label
+              htmlFor="instagram"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Add Instagram Link
             </label>
             <input
@@ -302,7 +319,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="facebook" className="text-yellow text-xs">
+            <label
+              htmlFor="facebook"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Add Facebook Link
             </label>
             <input
@@ -315,7 +335,7 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="twitter" className="text-yellow text-xs">
+            <label htmlFor="twitter" className="text-yellow text-sm lg:text-xs">
               Add Twitter Link
             </label>
             <input
@@ -328,7 +348,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="sponsors" className="text-yellow text-xs">
+            <label
+              htmlFor="sponsors"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Fest Sponsors
             </label>
             <input
@@ -341,7 +364,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="foodstalls" className="text-yellow text-xs">
+            <label
+              htmlFor="foodstalls"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Fest Food Stalls
             </label>
             <input
@@ -354,7 +380,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="accomodations" className="text-yellow text-xs">
+            <label
+              htmlFor="accomodations"
+              className="text-yellow text-sm lg:text-xs"
+            >
               Fest Accomodations
             </label>
             <input
@@ -368,7 +397,10 @@ export const AddFest = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <label htmlFor="poc_name" className="text-yellow text-xs">
+            <label
+              htmlFor="poc_name"
+              className="text-yellow text-sm lg:text-xs"
+            >
               POC Name
             </label>
             <input
@@ -381,7 +413,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="poc_contact" className="text-yellow text-xs">
+            <label
+              htmlFor="poc_contact"
+              className="text-yellow text-sm lg:text-xs"
+            >
               POC Contact Number
             </label>
             <input
@@ -394,7 +429,10 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="poc_email" className="text-yellow text-xs">
+            <label
+              htmlFor="poc_email"
+              className="text-yellow text-sm lg:text-xs"
+            >
               POC Email
             </label>
             <input
@@ -408,7 +446,9 @@ export const AddFest = () => {
           </div>
 
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Registration Fees</div>
+            <div className="text-yellow text-sm lg:text-xs">
+              Registration Fees
+            </div>
             <div className="flex items-center gap-4">
               <div className="flex gap-2 items-center">
                 <input
