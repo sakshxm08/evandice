@@ -264,8 +264,8 @@ const Auth = () => {
                 <input
                   ref={signup_pass_input}
                   type="password"
-                  name="password-login"
-                  id="password-login"
+                  name="password-signup"
+                  id="password-signup"
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
                   className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
