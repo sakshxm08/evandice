@@ -8,7 +8,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./routes/Home";
-import Login from "./routes/Login";
+// import Login from "./routes/Login";
 import About from "./routes/About";
 import Signup from "./routes/Signup";
 import Event from "./routes/Event";
@@ -22,6 +22,7 @@ import { AddFest } from "./routes/RegisterFest/AddFest";
 import { Verify } from "./routes/AddEvent/Verify";
 import { background } from "./assets/images/images";
 import { PropTypes } from "prop-types";
+import Auth from "./routes/Auth";
 const Layout = () => (
   <>
     <Header />
@@ -63,7 +64,8 @@ function App() {
         },
         {
           path: "login",
-          element: user ? <Navigate to="/" /> : <Login />,
+          // element: user ? <Navigate to="/" /> : <Login />,
+          element: <Auth />,
         },
         {
           path: "signup",
