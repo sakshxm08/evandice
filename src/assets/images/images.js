@@ -12,7 +12,7 @@ import login_bg from "./login_bg.png";
 import background from "./background.png";
 import who_are_we from "./who_are_we.png";
 import team_card_img from "./team_card_img.png";
-
+import blur_card_img from "./blurcardimg.png";
 export {
   hero_img_1,
   hero_img_2,
@@ -28,4 +28,5 @@ export {
   background,
   who_are_we,
   team_card_img,
+  blur_card_img,
 };
