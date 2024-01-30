@@ -40,7 +40,7 @@ const Paginate = ({
   return (
     <div
       className={`flex ${
-        totalPages > 10 ? "w-[300px] sm:w-[420px]" : "gap-4"
+        totalPages > 10 ? "w-[340px] sm:w-[420px]" : "gap-4"
       } items-center justify-between`}
     >
       <span
@@ -51,7 +51,7 @@ const Paginate = ({
       >
         <EvLeftArrow width={8} fill={currentPage === 1 ? "none" : "white"} />
       </span>
-      <ul className="flex gap-4 items-center justify-center relative">
+      <ul className="flex gap-2 sm:gap-4 items-center justify-center relative">
         {pageNumbers
           .slice(0, totalPages > 10 ? 2 : totalPages)
           .map((number) => (

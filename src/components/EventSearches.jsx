@@ -1,8 +1,11 @@
 import { useState } from "react";
 import EventCard from "./EventCard";
 import Paginate from "./Paginate";
+import BlurCard from "./BlurCard";
+import PropTypes from "prop-types";
 
-const EventSearches = () => {
+const EventSearches = ({ type, rows = 2 }) => {
+  const types = { NORMAL: "normal", BLUR: "blur" };
   // Events for Pagination. Taken as prop
   const events = [];
   for (let i = 0; i < 28; i++) {
@@ -21,28 +24,28 @@ const EventSearches = () => {
 
   const [eventsPerPage, setEventsPerPage] = useState(
     mediaQueries.xl.matches
-      ? 10
+      ? rows * 5
       : mediaQueries.tablets.matches
-      ? 8
+      ? rows * 4
       : mediaQueries.md.matches
-      ? 6
+      ? rows * 3
       : mediaQueries.mobiles.matches
-      ? 4
-      : 2
+      ? rows * 2
+      : rows
   );
 
   for (let i = 0; i < Object.keys(mediaQueries).length; i++) {
     mediaQueries[Object.keys(mediaQueries)[i]].addEventListener("change", () =>
       setEventsPerPage(
         mediaQueries.xl.matches
-          ? 10
+          ? rows * 5
           : mediaQueries.tablets.matches
-          ? 8
+          ? rows * 4
           : mediaQueries.md.matches
-          ? 6
+          ? rows * 3
           : mediaQueries.mobiles.matches
-          ? 4
-          : 2
+          ? rows * 2
+          : rows
       )
     );
   }
@@ -74,11 +77,15 @@ const EventSearches = () => {
       {events.length > 0 ? (
         <>
           <div
-            className={`max-w-[300px] mobiles:max-w-full w-5/6 mx-auto mobiles:w-full grid grid-cols-1 mobiles:grid-cols-2 md:grid-cols-3 tablets:grid-cols-4 xl:grid-cols-5 gap-4 grid-rows-2`}
+            className={`max-w-[300px] mobiles:max-w-full w-5/6 mx-auto mobiles:w-full grid grid-cols-1 mobiles:grid-cols-2 md:grid-cols-3 tablets:grid-cols-4 xl:grid-cols-5 gap-4 grid-rows-${rows}`}
           >
-            {currentEvents.map((value, index) => (
-              <EventCard key={index} />
-            ))}
+            {currentEvents.map((value, index) =>
+              types.NORMAL === type ? (
+                <EventCard key={index} />
+              ) : (
+                <BlurCard key={index} />
+              )
+            )}
           </div>
           <Paginate
             eventsPerPage={eventsPerPage}
@@ -102,4 +109,8 @@ const EventSearches = () => {
   );
 };
 
+EventSearches.propTypes = {
+  type: PropTypes.string,
+  rows: PropTypes.number,
+};
 export default EventSearches;

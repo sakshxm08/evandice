@@ -3,7 +3,7 @@ import { card_img } from "../assets/images/images";
 import { Link } from "react-router-dom";
 
 // Width as prop because of use of component in different sections ------------------------------------------------------
-const EventCard = ({ width = "w-full", event = [] }) => {
+const BlurCard = ({ width = "w-full", event = [] }) => {
   // Keywords for the event - Fetched from Props ------------------------------------------------------------------------
   const keywords = ["live", "trending", "paid", "fest"];
 
@@ -44,7 +44,7 @@ const EventCard = ({ width = "w-full", event = [] }) => {
             </Link>
           )}
         </div>
-        <h2 className="font-bold text-2xl text-center">Neon Da Vista</h2>
+        <h2 className="font-bold text-2xl text-center">Neon Da</h2>
         <div className="flex justify-around font-semibold">
           <span>Pilani</span>
           <span className=" text-green-600">Rs. 3400</span>
@@ -62,8 +62,8 @@ const EventCard = ({ width = "w-full", event = [] }) => {
   );
 };
 
-EventCard.propTypes = {
+BlurCard.propTypes = {
   width: PropTypes.string,
   event: PropTypes.object,
 };
-export default EventCard;
+export default BlurCard;

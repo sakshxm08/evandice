@@ -104,9 +104,6 @@ const Carousel = () => {
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
-            <div>
-              Dump <span className="text-primary">your ex</span>.
-            </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -131,9 +128,6 @@ const Carousel = () => {
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
             </div>
-            <div>
-              Dump <span className="text-primary">your ex</span>.
-            </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
@@ -157,9 +151,6 @@ const Carousel = () => {
           <div className="flex flex-col text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
               Joy at our <span className="text-primary">Oasis</span>.
-            </div>
-            <div>
-              Dump <span className="text-primary">your ex</span>.
             </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">

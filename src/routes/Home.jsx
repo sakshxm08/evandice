@@ -11,6 +11,8 @@ import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 
 const Home = () => {
+  const cardTypes = { NORMAL: "normal", BLUR: "blur" };
+
   const searches = [
     "Sports",
     "Music",
@@ -26,6 +28,12 @@ const Home = () => {
     "Hackathons",
   ];
   const competitions = [
+    {
+      img: competition_img,
+      name: "Hackathons",
+      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+      link: "",
+    },
     {
       img: competition_img,
       name: "Hackathons",
@@ -87,20 +95,10 @@ const Home = () => {
             </div>
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center py-12 gap-8">
-          <h1 className="uppercase text-5xl md:text-title font-title">
-            Competitions
-          </h1>
-          <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
-            {competitions.slice(0, 3).map((competition, index) => (
-              <CompetitionCard key={index} competition={competition} />
-            ))}
-          </div>
-        </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
             <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
-              Search for events
+              Search for fests
             </h1>
             <div className="md:text-base text-sm">
               Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
@@ -108,10 +106,89 @@ const Home = () => {
             </div>
           </div>
           <Search searches={searches} />
-          <EventSearches />
+          <EventSearches type={cardTypes.NORMAL} />
+        </div>
+        <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+              Events around you
+            </h1>
+            <div className="md:text-base text-sm">
+              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
+              velit.
+            </div>
+          </div>
+          <Search searches={searches} />
+          <EventSearches type={cardTypes.NORMAL} />
+        </div>
+
+        <h1 className="uppercase text-5xl md:text-title font-title text-center">
+          Participate in Competitions
+        </h1>
+        <div className="flex flex-col items-center justify-center py-12 gap-8">
+          <h2 className="uppercase text-4xl font-title text-center md:text-left w-full">
+            Cultural
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
+            {competitions.slice(0, 3).map((competition, index) => (
+              <CompetitionCard key={index} competition={competition} />
+            ))}
+          </div>
+        </div>
+        <div className="flex flex-col items-center justify-center py-12 gap-8">
+          <h2 className="uppercase text-4xl font-title text-center md:text-left w-full mt-8">
+            Hackathons
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
+            {competitions.slice(0, 3).map((competition, index) => (
+              <CompetitionCard key={index} competition={competition} />
+            ))}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+              College List
+            </h1>
+            <div className="md:text-base text-sm">
+              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
+              velit.
+            </div>
+          </div>
+          <Search searches={["IITs", "Medical", "Business"]} />
+
+          <EventSearches type={cardTypes.BLUR} rows={1} />
+        </div>
+        <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+              Your favorite artists
+            </h1>
+            <div className="md:text-base text-sm">
+              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
+              velit.
+            </div>
+          </div>
+          <Search searches={["IITs", "Medical", "Business"]} />
+
+          <EventSearches type={cardTypes.BLUR} rows={1} />
+        </div>
+        <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
+          <div className="flex flex-col items-center justify-center gap-4">
+            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+              Laughter is the best medicine
+            </h1>
+            <div className="md:text-base text-sm">
+              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
+              velit.
+            </div>
+          </div>
+          <Search searches={["IITs", "Medical", "Business"]} />
+
+          <EventSearches type={cardTypes.BLUR} rows={1} />
         </div>
       </div>
-
       <div className="flex flex-col-reverse sm:flex-row gap-4 sm:gap-6 md:gap-16 py-8 sm:items-center sm:justify-between bg-black px-10 md:px-20">
         <div className="flex gap-8 sm:gap-16 flex-col">
           <div className="flex flex-col gap-4">
