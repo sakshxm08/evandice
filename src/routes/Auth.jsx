@@ -1,17 +1,10 @@
-// import { Link } from "react-router-dom";
-
 import { FcGoogle } from "react-icons/fc";
-import { RxGithubLogo } from "react-icons/rx";
 import { useRef } from "react";
 import { login_bg } from "../assets/images/images";
 import { IoEyeOffOutline, IoEye } from "react-icons/io5";
-
 import { useState } from "react";
-// import Theme from "../../context/darkModeContext";
-// import DarkModeToggle from "../../components/DarkModeToggle";
 
 const Auth = () => {
-  //   const { darkMode } = useContext(Theme);
   const loginScreen = useRef();
   const imgText = useRef();
   const shift = () => {
@@ -44,29 +37,12 @@ const Auth = () => {
       ref={loginScreen}
     >
       <div className="w-2/3 px-16 pt-20 duration-700 origin-left">
-        {/* <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-4">
-            <img
-              src={darkMode ? logoLight : logoDark}
-              className="w-10"
-              alt=""
-            />
-            <span className="text-3xl font-bold dark:text-gray-50">
-              ProMize
-            </span>
-          </Link>
-          <DarkModeToggle />
-        </div> */}
         <div className=" w-2/3 flex items-center justify-center mx-auto flex-col gap-8 mt-14">
           <h1 className="text-5xl font-extrabold ">Login to Your Account</h1>
           <div className="flex flex-col items-center justify-center gap-4">
             <button className="border w-fit rounded-full px-12 py-2 flex gap-4 hover:bg-yellow/20 active:bg-yellow/40 transition-all items-center text-sm justify-center">
               <FcGoogle className="text-2xl" />
               Login with Google
-            </button>
-            <button className="border w-fit rounded-full px-12 py-2 flex gap-4 hover:bg-yellow/20 active:bg-yellow/40 transition-all items-center text-sm justify-center">
-              <RxGithubLogo className="text-2xl" />
-              Login with Github
             </button>
           </div>
           <div className="flex gap-4 justify-center items-center w-full text-slate-400 text-xs">
@@ -82,7 +58,7 @@ const Auth = () => {
                 type="email"
                 name="email-login"
                 id="email-login"
-                className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
+                className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                 placeholder="user@evandize.com"
               />
             </div>
@@ -102,7 +78,7 @@ const Auth = () => {
                     id="password-login"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
+                    className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                     placeholder="Min. 8 characters"
                   />
                   <span
@@ -181,29 +157,12 @@ const Auth = () => {
       </div>
 
       <div className="w-2/3 px-16 pt-20 duration-700 origin-right">
-        {/* <div className="flex justify-between items-center">
-          <Link to="/" className="flex items-center gap-4">
-            <img
-              src={darkMode ? logoLight : logoDark}
-              className="w-10"
-              alt=""
-            />
-            <span className="text-3xl font-bold dark:text-gray-50">
-              ProMize
-            </span>
-          </Link>
-          <DarkModeToggle />
-        </div> */}
         <div className=" w-2/3 flex items-center justify-center mx-auto flex-col gap-8 mt-14 dark:text-gray-50">
           <h1 className="text-5xl font-extrabold ">Create an Account</h1>
           <div className="flex flex-col items-center justify-center gap-4">
             <button className="border w-fit rounded-full px-12 py-2 flex gap-4 hover:bg-yellow/20 active:bg-yellow/40 transition-all items-center text-sm justify-center">
               <FcGoogle className="text-2xl" />
               Signup with Google
-            </button>
-            <button className="border w-fit rounded-full px-12 py-2 flex gap-4 hover:bg-yellow/20 active:bg-yellow/40 transition-all items-center text-sm justify-center">
-              <RxGithubLogo className="text-2xl" />
-              Signup with Github
             </button>
           </div>
           <div className="flex gap-4 justify-center items-center w-full text-slate-400 text-xs">
@@ -225,14 +184,14 @@ const Auth = () => {
                   type="text"
                   name="fname"
                   id="fname"
-                  className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
+                  className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                   placeholder="First"
                 />
                 <input
                   name="lname"
                   id="lname"
                   type="text"
-                  className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
+                  className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                   placeholder="Last"
                 />
               </div>
@@ -248,7 +207,7 @@ const Auth = () => {
                 type="email"
                 name="email-signup"
                 id="email-signup"
-                className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
+                className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                 placeholder="user@evandize.com"
               />
             </div>
@@ -268,7 +227,7 @@ const Auth = () => {
                   id="password-signup"
                   value={signupPassword}
                   onChange={(e) => setSignupPassword(e.target.value)}
-                  className="w-full px-3 placeholder:text-slate-500 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
+                  className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                   placeholder="Min. 8 characters"
                 />
                 <span
