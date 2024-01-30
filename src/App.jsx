@@ -32,7 +32,7 @@ const Layout = () => (
   </>
 );
 
-const AddBgLayout = ({ heading }) => (
+const AddBgLayout = ({ heading, mHeading = "mb-16" }) => (
   <div className="relative">
     <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden object-cover">
       <img
@@ -44,7 +44,9 @@ const AddBgLayout = ({ heading }) => (
     </div>
     <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">
       {heading && (
-        <h1 className="text-5xl md:text-title font-title uppercase mx-auto text-center mb-16">
+        <h1
+          className={`text-5xl md:text-title font-title uppercase mx-auto text-center ${mHeading}`}
+        >
           {heading}
         </h1>
       )}
@@ -118,7 +120,13 @@ function App() {
         },
         {
           path: "all_events",
-          element: <AllEvents />,
+          element: <AddBgLayout heading={"events"} mHeading="mb-0" />,
+          children: [
+            {
+              path: "",
+              element: <AllEvents />,
+            },
+          ],
         },
 
         {
@@ -143,4 +151,5 @@ export default App;
 
 AddBgLayout.propTypes = {
   heading: PropTypes.string,
+  mHeading: PropTypes.string,
 };

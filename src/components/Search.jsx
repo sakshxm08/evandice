@@ -4,7 +4,7 @@ import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import EvSearch from "../assets/icons/EvSearch";
 
-const Search = ({ searches = [] }) => {
+const Search = ({ searches = [], options = false }) => {
   const suggestions = useRef();
 
   const left_click = () => {
@@ -23,7 +23,11 @@ const Search = ({ searches = [] }) => {
 
   return (
     <div className="w-full flex flex-col md:grid grid-cols-12 py-6 gap-10">
-      <div className="relative col-span-5 w-full">
+      <div
+        className={`relative ${
+          options ? "col-span-5" : "col-span-full"
+        } w-full`}
+      >
         <input
           type="text"
           placeholder="Search"
@@ -33,40 +37,43 @@ const Search = ({ searches = [] }) => {
           <EvSearch size={28} stroke="gray" />
         </span>
       </div>
-      <div className="relative flex justify-between items-center gap-4 col-span-7">
-        <span
-          onClick={left_click}
-          className="rounded-full aspect-square h-8 border border-transparent flex items-center justify-center cursor-pointer hover:border-gray-200 transition-all"
-        >
-          <EvLeftArrow width={8} />
-        </span>
+      {options && (
+        <div className="relative flex justify-between items-center gap-4 col-span-7">
+          <span
+            onClick={left_click}
+            className="rounded-full aspect-square h-8 border border-transparent flex items-center justify-center cursor-pointer hover:border-gray-200 transition-all"
+          >
+            <EvLeftArrow width={8} />
+          </span>
 
-        <div
-          ref={suggestions}
-          className="flex items-center gap-2 overflow-x-scroll w-full flex-nowrap snap-mandatory scroll-p-2 search-suggestions"
-        >
-          {searches.map((search, index) => (
-            <span
-              key={index}
-              className="rounded-full px-6 py-1 texsm font-medium border border-white snap-start snap-always hover:bg-white hover:text-black transition-all cursor-pointer"
-            >
-              {search}
-            </span>
-          ))}
+          <div
+            ref={suggestions}
+            className="flex items-center gap-2 overflow-x-scroll w-full flex-nowrap snap-mandatory scroll-p-2 search-suggestions"
+          >
+            {searches.map((search, index) => (
+              <span
+                key={index}
+                className="rounded-full px-6 py-1 texsm font-medium border border-white snap-start snap-always hover:bg-white hover:text-black transition-all cursor-pointer"
+              >
+                {search}
+              </span>
+            ))}
+          </div>
+          <span
+            onClick={right_click}
+            className="rounded-full aspect-square h-8 border border-transparent flex items-center justify-center cursor-pointer hover:border-gray-200 transition-all"
+          >
+            <EvRightArrow width={8} />
+          </span>
         </div>
-        <span
-          onClick={right_click}
-          className="rounded-full aspect-square h-8 border border-transparent flex items-center justify-center cursor-pointer hover:border-gray-200 transition-all"
-        >
-          <EvRightArrow width={8} />
-        </span>
-      </div>
+      )}
     </div>
   );
 };
 
 Search.propTypes = {
   searches: PropTypes.array,
+  options: PropTypes.bool,
 };
 
 export default Search;
