@@ -43,9 +43,11 @@ const AddBgLayout = ({ heading }) => (
       <div className="absolute inset-0 h-full w-screen bg-gradient-to-t from-50% from-black"></div>
     </div>
     <div className="py-32 flex flex-col items-center justify-center max-w-7xl w-11/12 mx-auto gap-10">
-      <h1 className="text-5xl md:text-title font-title uppercase mx-auto text-center mb-16">
-        {heading}
-      </h1>
+      {heading && (
+        <h1 className="text-5xl md:text-title font-title uppercase mx-auto text-center mb-16">
+          {heading}
+        </h1>
+      )}
       <Outlet />
     </div>
   </div>
@@ -77,7 +79,13 @@ function App() {
         },
         {
           path: "events/:id",
-          element: <Event />,
+          element: <AddBgLayout />,
+          children: [
+            {
+              path: "",
+              element: <Event />,
+            },
+          ],
         },
 
         {
