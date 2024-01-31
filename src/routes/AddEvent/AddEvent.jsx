@@ -1,8 +1,17 @@
 import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { State, City } from "country-state-city";
 import { useEventContext } from "../../hooks/useEventContext";
+import { InputRadio, InputText, Label } from "../../components/FormComponents";
+import {
+  accomodations,
+  certificates,
+  depts,
+  event_types,
+  fees_plans,
+  tags,
+} from "../../assets/values";
 
 export const AddEvent = () => {
   const [states] = useState([]);
@@ -13,15 +22,7 @@ export const AddEvent = () => {
 
   const navigate = useNavigate();
 
-  const depts = [
-    "Computer Science Engineering",
-    "Information Technology",
-    "Electronics and Communcation Engineering",
-    "Electrical Engineering",
-    "Mechanical Engineering",
-    "Civil Engineering",
-    "Chemical Engineering",
-  ];
+  const location = useLocation();
 
   const [formData, setFormData] = useState(
     location.state ? location.state.formData : event
@@ -31,17 +32,23 @@ export const AddEvent = () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-  const [checked, setChecked] = useState(formData.depts);
+  const [checked, setChecked] = useState({
+    depts: formData.depts,
+    tags: formData.tags,
+  });
   // Add/Remove checked item from list
   const handleCheck = (event) => {
-    var updatedList = [...checked];
+    var updatedList = { ...checked };
     if (event.target.checked) {
-      updatedList = [...checked, event.target.value];
+      updatedList[event.target.name].push(event.target.value);
     } else {
-      updatedList.splice(checked.indexOf(event.target.value), 1);
+      updatedList[event.target.name].splice(
+        checked[event.target.name].indexOf(event.target.value),
+        1
+      );
     }
-    setChecked(updatedList);
-    formData.depts = updatedList;
+    setChecked({ ...updatedList });
+    formData[event.target.name] = updatedList[event.target.name];
   };
 
   useEffect(() => {
@@ -117,22 +124,17 @@ export const AddEvent = () => {
       <form className="flex flex-col gap-4 my-4 lg:text-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="name" className="text-yellow text-sm lg:text-xs">
-              Event Name
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="name"
-              id="name"
+            <Label value={"Event Name"} htmlFor={"name"} />
+            <InputText
+              name={"name"}
+              id={"name"}
               onChange={setValues}
               value={formData.name}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="date" className="text-yellow text-sm lg:text-xs">
-              Event Date/s
-            </label>
+            <Label value={"Event Date/s"} htmlFor={"date"} />
+
             <input
               type="text"
               className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
@@ -143,14 +145,10 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="address" className="text-yellow text-sm lg:text-xs">
-              Address
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="address"
-              id="address"
+            <Label value={"Address"} htmlFor={"address"} />
+            <InputText
+              name={"address"}
+              id={"address"}
               onChange={setValues}
               value={formData.address}
             />
@@ -174,153 +172,113 @@ export const AddEvent = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="gmap_link"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Google Maps Link
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="gmap_link"
-              id="gmap_link"
+            <Label value={"Google Maps Link"} htmlFor={"gmap_link"} />
+            <InputText
+              name={"gmap_link"}
+              id={"gmap_link"}
               onChange={setValues}
               value={formData.gmap_link}
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="contact_no"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Contact Number
-            </label>
-            <input
+            <Label value={"Contact Number"} htmlFor={"contact_no"} />
+            <InputText
               type="number"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="contact_no"
-              id="contact_no"
+              name={"contact_no"}
+              id={"contact_no"}
               onChange={setValues}
               value={formData.contact_no}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-sm lg:text-xs">Event Type</div>
+            <Label value={"Event Type"} />
             <div className="flex items-center gap-4">
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="offline"
-                  name="type"
-                  className="accent-yellow"
-                  onChange={setValues}
-                  checked={formData.type === "offline"}
-                  value={"offline"}
-                />
-                <label htmlFor="offline">Offline</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="online"
+              {event_types.map((type, index) => (
+                <InputRadio
+                  key={index + type}
+                  id={type}
                   name="type"
                   onChange={setValues}
-                  value={"online"}
-                  checked={formData.type === "online"}
-                  className="accent-yellow"
+                  checked={formData.type === type}
+                  value={type}
+                  label={type}
                 />
-                <label htmlFor="online">Online</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="hybrid"
-                  name="type"
-                  className="accent-yellow"
-                  onChange={setValues}
-                  checked={formData.type === "hybrid"}
-                  value={"hybrid"}
-                />
-                <label htmlFor="hybrid">Hybrid</label>
-              </div>
-            </div>
-          </div>
-          <div className="flex flex-col gap-1">
-            <div className="text-yellow text-sm lg:text-xs">
-              Accomodation Provided
-            </div>
-            <div className="flex items-center gap-4">
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="free_accomod"
-                  name="accomodation"
-                  checked={formData.accomodation === "free"}
-                  onChange={setValues}
-                  value={"free"}
-                  className="accent-yellow"
-                />
-                <label htmlFor="free_accomod">Yes, Free</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="paid_accomod"
-                  name="accomodation"
-                  onChange={setValues}
-                  checked={formData.accomodation === "paid"}
-                  value={"paid"}
-                  className="accent-yellow"
-                />
-                <label htmlFor="paid_accomod">Yes, Paid</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="no_accomod"
-                  name="accomodation"
-                  className="accent-yellow"
-                  checked={formData.accomodation === "no"}
-                  onChange={setValues}
-                  value={"no"}
-                />
-                <label htmlFor="no_accomod">No</label>
-              </div>
-            </div>
-          </div>
-
-          <div className="flex flex-col gap-1 col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="text-yellow text-sm lg:text-xs">
-              Relevant College Departments
-            </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 items-center gap-4">
-              {depts.map((item, index) => (
-                <div
-                  key={index}
-                  className="flex items-start justify-start gap-2"
-                >
-                  <input
-                    value={item}
-                    id={item}
-                    type="checkbox"
-                    checked={formData.depts.includes(item)}
-                    onChange={handleCheck}
-                    className="accent-yellow mt-[3px]"
-                  />
-                  <label htmlFor={item}>{item}</label>
-                </div>
               ))}
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="poster"
-              className="text-yellow text-sm lg:text-xs mb-1"
-            >
-              Add Main Poster
-            </label>
+            <Label value={"Accomodation Provided"} />
+            <div className="flex items-center gap-4">
+              {accomodations.map((accomodation, index) => (
+                <InputRadio
+                  key={index + accomodation.id}
+                  id={accomodation.id}
+                  name="accomodation"
+                  onChange={setValues}
+                  checked={formData.accomodation === accomodation.value}
+                  value={accomodation.value}
+                  label={accomodation.label}
+                />
+              ))}
+            </div>
+          </div>
+
+          <div className="flex flex-col gap-1 col-span-1 md:col-span-2 lg:col-span-3">
+            <div className="grid grid-cols-2 w-full relative gap-10 mt-4">
+              <div className="flex flex-col gap-2">
+                <Label value={"Add my interests"} />
+
+                <div className="grid grid-cols-3 w-full gap-1">
+                  {tags.map((tag, index) => (
+                    <div key={index} className="flex gap-2 items-center">
+                      <input
+                        type="checkbox"
+                        name="tags"
+                        value={tag}
+                        id={tag}
+                        className="accent-yellow w-3"
+                        checked={formData.tags.includes(tag)}
+                        onChange={handleCheck}
+                      />
+                      <label htmlFor={tag} className="text-sm capitalize">
+                        {tag}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="flex flex-col gap-2">
+                <Label value={"Relevant College Departments"} />
+
+                <div className="grid grid-cols-3 w-full gap-1">
+                  {depts.map((dept, index) => (
+                    <div key={index} className="flex gap-2 items-center">
+                      <input
+                        type="checkbox"
+                        name="depts"
+                        value={dept}
+                        id={dept}
+                        checked={formData.depts.includes(dept)}
+                        onChange={handleCheck}
+                        className="accent-yellow w-3"
+                      />
+                      <label htmlFor={dept} className="text-sm capitalize">
+                        {dept}
+                      </label>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+          <div className="flex flex-col gap-1">
+            <Label
+              value={"Add Main Poster"}
+              htmlFor={"poster"}
+              className={"mb-2"}
+            />
+
             <input type="file" name="poster" id="poster" className="hidden" />
             <label
               htmlFor="poster"
@@ -330,12 +288,7 @@ export const AddEvent = () => {
             </label>
           </div>
           <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
-            <label
-              htmlFor="images"
-              className="text-yellow text-sm lg:text-xs mb-1"
-            >
-              Add Images
-            </label>
+            <Label value={"Add Images"} htmlFor={"images"} className={"mb-2"} />
             <input
               type="file"
               name="images"
@@ -351,148 +304,81 @@ export const AddEvent = () => {
             </label>
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="instagram"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Add Instagram Link
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="instagram"
-              id="instagram"
+            <Label value={"Add Instagram Link"} htmlFor={"instagram"} />
+
+            <InputText
+              name={"instagram"}
+              id={"instagram"}
               onChange={setValues}
               value={formData.instagram}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="facebook"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Add Facebook Link
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="facebook"
-              id="facebook"
+            <Label value={"Add Facebook Link"} htmlFor={"facebook"} />
+            <InputText
+              name={"facebook"}
+              id={"facebook"}
               onChange={setValues}
               value={formData.facebook}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="twitter" className="text-yellow text-sm lg:text-xs">
-              Add Twitter Link
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="twitter"
-              id="twitter"
+            <Label value={"Add Twitter Link"} htmlFor={"twitter"} />
+            <InputText
+              name={"twitter"}
+              id={"twitter"}
               onChange={setValues}
               value={formData.twitter}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="sponsors"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Event Sponsors
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="sponsors"
-              id="sponsors"
+            <Label value={"Event Sponsors"} htmlFor={"sponsors"} />
+            <InputText
+              name={"sponsors"}
+              id={"sponsors"}
               onChange={setValues}
               value={formData.sponsors}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="foodstalls"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Event Food Stalls
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="foodstalls"
-              id="foodstalls"
+            <Label value={"Event Food Stalls"} htmlFor={"foodstalls"} />
+            <InputText
+              name={"foodstalls"}
+              id={"foodstalls"}
               onChange={setValues}
               value={formData.foodstalls}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="accomodations"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Event Accomodations
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="accomodations"
-              id="accomodations"
+            <Label value={"Event Accomodations"} htmlFor={"accomodations"} />
+            <InputText
+              name={"accomodations"}
+              id={"accomodations"}
               onChange={setValues}
               value={formData.accomodations}
             />
           </div>
 
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-sm lg:text-xs">
-              Registration Fees
-            </div>
+            <Label value={"Registration Fees"} />
             <div className="flex items-center gap-4">
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="paid_plan"
+              {fees_plans.map((plan, index) => (
+                <InputRadio
+                  key={index + plan.id}
+                  id={plan.id}
                   name="registerfees"
                   onChange={setValues}
-                  checked={formData.registerfees === "paid"}
-                  value={"paid"}
-                  className="accent-yellow"
+                  checked={formData.registerfees === plan.value}
+                  value={plan.value}
+                  label={plan.label}
                 />
-                <label htmlFor="paid_plan">Paid</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="free_plan"
-                  name="registerfees"
-                  onChange={setValues}
-                  checked={formData.registerfees === "free"}
-                  value={"free"}
-                  className="accent-yellow"
-                />
-                <label htmlFor="free_plan">Free</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="multiple_plan"
-                  name="registerfees"
-                  onChange={setValues}
-                  checked={formData.registerfees === "multiple"}
-                  value={"multiple"}
-                  className="accent-yellow"
-                />
-                <label htmlFor="multiple_plan">Multiple Plans</label>
-              </div>
+              ))}
             </div>
           </div>
         </div>
 
         <div className="flex flex-col gap-2 my-5">
-          <label htmlFor="desc" className="text-yellow text-sm lg:text-xs">
-            Important Rules and Regulations
-          </label>
+          <Label value={"Important Rules and Regulations"} htmlFor={"desc"} />
           <textarea
             name="desc"
             id="desc"
@@ -504,86 +390,45 @@ export const AddEvent = () => {
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <label htmlFor="winner" className="text-yellow text-sm lg:text-xs">
-              Winner Prizes
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="winner"
-              id="winner"
+            <Label value={"Winner Prizes"} htmlFor={"winner"} />
+            <InputText
+              name={"winner"}
+              id={"winner"}
               onChange={setValues}
               value={formData.winner}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <label
-              htmlFor="participant"
-              className="text-yellow text-sm lg:text-xs"
-            >
-              Participant Prizes
-            </label>
-            <input
-              type="text"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="participant"
-              id="participant"
+            <Label value={"Participation Prizes"} htmlFor={"participant"} />
+            <InputText
+              name={"participant"}
+              id={"participant"}
               onChange={setValues}
               value={formData.participant}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <div className="text-yellow text-sm lg:text-xs">
-              Certificates Available
-            </div>
+            <Label value={"Certificates Available"} />
             <div className="flex items-center gap-4">
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="yes_certificate"
-                  name="certificates"
-                  className="accent-yellow"
-                  onChange={setValues}
-                  checked={formData.registerfees === "yes"}
-                  value={"yes"}
-                />
-                <label htmlFor="yes_certificate">Yes, for all</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="win_certificate"
-                  name="certificates"
-                  className="accent-yellow"
-                  checked={formData.registerfees === "winners"}
-                  onChange={setValues}
-                  value={"winners"}
-                />
-                <label htmlFor="win_certificate">Only for Winners</label>
-              </div>
-              <div className="flex gap-2 items-center">
-                <input
-                  type="radio"
-                  id="no_certificate"
+              {certificates.map((plan, index) => (
+                <InputRadio
+                  key={index + plan.id}
+                  id={plan.id}
                   name="certificates"
                   onChange={setValues}
-                  value={"no"}
-                  checked={formData.registerfees === "no"}
-                  className="accent-yellow"
+                  checked={formData.certificates === plan.value}
+                  value={plan.value}
+                  label={plan.label}
                 />
-                <label htmlFor="no_certificate">No</label>
-              </div>
+              ))}
             </div>
           </div>
           <div className="flex flex-col gap-1">
-            <label htmlFor="email" className="text-yellow text-sm lg:text-xs">
-              Email*
-            </label>
-            <input
+            <Label value={"Email ID"} htmlFor={"email"} />
+            <InputText
               type="email"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="email"
-              id="email"
+              name={"email"}
+              id={"email"}
               onChange={setValues}
               value={formData.email}
             />

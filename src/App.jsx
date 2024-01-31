@@ -149,7 +149,17 @@ function App() {
         {
           // Make the "profile" route protected
           path: "profile",
-          element: !user ? <Navigate to="/login" replace /> : <Profile />,
+          element: !user ? (
+            <Navigate to="/login" replace />
+          ) : (
+            <AddBgLayout heading={"my profile"} mHeading="mb-0" />
+          ),
+          children: [
+            {
+              path: "",
+              element: <Profile />,
+            },
+          ],
         },
       ],
     },

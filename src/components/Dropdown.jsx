@@ -1,6 +1,7 @@
 import PropTypes from "prop-types";
 import { useRef, useState } from "react";
 import { MdArrowDropDown } from "react-icons/md";
+import { Label } from "./FormComponents";
 
 const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
   const dropdownRef = useRef(null);
@@ -23,14 +24,15 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
 
   return (
     <>
-      <label htmlFor={type} className="text-yellow text-sm lg:text-xs">
-        {type.charAt(0).toUpperCase() + type.slice(1)}
-      </label>
+      <Label
+        value={type.charAt(0).toUpperCase() + type.slice(1)}
+        htmlFor={type}
+      />
       <div className="relative h-full">
         <div
           className={`${
             !isEditable
-              ? "text-gray-500 cursor-default border-gray-600"
+              ? "text-gray-500 cursor-not-allowed border-gray-600"
               : formData[type]
               ? "text-white cursor-pointer"
               : "text-gray-400 cursor-pointer"
