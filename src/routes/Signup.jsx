@@ -58,7 +58,7 @@ const Signup = () => {
             <div>
               If you already have an account,{" "}
               <Link
-                to="/login"
+                to="/auth/login"
                 className="text-[#C10C99] font-medium tracking-wide relative after:content-[''] after:absolute after:-bottom-1 after:bg-[#C10C99] after:w-0 after:h-px after:left-0 hover:after:w-full after:transition-all after:duration-300"
               >
                 sign in here!

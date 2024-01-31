@@ -129,14 +129,14 @@ const Header = () => {
               {!user ? (
                 <>
                   <Link
-                    to="/login"
+                    to="/auth/login"
                     onClick={openMenu}
                     className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white text-white font-semibold hover:bg-white hover:text-primary transition-all"
                   >
                     Login
                   </Link>
                   <Link
-                    to="/signup"
+                    to="/auth/signup"
                     onClick={openMenu}
                     className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white bg-white text-primary font-semibold hover:bg-white/75 hover:border-primary/75 transition-all"
                   >

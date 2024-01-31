@@ -150,7 +150,7 @@ function App() {
           // Make the "profile" route protected
           path: "profile",
           element: !user ? (
-            <Navigate to="/login" replace />
+            <Navigate to="/auth/login" replace />
           ) : (
             <AddBgLayout heading={"my profile"} mHeading="mb-0" />
           ),
