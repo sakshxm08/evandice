@@ -23,6 +23,7 @@ import { Verify } from "./routes/AddEvent/Verify";
 import { background } from "./assets/images/images";
 import { PropTypes } from "prop-types";
 import Auth from "./routes/Auth";
+import { AllCompetitions } from "./routes/AllCompetitions";
 const Layout = () => (
   <>
     <Header />
@@ -125,6 +126,16 @@ function App() {
             {
               path: "",
               element: <AllEvents />,
+            },
+          ],
+        },
+        {
+          path: "all_competitions",
+          element: <AddBgLayout heading={"competitions"} mHeading="mb-0" />,
+          children: [
+            {
+              path: "",
+              element: <AllCompetitions />,
             },
           ],
         },

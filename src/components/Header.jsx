@@ -10,6 +10,7 @@ const Header = () => {
   const nav_links = [
     { route: "Home", link: "/" },
     { route: "Events", link: "/all_events" },
+    { route: "Competitions", link: "/all_competitions" },
     { route: "Register a Fest", link: "/add_fest/form" },
     { route: "Add an Event", link: "/add_event/form" },
     { route: "About Us", link: "/about" },
