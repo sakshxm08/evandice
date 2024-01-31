@@ -8,9 +8,7 @@ import { Outlet } from "react-router-dom";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import Home from "./routes/Home";
-// import Login from "./routes/Login";
 import About from "./routes/About";
-import Signup from "./routes/Signup";
 import Event from "./routes/Event";
 import Profile from "./routes/Profile";
 import "react-toastify/dist/ReactToastify.min.css";
@@ -68,13 +66,21 @@ function App() {
           element: <Home />,
         },
         {
-          path: "login",
-          // element: user ? <Navigate to="/" /> : <Login />,
-          element: <Auth />,
-        },
-        {
-          path: "signup",
-          element: user ? <Navigate to="/" /> : <Signup />,
+          path: "auth",
+          children: [
+            {
+              path: "",
+              element: user ? <Navigate to="/" /> : <Navigate to="login" />,
+            },
+            {
+              path: "login",
+              element: user ? <Navigate to="/" /> : <Auth type="login" />,
+            },
+            {
+              path: "signup",
+              element: user ? <Navigate to="/" /> : <Auth type="signup" />,
+            },
+          ],
         },
         {
           path: "about",

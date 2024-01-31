@@ -3,14 +3,12 @@ import { useRef } from "react";
 import { login_bg } from "../assets/images/images";
 import { IoEyeOffOutline, IoEye } from "react-icons/io5";
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import { PropTypes } from "prop-types";
 
-const Auth = () => {
+const Auth = ({ type }) => {
   const loginScreen = useRef();
   const imgText = useRef();
-  const shift = () => {
-    loginScreen.current.classList.toggle("-translate-x-[41%]");
-    imgText.current.classList.toggle("-translate-x-1/2");
-  };
 
   const [loginPassword, setLoginPassword] = useState("");
   const [signupPassword, setSignupPassword] = useState("");
@@ -33,7 +31,9 @@ const Auth = () => {
 
   return (
     <div
-      className="flex justify-between w-[170%] duration-700"
+      className={`flex justify-between w-[170%] duration-700 ${
+        type === "signup" ? "-translate-x-[41%]" : ""
+      }`}
       ref={loginScreen}
     >
       <div className="w-2/3 px-16 pt-20 duration-700 origin-left">
@@ -124,7 +124,9 @@ const Auth = () => {
         />
         <div className="w-full h-full bg-black/20 absolute top-0 -z-10 left-0"></div>
         <div
-          className="w-[200%] flex h-full items-center justify-center overflow-hidden duration-700 -translate-x-1/2"
+          className={`w-[200%] flex h-full items-center justify-center overflow-hidden duration-700  ${
+            type === "signup" ? "" : "-translate-x-1/2"
+          }`}
           ref={imgText}
         >
           <div className="flex overflow-hidden w-1/2 origin-bottom duration-500 flex-col justify-center items-center text-white h-full gap-8">
@@ -134,24 +136,24 @@ const Auth = () => {
             <div className="text-xl font-light text-center text-slate-300 px-20 tracking-wider">
               Login to your account
             </div>
-            <button
-              onClick={shift}
+            <Link
+              to="/auth/login"
               className="py-2 px-20 border border-white text-white hover:text-black hover:border-yellow font-medium mt-6 hover:bg-yellow transition-all rounded-full shadow-lg"
             >
               Login
-            </button>
+            </Link>
           </div>
           <div className="flex overflow-hidden w-1/2 origin-top duration-500 flex-col justify-center items-center text-white h-full gap-8">
             <h1 className="text-5xl drop-shadow-2xl font-bold">New Here?</h1>
             <div className="text-xl font-light text-center text-slate-300 px-20 tracking-wider">
               Sign up and discover a great amount of new opportunities
             </div>
-            <button
-              onClick={shift}
+            <Link
+              to="/auth/signup"
               className="py-2 px-20 border border-white text-white hover:text-black hover:border-yellow font-medium mt-6 hover:bg-yellow transition-all rounded-full shadow-lg"
             >
               Sign Up
-            </button>
+            </Link>
           </div>
         </div>
       </div>
@@ -253,3 +255,7 @@ const Auth = () => {
 };
 
 export default Auth;
+
+Auth.propTypes = {
+  type: PropTypes.string,
+};
