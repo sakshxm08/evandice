@@ -69,8 +69,8 @@ const Header = () => {
         <Link to="/" className="pl-8 py-2">
           <EvLogo className="w-32 md:w-40" />
         </Link>
-        <div className="lg:flex hidden items-center justify-end gap-6 px-6">
-          <div className="flex gap-8 items-center">
+        <div className="lg:flex hidden items-center justify-end gap-4 xl:gap-6 px-6">
+          <div className="flex gap-4 xl:gap-8 items-center">
             {nav_links.map((item) => (
               <NavLink
                 key={item.link}
