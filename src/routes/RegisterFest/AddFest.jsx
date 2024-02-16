@@ -11,6 +11,7 @@ import {
   fees_plans,
   tags,
 } from "../../assets/values";
+import Datepicker from "react-tailwindcss-datepicker";
 
 export const AddFest = () => {
   const [states] = useState([]);
@@ -86,15 +87,18 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Event Date/s"} htmlFor={"date"} />
-
-            <input
-              type="date"
-              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-              name="date"
-              id="date"
-              onChange={setValues}
-              value={formData.date}
+            <Label value={"Fest Date/s"} htmlFor={"dates"} />
+            <Datepicker
+              inputName="dates"
+              inputId="dates"
+              primaryColor={"amber"}
+              separator={"-"}
+              displayFormat={"DD/MM/YYYY"}
+              value={formData.dates}
+              inputClassName="py-2 px-4 w-full text-white rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
+              onChange={(newValue) =>
+                setFormData({ ...formData, dates: newValue })
+              }
             />
           </div>
           <div className="flex flex-col gap-1">
