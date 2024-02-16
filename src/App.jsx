@@ -22,6 +22,7 @@ import { background } from "./assets/images/images";
 import { PropTypes } from "prop-types";
 import Auth from "./routes/Auth";
 import { AllCompetitions } from "./routes/AllCompetitions";
+import { CreatePlan } from "./routes/RegisterFest/CreatePlan";
 const Layout = () => (
   <>
     <Header />
@@ -122,6 +123,10 @@ function App() {
             {
               path: "verify",
               element: <Verify />,
+            },
+            {
+              path: "create_plan",
+              element: <CreatePlan />,
             },
           ],
         },
