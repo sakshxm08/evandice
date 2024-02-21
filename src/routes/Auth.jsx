@@ -1,33 +1,13 @@
-import { FcGoogle } from "react-icons/fc";
 import { useRef } from "react";
 import { login_bg } from "../assets/images/images";
-import { IoEyeOffOutline, IoEye } from "react-icons/io5";
-import { useState } from "react";
 import { Link } from "react-router-dom";
 import { PropTypes } from "prop-types";
+import Signup from "./Signup";
+import Login from "./Login";
 
 const Auth = ({ type }) => {
   const loginScreen = useRef();
   const imgText = useRef();
-
-  const [loginPassword, setLoginPassword] = useState("");
-  const [signupPassword, setSignupPassword] = useState("");
-  const [loginPassHidden, setLoginPassHidden] = useState(true);
-  const [signupPassHidden, setSignupPassHidden] = useState(true);
-
-  const login_pass_input = useRef();
-  const signup_pass_input = useRef();
-
-  const toggleLoginPass = () => {
-    setLoginPassHidden(!loginPassHidden);
-    if (loginPassHidden) login_pass_input.current.type = "text";
-    else login_pass_input.current.type = "password";
-  };
-  const toggleSignupPass = () => {
-    setSignupPassHidden(!signupPassHidden);
-    if (signupPassHidden) signup_pass_input.current.type = "text";
-    else signup_pass_input.current.type = "password";
-  };
 
   return (
     <div
@@ -36,86 +16,7 @@ const Auth = ({ type }) => {
       }`}
       ref={loginScreen}
     >
-      <div className="w-2/3 px-16 pt-20 duration-700 origin-left">
-        <div className=" w-2/3 flex items-center justify-center mx-auto flex-col gap-8 mt-14">
-          <h1 className="text-5xl font-extrabold ">Login to Your Account</h1>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <button className="border w-fit rounded-full px-12 py-2 flex gap-4 hover:bg-yellow/20 active:bg-yellow/40 transition-all items-center text-sm justify-center">
-              <FcGoogle className="text-2xl" />
-              Login with Google
-            </button>
-          </div>
-          <div className="flex gap-4 justify-center items-center w-full text-slate-400 text-xs">
-            <span className="w-full flex-grow h-[1px] bg-slate-300"></span>or
-            <span className="w-full h-[1px] flex-grow bg-slate-300"></span>
-          </div>
-          <div className="w-full flex justify-center items-center gap-4 flex-col">
-            <div className="flex flex-col w-full gap-1">
-              <label htmlFor="email-login" className="text-xs text-slate-400">
-                Email
-              </label>
-              <input
-                type="email"
-                name="email-login"
-                id="email-login"
-                className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
-                placeholder="user@evandize.com"
-              />
-            </div>
-            <div className="w-full flex flex-col gap-4  items-center justify-center">
-              <div className="flex flex-col w-full gap-1">
-                <label
-                  htmlFor="password-login"
-                  className="text-xs text-slate-300"
-                >
-                  Password
-                </label>
-                <div className="relative">
-                  <input
-                    ref={login_pass_input}
-                    type="password"
-                    name="password-login"
-                    id="password-login"
-                    value={loginPassword}
-                    onChange={(e) => setLoginPassword(e.target.value)}
-                    className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
-                    placeholder="Min. 8 characters"
-                  />
-                  <span
-                    className="absolute right-2 top-[6px] cursor-pointer hover:bg-white hover:text-black rounded-full p-1 transition-all"
-                    onClick={toggleLoginPass}
-                  >
-                    {loginPassHidden ? (
-                      <IoEyeOffOutline size={16} />
-                    ) : (
-                      <IoEye size={16} />
-                    )}
-                  </span>
-                </div>
-              </div>
-              <div className=" w-full px-2 flex justify-between items-center text-xs">
-                <div className="flex gap-2 justify-center items-center">
-                  <input
-                    type="checkbox"
-                    name="remember"
-                    id="remember"
-                    className=" accent-yellow"
-                  />
-                  <label htmlFor="remember" className="text-slate-300">
-                    Remember Me
-                  </label>
-                </div>
-                <div className="text-yellow  hover:text-yellow/80 transition-all relative cursor-pointer after:absolute after:bottom-0 py-1 after:left-0 after:w-full after:h-[1px] after:bg-yellow after:opacity-0 after:transition-all hover:after:opacity-100">
-                  Forgot Password?
-                </div>
-              </div>
-            </div>
-          </div>
-          <button className="bg-yellow hover:bg-yellow/80 active:bg-yellow/70 transition-all text-black w-1/3 px-4 py-3 text-sm rounded-full">
-            Sign In
-          </button>
-        </div>
-      </div>
+      <Login />
       <div className="w-1/3 relative h-screen overflow-hidden object-cover">
         <img
           src={login_bg}
@@ -138,6 +39,7 @@ const Auth = ({ type }) => {
             </div>
             <Link
               to="/auth/login"
+              replace
               className="py-2 px-20 border border-white text-white hover:text-black hover:border-yellow font-medium mt-6 hover:bg-yellow transition-all rounded-full shadow-lg"
             >
               Login
@@ -150,6 +52,7 @@ const Auth = ({ type }) => {
             </div>
             <Link
               to="/auth/signup"
+              replace
               className="py-2 px-20 border border-white text-white hover:text-black hover:border-yellow font-medium mt-6 hover:bg-yellow transition-all rounded-full shadow-lg"
             >
               Sign Up
@@ -157,99 +60,7 @@ const Auth = ({ type }) => {
           </div>
         </div>
       </div>
-
-      <div className="w-2/3 px-16 pt-20 duration-700 origin-right">
-        <div className=" w-2/3 flex items-center justify-center mx-auto flex-col gap-8 mt-14 dark:text-gray-50">
-          <h1 className="text-5xl font-extrabold ">Create an Account</h1>
-          <div className="flex flex-col items-center justify-center gap-4">
-            <button className="border w-fit rounded-full px-12 py-2 flex gap-4 hover:bg-yellow/20 active:bg-yellow/40 transition-all items-center text-sm justify-center">
-              <FcGoogle className="text-2xl" />
-              Signup with Google
-            </button>
-          </div>
-          <div className="flex gap-4 justify-center items-center w-full text-slate-400 text-xs">
-            <span className="w-full flex-grow h-[1px] bg-slate-300"></span>
-            <span className="whitespace-nowrap"> or continue with email</span>
-            <span className="w-full h-[1px] flex-grow bg-slate-300"></span>
-          </div>
-
-          <form className="w-full flex justify-center items-center gap-4 flex-col">
-            <div className="flex flex-col w-full gap-1">
-              <label
-                htmlFor="fname"
-                className="text-xs text-slate-400 dark:text-slate-300"
-              >
-                Name
-              </label>
-              <div className="flex  gap-2 items-center justify-between">
-                <input
-                  type="text"
-                  name="fname"
-                  id="fname"
-                  className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
-                  placeholder="First"
-                />
-                <input
-                  name="lname"
-                  id="lname"
-                  type="text"
-                  className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
-                  placeholder="Last"
-                />
-              </div>
-            </div>
-            <div className="flex flex-col w-full gap-1">
-              <label
-                htmlFor="email-signup"
-                className="text-xs text-slate-400 dark:text-slate-300"
-              >
-                Email
-              </label>
-              <input
-                type="email"
-                name="email-signup"
-                id="email-signup"
-                className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
-                placeholder="user@evandize.com"
-              />
-            </div>
-
-            <div className="flex flex-col w-full gap-1">
-              <label
-                htmlFor="password-signup"
-                className="text-xs text-slate-400 dark:text-slate-300"
-              >
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  ref={signup_pass_input}
-                  type="password"
-                  name="password-signup"
-                  id="password-signup"
-                  value={signupPassword}
-                  onChange={(e) => setSignupPassword(e.target.value)}
-                  className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
-                  placeholder="Min. 8 characters"
-                />
-                <span
-                  className="absolute right-2 top-[6px] cursor-pointer hover:bg-white hover:text-black rounded-full p-1 transition-all"
-                  onClick={toggleSignupPass}
-                >
-                  {signupPassHidden ? (
-                    <IoEyeOffOutline size={16} />
-                  ) : (
-                    <IoEye size={16} />
-                  )}
-                </span>
-              </div>
-            </div>
-          </form>
-          <button className="bg-yellow hover:bg-yellow/80 active:bg-yellow/70 transition-all text-black w-1/3 px-4 py-3 text-sm rounded-full">
-            Sign Up
-          </button>
-        </div>
-      </div>
+      <Signup />
     </div>
   );
 };

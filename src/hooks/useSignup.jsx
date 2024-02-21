@@ -13,7 +13,8 @@ export const useSignup = () => {
 
   const navigate = useNavigate();
 
-  const signup = async (name, email, password, confPassword) => {
+  const signup = async (details) => {
+    const { name, email, password, confPassword } = details;
     setIsLoading(true);
     setError(null);
 
@@ -80,7 +81,7 @@ export const useSignup = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        toast.error(err.response.data.message, {
+        toast.error(err?.response?.data.message || err.message, {
           position: "top-right",
           autoClose: 3000,
           hideProgressBar: false,
@@ -91,7 +92,6 @@ export const useSignup = () => {
           progress: undefined,
           theme: "dark",
         });
-        console.log(err.response.data.message);
       });
   };
   return { signup, error, isLoading };

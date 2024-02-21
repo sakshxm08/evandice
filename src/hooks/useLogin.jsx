@@ -12,7 +12,8 @@ export const useLogin = () => {
 
   const navigate = useNavigate();
 
-  const login = async (email, password) => {
+  const login = async (details) => {
+    const { email, password } = details;
     setIsLoading(true);
     setError(null);
 
@@ -46,7 +47,7 @@ export const useLogin = () => {
       })
       .catch((err) => {
         setIsLoading(false);
-        toast.error(err.response.data.message, {
+        toast.error(err?.response?.data.message || err.message, {
           position: "top-right",
           autoClose: 5000,
           hideProgressBar: false,
