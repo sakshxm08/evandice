@@ -2,7 +2,7 @@ import { IoEyeOffOutline, IoEye } from "react-icons/io5";
 import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useLogin } from "../hooks/useLogin";
-
+import { setValues } from "../services/helperFunctions";
 const Login = () => {
   // Login Hook
   const { login, isLoading } = useLogin();
@@ -12,12 +12,6 @@ const Login = () => {
     email: "",
     password: "",
   });
-
-  // onChange event handle of input fields
-  const setValues = (e) => {
-    const { name, value } = e.target;
-    setFormDetails({ ...formDetails, [name]: value });
-  };
 
   // Password hidden state
   const [passHidden, setPassHidden] = useState(true);
@@ -65,7 +59,7 @@ const Login = () => {
               name="email"
               id="email"
               value={formDetails.email}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formDetails, setFormDetails)}
               className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
               placeholder="user@evandize.com"
             />
@@ -82,7 +76,7 @@ const Login = () => {
                   name="password"
                   id="password"
                   value={formDetails.password}
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formDetails, setFormDetails)}
                   className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                   placeholder="Min. 8 characters"
                 />

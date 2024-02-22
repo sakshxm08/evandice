@@ -2,24 +2,19 @@ import { IoEyeOffOutline, IoEye } from "react-icons/io5";
 import { useRef, useState } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { useSignup } from "../hooks/useSignup";
+import { setValues } from "../services/helperFunctions";
 
 const Signup = () => {
   // Signup Hook
   const { signup, isLoading } = useSignup();
 
   // Form Details State Object
-  const [formDetails, setFormDetails] = useState({
+  const [formData, setFormData] = useState({
     name: "",
     email: "",
     password: "",
     confPassword: "",
   });
-
-  // onChange event handle of input fields
-  const setValues = (e) => {
-    const { name, value } = e.target;
-    setFormDetails({ ...formDetails, [name]: value });
-  };
 
   // Password hidden states
   const [passHidden, setPassHidden] = useState(true);
@@ -39,7 +34,7 @@ const Signup = () => {
   // Submitting the form
   const handleSignup = async (e) => {
     e.preventDefault();
-    await signup(formDetails);
+    await signup(formData);
   };
 
   return (
@@ -74,8 +69,8 @@ const Signup = () => {
               name="name"
               id="name"
               type="text"
-              value={formDetails.name}
-              onChange={setValues}
+              value={formData.name}
+              onChange={(e) => setValues(e, formData, setFormData)}
               className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
               placeholder="Enter your name"
             />
@@ -91,8 +86,8 @@ const Signup = () => {
               type="email"
               name="email"
               id="email"
-              value={formDetails.email}
-              onChange={setValues}
+              value={formData.email}
+              onChange={(e) => setValues(e, formData, setFormData)}
               className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
               placeholder="user@evandize.com"
             />
@@ -111,8 +106,8 @@ const Signup = () => {
                 type="password"
                 name="password"
                 id="password"
-                value={formDetails.password}
-                onChange={setValues}
+                value={formData.password}
+                onChange={(e) => setValues(e, formData, setFormData)}
                 className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                 placeholder="Min. 8 characters"
               />
@@ -143,8 +138,8 @@ const Signup = () => {
                 type="password"
                 name="confPassword"
                 id="confPassword"
-                value={formDetails.confPassword}
-                onChange={setValues}
+                value={formData.confPassword}
+                onChange={(e) => setValues(e, formData, setFormData)}
                 className="w-full px-3 placeholder:text-gray-600 py-2 rounded-lg border text-sm bg-transparent text-slate-100 focus-visible:border-yellow outline-none"
                 placeholder="Enter your password again"
               />

@@ -11,6 +11,7 @@ import { RxCross1 } from "react-icons/rx";
 import { InputText, Label } from "../components/FormComponents";
 import { depts, genders, interests } from "../assets/values";
 import { useAuthContext } from "../hooks/useAuthContext";
+import { setValues } from "../services/helperFunctions";
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -36,11 +37,6 @@ const Profile = () => {
   };
 
   const [formData, setFormData] = useState(initialValues);
-
-  const setValues = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
 
   const [checked, setChecked] = useState({
     depts: formData.depts,
@@ -161,7 +157,7 @@ const Profile = () => {
             <InputText
               name="name"
               id="name"
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               disabled={!isEditable}
               value={formData.name}
             />
@@ -171,7 +167,7 @@ const Profile = () => {
             <InputText
               name="clgName"
               id="clgName"
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               disabled={!isEditable}
               value={formData.clgName}
             />
@@ -182,7 +178,7 @@ const Profile = () => {
               type="email"
               name="email"
               id="email"
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               disabled={!isEditable}
               value={formData.email}
             />
@@ -226,7 +222,7 @@ const Profile = () => {
               type="number"
               name="contactNo"
               id="contactNo"
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               disabled={!isEditable}
               value={formData.contactNo}
             />
@@ -236,7 +232,7 @@ const Profile = () => {
             <InputText
               name="instagram"
               id="instagram"
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               disabled={!isEditable}
               value={formData.instagram}
             />

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { State, City } from "country-state-city";
 import { useEventContext } from "../../hooks/useEventContext";
 import { InputRadio, InputText, Label } from "../../components/FormComponents";
@@ -13,6 +13,7 @@ import {
   tags,
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
+import { setValues } from "../../services/helperFunctions";
 
 export const AddEvent = () => {
   const [states] = useState([]);
@@ -23,16 +24,8 @@ export const AddEvent = () => {
 
   const navigate = useNavigate();
 
-  const location = useLocation();
+  const [formData, setFormData] = useState(event);
 
-  const [formData, setFormData] = useState(
-    location.state ? location.state.formData : event
-  );
-
-  const setValues = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
   const [checked, setChecked] = useState({
     relevantCollegeDepartment: formData.relevantCollegeDepartment,
     selectTags: formData.selectTags,
@@ -129,7 +122,7 @@ export const AddEvent = () => {
             <InputText
               name={"eventName"}
               id={"eventName"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.eventName}
             />
           </div>
@@ -153,7 +146,7 @@ export const AddEvent = () => {
             <InputText
               name={"address"}
               id={"address"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.address}
             />
           </div>
@@ -180,7 +173,7 @@ export const AddEvent = () => {
             <InputText
               name={"googleMapsLink"}
               id={"googleMapsLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.googleMapsLink}
             />
           </div>
@@ -191,7 +184,7 @@ export const AddEvent = () => {
               type="number"
               name={"contactNumber"}
               id={"contactNumber"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.contactNumber}
             />
           </div>
@@ -203,7 +196,7 @@ export const AddEvent = () => {
                   key={index + type}
                   id={type}
                   name="eventType"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.eventType === type}
                   value={type}
                   label={type}
@@ -219,7 +212,7 @@ export const AddEvent = () => {
                   key={index + accomodation.id}
                   id={accomodation.id}
                   name="accomodationProvided"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.accomodationProvided === accomodation.value}
                   value={accomodation.value}
                   label={accomodation.label}
@@ -315,7 +308,7 @@ export const AddEvent = () => {
             <InputText
               name={"instagramLink"}
               id={"instagramLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.instagramLink}
             />
           </div>
@@ -324,7 +317,7 @@ export const AddEvent = () => {
             <InputText
               name={"facebookLink"}
               id={"facebookLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.facebookLink}
             />
           </div>
@@ -333,7 +326,7 @@ export const AddEvent = () => {
             <InputText
               name={"twitterLink"}
               id={"twitterLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.twitterLink}
             />
           </div>
@@ -342,7 +335,7 @@ export const AddEvent = () => {
             <InputText
               name={"eventSponsor"}
               id={"eventSponsor"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.eventSponsor}
             />
           </div>
@@ -351,7 +344,7 @@ export const AddEvent = () => {
             <InputText
               name={"eventFoodStalls"}
               id={"eventFoodStalls"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.eventFoodStalls}
             />
           </div>
@@ -363,7 +356,7 @@ export const AddEvent = () => {
             <InputText
               name={"eventAccomodation"}
               id={"eventAccomodation"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.eventAccomodation}
             />
           </div>
@@ -376,7 +369,7 @@ export const AddEvent = () => {
                   key={index + plan.id}
                   id={plan.id}
                   name="registrationFees"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.registrationFees === plan.value}
                   value={plan.value}
                   label={plan.label}
@@ -393,7 +386,7 @@ export const AddEvent = () => {
             id="desc"
             className="py-2 px-4 w-full rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
             rows="4"
-            onChange={setValues}
+            onChange={(e) => setValues(e, formData, setFormData)}
             value={formData.desc}
           ></textarea>
         </div>
@@ -403,7 +396,7 @@ export const AddEvent = () => {
             <InputText
               name={"winner"}
               id={"winner"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.winner}
             />
           </div>
@@ -412,7 +405,7 @@ export const AddEvent = () => {
             <InputText
               name={"participant"}
               id={"participant"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.participant}
             />
           </div>
@@ -424,7 +417,7 @@ export const AddEvent = () => {
                   key={index + plan.id}
                   id={plan.id}
                   name="certificates"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.certificates === plan.value}
                   value={plan.value}
                   label={plan.label}
@@ -438,7 +431,7 @@ export const AddEvent = () => {
               type="email"
               name={"email"}
               id={"email"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.email}
             />
           </div>

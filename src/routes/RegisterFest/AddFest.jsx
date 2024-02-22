@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
 import { State, City } from "country-state-city";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useEventContext } from "../../hooks/useEventContext";
 import { InputRadio, InputText, Label } from "../../components/FormComponents";
 import {
@@ -12,6 +12,7 @@ import {
   tags,
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
+import { setValues } from "../../services/helperFunctions";
 
 export const AddFest = () => {
   const [states] = useState([]);
@@ -22,16 +23,8 @@ export const AddFest = () => {
 
   const navigate = useNavigate();
 
-  const location = useLocation();
+  const [formData, setFormData] = useState(fest);
 
-  const [formData, setFormData] = useState(
-    location.state ? location.state.formData : fest
-  );
-
-  const setValues = (e) => {
-    const { name, value } = e.target;
-    setFormData({ ...formData, [name]: value });
-  };
   const [checked, setChecked] = useState({
     relevantCollegeDepartment: formData.relevantCollegeDepartment,
     selectTags: formData.selectTags,
@@ -83,7 +76,7 @@ export const AddFest = () => {
             <InputText
               name={"festName"}
               id={"festName"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.festName}
             />
           </div>
@@ -107,7 +100,7 @@ export const AddFest = () => {
             <InputText
               name={"address"}
               id={"address"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.address}
             />
           </div>
@@ -134,7 +127,7 @@ export const AddFest = () => {
             <InputText
               name={"googleMapsLink"}
               id={"googleMapsLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.googleMapsLink}
             />
           </div>
@@ -144,7 +137,7 @@ export const AddFest = () => {
               type="number"
               name={"contactNumber"}
               id={"contactNumber"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.contactNumber}
             />
           </div>
@@ -157,7 +150,7 @@ export const AddFest = () => {
                   key={index + type}
                   id={type}
                   name="festType"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.festType === type}
                   value={type}
                   label={type}
@@ -173,7 +166,7 @@ export const AddFest = () => {
                   key={index + accomodation.id}
                   id={accomodation.id}
                   name="accomodationProvided"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.accomodationProvided === accomodation.value}
                   value={accomodation.value}
                   label={accomodation.label}
@@ -267,7 +260,7 @@ export const AddFest = () => {
             <InputText
               name={"instagramLink"}
               id={"instagramLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.instagramLink}
             />
           </div>
@@ -276,7 +269,7 @@ export const AddFest = () => {
             <InputText
               name={"facebookLink"}
               id={"facebookLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.facebookLink}
             />
           </div>
@@ -285,7 +278,7 @@ export const AddFest = () => {
             <InputText
               name={"twitterLink"}
               id={"twitterLink"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.twitterLink}
             />
           </div>
@@ -294,7 +287,7 @@ export const AddFest = () => {
             <InputText
               name={"festSponsor"}
               id={"festSponsor"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.festSponsor}
             />
           </div>
@@ -303,7 +296,7 @@ export const AddFest = () => {
             <InputText
               name={"festFoodStalls"}
               id={"festFoodStalls"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.festFoodStalls}
             />
           </div>
@@ -312,7 +305,7 @@ export const AddFest = () => {
             <InputText
               name={"festAccomodation"}
               id={"festAccomodation"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.festAccomodation}
             />
           </div>
@@ -322,7 +315,7 @@ export const AddFest = () => {
             <InputText
               name={"poc_name"}
               id={"poc_name"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.poc_name}
             />
           </div>
@@ -331,7 +324,7 @@ export const AddFest = () => {
             <InputText
               name={"poc_contact"}
               id={"poc_contact"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.poc_contact}
             />
           </div>
@@ -341,7 +334,7 @@ export const AddFest = () => {
               type="email"
               name={"poc_email"}
               id={"poc_email"}
-              onChange={setValues}
+              onChange={(e) => setValues(e, formData, setFormData)}
               value={formData.poc_email}
             />
           </div>
@@ -354,7 +347,7 @@ export const AddFest = () => {
                   key={index + plan.id}
                   id={plan.id}
                   name="registrationFees"
-                  onChange={setValues}
+                  onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.registrationFees === plan.value}
                   value={plan.value}
                   label={plan.label}
