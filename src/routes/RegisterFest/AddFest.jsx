@@ -12,7 +12,11 @@ import {
   tags,
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
-import { setValues } from "../../services/helperFunctions";
+import {
+  handleCheck,
+  saveFileInputData,
+  setValues,
+} from "../../services/helperFunctions";
 
 export const AddFest = () => {
   const [states] = useState([]);
@@ -30,19 +34,6 @@ export const AddFest = () => {
     selectTags: formData.selectTags,
   });
   // Add/Remove checked item from list
-  const handleCheck = (event) => {
-    var updatedList = { ...checked };
-    if (event.target.checked) {
-      updatedList[event.target.name].push(event.target.value);
-    } else {
-      updatedList[event.target.name].splice(
-        checked[event.target.name].indexOf(event.target.value),
-        1
-      );
-    }
-    setChecked({ ...updatedList });
-    formData[event.target.name] = updatedList[event.target.name];
-  };
 
   useEffect(() => {
     for (let state of State.getStatesOfCountry("IN")) {
@@ -189,7 +180,9 @@ export const AddFest = () => {
                         id={tag}
                         className="accent-yellow w-3"
                         checked={formData.selectTags.includes(tag)}
-                        onChange={handleCheck}
+                        onChange={(e) =>
+                          handleCheck(e, checked, setChecked, formData)
+                        }
                       />
                       <label htmlFor={tag} className="text-sm capitalize">
                         {tag}
@@ -212,7 +205,9 @@ export const AddFest = () => {
                         checked={formData.relevantCollegeDepartment.includes(
                           dept
                         )}
-                        onChange={handleCheck}
+                        onChange={(e) =>
+                          handleCheck(e, checked, setChecked, formData)
+                        }
                         className="accent-yellow w-3"
                       />
                       <label htmlFor={dept} className="text-sm capitalize">
@@ -245,6 +240,7 @@ export const AddFest = () => {
               name="images"
               id="images"
               multiple
+              onChange={saveFileInputData}
               className="hidden"
             />
             <label

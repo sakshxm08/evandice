@@ -88,7 +88,7 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
               ))
             ) : (
               <div className="py-2 px-4 cursor-default text-xs text-gray-400">
-                Select state
+                Select {type === "city" ? "state" : type}
               </div>
             )}
           </div>
