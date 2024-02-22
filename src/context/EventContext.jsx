@@ -8,7 +8,7 @@ export const EventContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(eventReducer, {
     fest: {
       name: "",
-      dates: { startDate: new Date(), endDate: new Date().setMonth(1) },
+      dates: { startDate: null, endDate: null },
       address: "",
       state: "",
       city: "",
@@ -30,7 +30,7 @@ export const EventContextProvider = ({ children }) => {
     },
     event: {
       name: "",
-      dates: { startDate: new Date(), endDate: new Date().setMonth(1) },
+      dates: { startDate: null, endDate: null },
       address: "",
       state: "",
       city: "",
