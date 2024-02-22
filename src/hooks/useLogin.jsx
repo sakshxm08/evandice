@@ -28,7 +28,10 @@ export const useLogin = () => {
         apiConnector("GET", endpoints.GET_USER, null, {
           Authorization: user.token, // Replace with the actual JWT token
         }).then((res) => {
-          dispatch({ type: "LOGIN", payload: res.data.user });
+          dispatch({
+            type: "LOGIN",
+            payload: { user: res.data.user, userFetched: true },
+          });
         });
 
         setIsLoading(false);

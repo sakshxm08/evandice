@@ -10,8 +10,12 @@ import { IoMdSave } from "react-icons/io";
 import { RxCross1 } from "react-icons/rx";
 import { InputText, Label } from "../components/FormComponents";
 import { depts, genders, interests } from "../assets/values";
+import { useAuthContext } from "../hooks/useAuthContext";
 
 const Profile = () => {
+  const { user } = useAuthContext();
+  console.log(user);
+
   const [userImg] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
 
@@ -20,9 +24,9 @@ const Profile = () => {
   const [stateData, setStateData] = useState([]);
 
   const initialValues = {
-    name: "",
+    name: user?.name || "",
     clgName: "",
-    email: "",
+    email: user?.email || "",
     gender: "",
     state: "",
     city: "",
@@ -79,7 +83,6 @@ const Profile = () => {
         cities.push(city.name);
       }
     }
-    console.log(stateData);
   }, [stateData, formData.state, cities]);
   return (
     <div className="w-full">

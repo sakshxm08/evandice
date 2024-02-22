@@ -23,6 +23,7 @@ import { PropTypes } from "prop-types";
 import Auth from "./routes/Auth";
 import { AllCompetitions } from "./routes/AllCompetitions";
 import { CreatePlan } from "./routes/RegisterFest/CreatePlan";
+import { ScreenLoader } from "./components/ScreenLoader";
 const Layout = () => (
   <>
     <Header />
@@ -55,7 +56,8 @@ const AddBgLayout = ({ heading, mHeading = "mb-16" }) => (
   </div>
 );
 function App() {
-  const { user } = useAuthContext();
+  const { user, userFetched } = useAuthContext();
+  console.log(userFetched);
 
   const router = createBrowserRouter([
     {
@@ -71,15 +73,33 @@ function App() {
           children: [
             {
               path: "",
-              element: user ? <Navigate to="/" /> : <Navigate to="login" />,
+              element: !userFetched ? (
+                <ScreenLoader />
+              ) : user ? (
+                <Navigate to={"/"} />
+              ) : (
+                <Navigate to="login" />
+              ),
             },
             {
               path: "login",
-              element: user ? <Navigate to="/" /> : <Auth type="login" />,
+              element: !userFetched ? (
+                <ScreenLoader />
+              ) : user ? (
+                <Navigate to={"/"} />
+              ) : (
+                <Auth type="login" />
+              ),
             },
             {
               path: "signup",
-              element: user ? <Navigate to="/" /> : <Auth type="signup" />,
+              element: !userFetched ? (
+                <ScreenLoader />
+              ) : user ? (
+                <Navigate to={"/"} />
+              ) : (
+                <Auth type="signup" />
+              ),
             },
           ],
         },
@@ -154,7 +174,9 @@ function App() {
         {
           // Make the "profile" route protected
           path: "profile",
-          element: !user ? (
+          element: !userFetched ? (
+            <ScreenLoader />
+          ) : !user ? (
             <Navigate to="/auth/login" replace />
           ) : (
             <AddBgLayout heading={"my profile"} mHeading="mb-0" />
