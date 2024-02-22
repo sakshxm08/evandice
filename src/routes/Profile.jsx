@@ -14,7 +14,6 @@ import { useAuthContext } from "../hooks/useAuthContext";
 
 const Profile = () => {
   const { user } = useAuthContext();
-  console.log(user);
 
   const [userImg] = useState(false);
   const [isEditable, setIsEditable] = useState(false);

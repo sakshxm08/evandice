@@ -1,9 +1,9 @@
 export const eventReducer = (state, action) => {
   switch (action.type) {
     case "EVENT":
-      return { event: action.payload, fest: state.fest };
+      return { ...state, event: action.payload };
     case "FEST":
-      return { fest: action.payload, event: state.event };
+      return { ...state, fest: action.payload };
     default:
       return state;
   }

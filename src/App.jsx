@@ -57,7 +57,6 @@ const AddBgLayout = ({ heading, mHeading = "mb-16" }) => (
 );
 function App() {
   const { user, userFetched } = useAuthContext();
-  console.log(userFetched);
 
   const router = createBrowserRouter([
     {

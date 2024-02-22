@@ -33,8 +33,8 @@ export const AddFest = () => {
     setFormData({ ...formData, [name]: value });
   };
   const [checked, setChecked] = useState({
-    depts: formData.depts,
-    tags: formData.tags,
+    relevantCollegeDepartment: formData.relevantCollegeDepartment,
+    selectTags: formData.selectTags,
   });
   // Add/Remove checked item from list
   const handleCheck = (event) => {
@@ -73,17 +73,18 @@ export const AddFest = () => {
       }
     }
   }, [stateData, formData.state, cities]);
+
   return (
     <div className="relative">
       <form className="flex flex-col gap-4 my-4 lg:text-sm">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
-            <Label value={"Fest Name"} htmlFor={"name"} />
+            <Label value={"Fest Name"} htmlFor={"festName"} />
             <InputText
-              name={"name"}
-              id={"name"}
+              name={"festName"}
+              id={"festName"}
               onChange={setValues}
-              value={formData.name}
+              value={formData.festName}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -129,22 +130,22 @@ export const AddFest = () => {
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Google Maps Link"} htmlFor={"gmap_link"} />
+            <Label value={"Google Maps Link"} htmlFor={"googleMapsLink"} />
             <InputText
-              name={"gmap_link"}
-              id={"gmap_link"}
+              name={"googleMapsLink"}
+              id={"googleMapsLink"}
               onChange={setValues}
-              value={formData.gmap_link}
+              value={formData.googleMapsLink}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Contact Number"} htmlFor={"contact_no"} />
+            <Label value={"Contact Number"} htmlFor={"contactNumber"} />
             <InputText
               type="number"
-              name={"contact_no"}
-              id={"contact_no"}
+              name={"contactNumber"}
+              id={"contactNumber"}
               onChange={setValues}
-              value={formData.contact_no}
+              value={formData.contactNumber}
             />
           </div>
           <div className="flex flex-col gap-1">
@@ -155,9 +156,9 @@ export const AddFest = () => {
                 <InputRadio
                   key={index + type}
                   id={type}
-                  name="type"
+                  name="festType"
                   onChange={setValues}
-                  checked={formData.type === type}
+                  checked={formData.festType === type}
                   value={type}
                   label={type}
                 />
@@ -171,9 +172,9 @@ export const AddFest = () => {
                 <InputRadio
                   key={index + accomodation.id}
                   id={accomodation.id}
-                  name="accomodation"
+                  name="accomodationProvided"
                   onChange={setValues}
-                  checked={formData.accomodation === accomodation.value}
+                  checked={formData.accomodationProvided === accomodation.value}
                   value={accomodation.value}
                   label={accomodation.label}
                 />
@@ -190,11 +191,11 @@ export const AddFest = () => {
                     <div key={index} className="flex gap-2 items-center">
                       <input
                         type="checkbox"
-                        name="tags"
+                        name="selectTags"
                         value={tag}
                         id={tag}
                         className="accent-yellow w-3"
-                        checked={formData.tags.includes(tag)}
+                        checked={formData.selectTags.includes(tag)}
                         onChange={handleCheck}
                       />
                       <label htmlFor={tag} className="text-sm capitalize">
@@ -212,10 +213,12 @@ export const AddFest = () => {
                     <div key={index} className="flex gap-2 items-center">
                       <input
                         type="checkbox"
-                        name="depts"
+                        name="relevantCollegeDepartment"
                         value={dept}
                         id={dept}
-                        checked={formData.depts.includes(dept)}
+                        checked={formData.relevantCollegeDepartment.includes(
+                          dept
+                        )}
                         onChange={handleCheck}
                         className="accent-yellow w-3"
                       />
@@ -259,58 +262,58 @@ export const AddFest = () => {
             </label>
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Add Instagram Link"} htmlFor={"instagram"} />
+            <Label value={"Add Instagram Link"} htmlFor={"instagramLink"} />
 
             <InputText
-              name={"instagram"}
-              id={"instagram"}
+              name={"instagramLink"}
+              id={"instagramLink"}
               onChange={setValues}
-              value={formData.instagram}
+              value={formData.instagramLink}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Add Facebook Link"} htmlFor={"facebook"} />
+            <Label value={"Add Facebook Link"} htmlFor={"facebookLink"} />
             <InputText
-              name={"facebook"}
-              id={"facebook"}
+              name={"facebookLink"}
+              id={"facebookLink"}
               onChange={setValues}
-              value={formData.facebook}
+              value={formData.facebookLink}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Add Twitter Link"} htmlFor={"twitter"} />
+            <Label value={"Add Twitter Link"} htmlFor={"twitterLink"} />
             <InputText
-              name={"twitter"}
-              id={"twitter"}
+              name={"twitterLink"}
+              id={"twitterLink"}
               onChange={setValues}
-              value={formData.twitter}
+              value={formData.twitterLink}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Fest Sponsors"} htmlFor={"sponsors"} />
+            <Label value={"Fest Sponsors"} htmlFor={"festSponsor"} />
             <InputText
-              name={"sponsors"}
-              id={"sponsors"}
+              name={"festSponsor"}
+              id={"festSponsor"}
               onChange={setValues}
-              value={formData.sponsors}
+              value={formData.festSponsor}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Fest Food Stalls"} htmlFor={"foodstalls"} />
+            <Label value={"Fest Food Stalls"} htmlFor={"festFoodStalls"} />
             <InputText
-              name={"foodstalls"}
-              id={"foodstalls"}
+              name={"festFoodStalls"}
+              id={"festFoodStalls"}
               onChange={setValues}
-              value={formData.foodstalls}
+              value={formData.festFoodStalls}
             />
           </div>
           <div className="flex flex-col gap-1">
-            <Label value={"Fest Accomodations"} htmlFor={"accomodations"} />
+            <Label value={"Fest Accomodations"} htmlFor={"festAccomodation"} />
             <InputText
-              name={"accomodations"}
-              id={"accomodations"}
+              name={"festAccomodation"}
+              id={"festAccomodation"}
               onChange={setValues}
-              value={formData.accomodations}
+              value={formData.festAccomodation}
             />
           </div>
 
@@ -350,9 +353,9 @@ export const AddFest = () => {
                 <InputRadio
                   key={index + plan.id}
                   id={plan.id}
-                  name="registerfees"
+                  name="registrationFees"
                   onChange={setValues}
-                  checked={formData.registerfees === plan.value}
+                  checked={formData.registrationFees === plan.value}
                   value={plan.value}
                   label={plan.label}
                 />
@@ -364,7 +367,7 @@ export const AddFest = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            dispatch({ type: "EVENT", payload: formData });
+            dispatch({ type: "FEST", payload: formData });
             navigate("/add_fest/verify");
           }}
           className="mx-auto py-3 px-32 text-black bg-yellow mt-8 hover:bg-yellow/90 transition-all font-bold text-base rounded-md"

@@ -1,9 +1,9 @@
 import { Link } from "react-router-dom";
 import { IoIosArrowRoundBack } from "react-icons/io";
-import { useEventContext } from "../../hooks/useEventContext";
+// import { useEventContext } from "../../hooks/useEventContext";
 export const Verify = () => {
-  const { event } = useEventContext();
-  console.log(event);
+  // const context = useEventContext();
+
   return (
     <div>
       <Link
