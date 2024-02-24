@@ -47,7 +47,7 @@ export const useSignup = () => {
       });
     }
 
-    apiConnector("POST", endpoints.SIGNUP_API, {
+    apiConnector("POST", endpoints.AUTH.SIGNUP_API, {
       name,
       email,
       password,
@@ -60,7 +60,7 @@ export const useSignup = () => {
         // Store the token in local storage or cookies for authentication
         localStorage.setItem("token", JSON.stringify(user.token));
 
-        apiConnector("GET", endpoints.GET_USER, null, {
+        apiConnector("GET", endpoints.AUTH.GET_USER, null, {
           Authorization: user.token, // Replace with the actual JWT token
         }).then((res) => {
           dispatch({ type: "LOGIN", payload: res.data.user });

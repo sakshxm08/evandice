@@ -15,7 +15,7 @@ export const AuthContextProvider = ({ children }) => {
   useEffect(() => {
     const token = JSON.parse(localStorage.getItem("token"));
     if (token) {
-      apiConnector("GET", endpoints.GET_USER, null, {
+      apiConnector("GET", endpoints.AUTH.GET_USER, null, {
         Authorization: JSON.parse(localStorage.getItem("token")), // Replace with the actual JWT token
       })
         .then((res) => {

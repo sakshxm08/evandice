@@ -1,5 +1,7 @@
 import EventCarousel from "../components/EventCarousel";
 import Search from "../components/Search";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apiRoutes";
 
 export const AllEvents = () => {
   const types = [
@@ -7,6 +9,9 @@ export const AllEvents = () => {
     { heading: "dance", type: "dance", events: [] },
     { heading: "comedy", type: "comedy", events: [] },
   ];
+  apiConnector("GET", endpoints.EVENTS.GET_ALL).then((res) =>
+    console.log(res.data.events)
+  );
   return (
     <>
       <div className="w-4/5">

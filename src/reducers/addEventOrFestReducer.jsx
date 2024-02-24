@@ -1,4 +1,4 @@
-export const eventReducer = (state, action) => {
+export const addEventOrFestReducer = (state, action) => {
   switch (action.type) {
     case "EVENT":
       return { ...state, event: action.payload };

@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Dropdown from "../../components/Dropdown";
 import { State, City } from "country-state-city";
 import { useNavigate } from "react-router-dom";
-import { useEventContext } from "../../hooks/useEventContext";
+import { useAddEventOrFestContext } from "../../hooks/useAddEventOrFestContext";
 import { InputRadio, InputText, Label } from "../../components/FormComponents";
 import {
   accomodations,
@@ -23,7 +23,7 @@ export const AddFest = () => {
   const [cities, setCities] = useState([]);
   const [stateData, setStateData] = useState([]);
 
-  const { dispatch, fest } = useEventContext();
+  const { dispatch, fest } = useAddEventOrFestContext();
 
   const navigate = useNavigate();
 

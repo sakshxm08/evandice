@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import { createContext, useReducer } from "react";
-import { eventReducer } from "../reducers/eventReducer";
+import { addEventOrFestReducer } from "../reducers/addEventOrFestReducer";
 
-export const EventContext = createContext();
+export const AddEventOrFestContext = createContext();
 
-export const EventContextProvider = ({ children }) => {
+export const AddEventOrFestContextProvider = ({ children }) => {
   // Radio Button states not saved after submit and then back.
-  const [state, dispatch] = useReducer(eventReducer, {
+  const [state, dispatch] = useReducer(addEventOrFestReducer, {
     fest: {
       festName: "",
       dates: { startDate: null, endDate: null },
@@ -58,12 +58,12 @@ export const EventContextProvider = ({ children }) => {
   });
 
   return (
-    <EventContext.Provider value={{ ...state, dispatch }}>
+    <AddEventOrFestContext.Provider value={{ ...state, dispatch }}>
       {children}
-    </EventContext.Provider>
+    </AddEventOrFestContext.Provider>
   );
 };
 
-EventContextProvider.propTypes = {
+AddEventOrFestContextProvider.propTypes = {
   children: PropTypes.node.isRequired,
 };

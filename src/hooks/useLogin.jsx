@@ -17,7 +17,7 @@ export const useLogin = () => {
     setIsLoading(true);
     setError(null);
 
-    apiConnector("POST", endpoints.LOGIN_API, {
+    apiConnector("POST", endpoints.AUTH.LOGIN_API, {
       email,
       password,
     })
@@ -25,7 +25,7 @@ export const useLogin = () => {
         const user = response.data;
         // Store the token in local storage or cookies for authentication
         localStorage.setItem("token", JSON.stringify(user.token));
-        apiConnector("GET", endpoints.GET_USER, null, {
+        apiConnector("GET", endpoints.AUTH.GET_USER, null, {
           Authorization: user.token, // Replace with the actual JWT token
         }).then((res) => {
           dispatch({
