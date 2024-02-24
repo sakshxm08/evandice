@@ -14,6 +14,9 @@ import {
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
 import { handleCheck, setValues } from "../../services/helperFunctions";
+import { BsImageFill } from "react-icons/bs";
+import { RxCross2 } from "react-icons/rx";
+import { GoPlus } from "react-icons/go";
 
 export const AddEvent = () => {
   const [states] = useState([]);
@@ -261,33 +264,97 @@ export const AddEvent = () => {
           <div className="flex flex-col gap-1">
             <Label
               value={"Add Main Poster"}
-              htmlFor={"poster"}
+              htmlFor={"mainPoster"}
               className={"mb-2"}
             />
-
-            <input type="file" name="poster" id="poster" className="hidden" />
-            <label
-              htmlFor="poster"
-              className="border border-gray-200 rounded-md py-2 px-6 hover:bg-gray-200 hover:text-black cursor-pointer transition-all w-fit text-sm"
-            >
-              Choose file
-            </label>
-          </div>
-          <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
-            <Label value={"Add Images"} htmlFor={"images"} className={"mb-2"} />
             <input
               type="file"
-              name="images"
-              id="images"
+              name="mainPoster"
+              id="mainPoster"
+              className="hidden"
+              onChange={(e) => {
+                const file = e.target.files[0];
+                setFormData({ ...formData, mainPoster: file });
+              }}
+            />
+            {formData.mainPoster ? (
+              <div className="bg-white rounded-full py-2 px-3 hover:bg-gray-200 text-black cursor-pointer transition-all w-fit flex items-center justify-between text-sm gap-3">
+                <BsImageFill size={14} />
+                <span className="text-ellipsis max-w-[120px] text-xs font-semibold whitespace-nowrap overflow-hidden w-fit">
+                  {formData.mainPoster.name}
+                </span>
+                <RxCross2
+                  size={18}
+                  onClick={() => setFormData({ ...formData, mainPoster: null })}
+                />
+              </div>
+            ) : (
+              <label
+                htmlFor="mainPoster"
+                className="border border-gray-200 rounded-md py-2 px-6 hover:bg-gray-200 hover:text-black cursor-pointer transition-all w-fit text-sm"
+              >
+                Choose file
+              </label>
+            )}
+          </div>
+          <div className="flex flex-col gap-1 col-span-1 md:col-span-2">
+            <Label
+              value={"Add Images"}
+              htmlFor={"pictures"}
+              className={"mb-2"}
+            />
+            <input
+              type="file"
+              name="pictures"
+              id="pictures"
               multiple
               className="hidden"
+              onChange={(event) => {
+                const filesArray = Array.from(event.target.files);
+                setFormData({
+                  ...formData,
+                  pictures: [...formData.pictures, ...filesArray],
+                });
+              }}
             />
-            <label
-              htmlFor="images"
-              className="border border-gray-200 rounded-md py-2 px-6 hover:bg-gray-200 hover:text-black cursor-pointer transition-all w-fit text-sm"
-            >
-              Choose file
-            </label>
+            {formData.pictures.length > 0 ? (
+              <div className="grid grid-cols-6 items-center gap-3">
+                {formData.pictures.map((picture, index) => (
+                  <div
+                    key={index}
+                    className="bg-white rounded-full py-2 px-3 hover:bg-gray-200 text-black cursor-pointer transition-all w-full flex items-center justify-between text-sm gap-1"
+                  >
+                    <BsImageFill className="w-8" />
+                    <span className="text-ellipsis text-xs font-semibold whitespace-nowrap overflow-hidden max-w-[40px]">
+                      {picture.name}
+                    </span>
+                    <RxCross2
+                      className="w-8"
+                      onClick={() => {
+                        const pictures = [...formData.pictures];
+                        pictures.splice(index, 1);
+                        setFormData({ ...formData, pictures });
+                      }}
+                    />
+                  </div>
+                ))}
+                {formData.pictures.length <= 5 && (
+                  <label
+                    htmlFor="pictures"
+                    className="rounded-full aspect-square w-9 flex items-center justify-center border border-white hover:bg-white hover:text-black cursor-pointer"
+                  >
+                    <GoPlus />
+                  </label>
+                )}
+              </div>
+            ) : (
+              <label
+                htmlFor="pictures"
+                className="border border-gray-200 rounded-md py-2 px-6 hover:bg-gray-200 hover:text-black cursor-pointer transition-all w-fit text-sm"
+              >
+                Choose file
+              </label>
+            )}
           </div>
           <div className="flex flex-col gap-1">
             <Label value={"Add Instagram Link"} htmlFor={"instagramLink"} />
