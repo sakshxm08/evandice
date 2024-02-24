@@ -18,7 +18,6 @@ import { handleCheck, setValues } from "../../services/helperFunctions";
 export const AddEvent = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
-  const [stateData, setStateData] = useState([]);
 
   const { dispatch, event } = useAddEventOrFestContext();
 
@@ -38,21 +37,19 @@ export const AddEvent = () => {
   }, [states]);
 
   useEffect(() => {
-    setFormData({ ...formData, city: "" });
-    setCities([]);
-    setStateData(
-      State.getStatesOfCountry("IN").filter((s) => s.name === formData.state)
-    );
+    if (formData.state !== event.state) {
+      // Check if selected state has changed
+      const citiesOfState = State.getStatesOfCountry("IN")
+        .filter((s) => s.name === formData.state)
+        .flatMap((s) => City.getCitiesOfState("IN", s.isoCode))
+        .map((city) => city.name);
+
+      setCities(citiesOfState);
+      setFormData({ ...formData, city: "" }); // Reset city when state changes
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.state]);
 
-  useEffect(() => {
-    if (stateData.length > 0) {
-      for (let city of City.getCitiesOfState("IN", stateData[0].isoCode)) {
-        cities.push(city.name);
-      }
-    }
-  }, [stateData, formData.state, cities]);
   return (
     <div className="relative">
       <div className="grid grid-cols-1 gap-8 tablets:gap-0 tablets:grid-cols-3 mx-auto w-11/12 pb-8 mb-12 border-b-gray-400 border-b-[0.5px]">

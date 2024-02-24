@@ -21,7 +21,6 @@ import {
 export const AddFest = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
-  const [stateData, setStateData] = useState([]);
 
   const { dispatch, fest } = useAddEventOrFestContext();
 
@@ -42,22 +41,21 @@ export const AddFest = () => {
   }, [states]);
 
   useEffect(() => {
-    setFormData({ ...formData, city: "" });
-    setCities([]);
-    setStateData(
-      State.getStatesOfCountry("IN").filter((s) => s.name === formData.state)
-    );
+    if (formData.state !== fest.state) {
+      // Check if selected state has changed
+      const citiesOfState = State.getStatesOfCountry("IN")
+        .filter((s) => s.name === formData.state)
+        .flatMap((s) => City.getCitiesOfState("IN", s.isoCode))
+        .map((city) => city.name);
+
+      setCities(citiesOfState);
+      setFormData({ ...formData, city: "" }); // Reset city when state changes
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.state]);
 
-  useEffect(() => {
-    if (stateData.length > 0) {
-      for (let city of City.getCitiesOfState("IN", stateData[0].isoCode)) {
-        cities.push(city.name);
-      }
-    }
-  }, [stateData, formData.state, cities]);
-
+  console.log(formData);
+  console.log(fest);
   return (
     <div className="relative">
       <form className="flex flex-col gap-4 my-4 lg:text-sm">

@@ -21,7 +21,6 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
       dropdownMenu.current.classList.remove("scale-y-100");
     }
   });
-
   return (
     <>
       <Label
@@ -71,11 +70,11 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
             ref={dropdownMenu}
           >
             {values.length > 0 ? (
-              values.map((v, index) => (
+              values.map((val, index) => (
                 <span
                   className="py-2 px-4 cursor-pointer hover:bg-gray-700/70 text-white transition-all text-sm"
                   onClick={() => {
-                    setFormData({ ...formData, [type]: v });
+                    setFormData({ ...formData, [type]: val });
                     dropdownMenu.current.classList.toggle("scale-y-0");
                     dropdownMenu.current.classList.toggle("scale-y-100");
 
@@ -83,7 +82,7 @@ const Dropdown = ({ isEditable, type, formData, setFormData, values }) => {
                   }}
                   key={index}
                 >
-                  {v}
+                  {val}
                 </span>
               ))
             ) : (
