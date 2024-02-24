@@ -51,11 +51,11 @@ const Header = () => {
       : (document.body.style.overflow = "unset");
   }, [open]);
   const hamburger = useRef(null);
-  const sidebar = useRef(null);
+  const dropdown = useRef(null);
   document.onclick = function (e) {
     if (
       !hamburger.current.contains(e.target) &&
-      !sidebar.current.contains(e.target)
+      !dropdown.current.contains(e.target)
     ) {
       setOpen(false);
     }
@@ -119,13 +119,13 @@ const Header = () => {
         </div>
 
         <div
-          className={`h-screen flex flex-col justify-between pt-20 pb-32 gap-6 lg:hidden fixed top-0  w-2/3 bg-primary max-w-[350px] shadow-2xl ${
-            open ? "right-0" : "-right-full"
-          } transition-all duration-500 ease-in-out px-8 text-lg`}
-          ref={sidebar}
+          className={`h-fit flex flex-col justify-between py-12 gap-6 lg:hidden fixed top-3 right-3  w-2/3 bg-black/40 backdrop-blur-3xl max-w-[350px] shadow-2xl rounded-2xl ${
+            open ? "scale-100" : "scale-0"
+          } transition-all duration-500 px-8 origin-top-right text-lg`}
+          ref={dropdown}
         >
-          <div className="flex flex-col gap-6">
-            <div className="flex items-center gap-4 pb-8 border-b border-b-gray-50">
+          <div className="flex flex-col gap-6 text-base">
+            <div className="flex items-center gap-4 pb-8 border-b border-b-gray-600">
               {!user ? (
                 <>
                   <Link
@@ -152,14 +152,19 @@ const Header = () => {
                         {user.name.split(" ")[0]}
                       </span>
                     </span>
-                    <span className="text-xs text-gray-500">{user.email}</span>
-                    <Link
+                    <span className="text-xs text-gray-300">{user.email}</span>
+                    <NavLink
                       to="/profile"
-                      onClick={openMenu}
-                      className="active:text-black cursor-pointer mt-4"
+                      className={({ isActive, isPending }) =>
+                        isPending
+                          ? "text-white  cursor-pointer transition-all duration-200 mt-4"
+                          : isActive
+                          ? "text-primary cursor-pointer transition-all duration-200 mt-4"
+                          : "text-white hover:text-primary cursor-pointer transition-all duration-200 mt-4"
+                      }
                     >
                       Edit Profile
-                    </Link>
+                    </NavLink>
                   </div>
                 </>
               )}
@@ -173,8 +178,8 @@ const Header = () => {
                   isPending
                     ? "text-white  cursor-pointer transition-all duration-200"
                     : isActive
-                    ? "text-black  cursor-pointer transition-all duration-200 "
-                    : "text-white hover:text-black cursor-pointer transition-all duration-200 "
+                    ? "text-primary  cursor-pointer transition-all duration-200 "
+                    : "text-white hover:text-primary cursor-pointer transition-all duration-200 "
                 }
               >
                 {item.route}
@@ -182,9 +187,9 @@ const Header = () => {
             ))}
           </div>
           {user && (
-            <div className="flex flex-col gap-4 pt-8 border-t border-t-gray-50">
+            <div className="flex flex-col gap-4 pt-8 border-t border-t-gray-600">
               <span
-                className="text-red-500 bg-white w-full py-2 text-center rounded-full justify-center active:text-red-800 cursor-pointer flex gap-2 items-center"
+                className="text-red-500 bg-white/20 backdrop-blur-xl w-full py-2 text-center text-base rounded-full justify-center active:text-red-800 cursor-pointer flex gap-2 items-center"
                 onClick={signout}
               >
                 <CiLogout size={20} />
@@ -201,20 +206,45 @@ const Header = () => {
         >
           <span
             className={`h-px w-full ${
-              open ? "bg-black" : "bg-white"
-            } rounded-full transition-all duration-500 ease-in-out`}
+              open ? "rotate-45 translate-y-2" : ""
+            } rounded-full transition-all duration-500 ease-in-out bg-white`}
           ></span>
           <span
             className={`h-px ${
-              open ? "w-2/3 bg-black" : "w-full bg-white"
-            } rounded-full transition-all duration-500 ease-in-out`}
+              open ? "opacity-0" : "opacity-100"
+            } rounded-full transition-all duration-500 ease-in-out bg-white`}
           ></span>
           <span
             className={`h-px w-full ${
-              open ? "bg-black" : "bg-white"
-            } rounded-full transition-all duration-500 ease-in-out`}
+              open ? "-rotate-45 -translate-y-[9px]" : ""
+            } rounded-full transition-all duration-500 ease-in-out bg-white`}
           ></span>
         </div>
+        {/* <button
+          className="flex items-center justify-center w-10 h-10 md:hidden"
+          onClick={openMenu}
+        >
+          <div className="w-6 h-6">
+
+            <div
+              className={`block w-full h-0.5 bg-gray-700 transition-transform duration-300 transform ${
+                open ? "rotate-45 -translate-y-1.5" : "rotate-0 translate-y-0"
+              }`}
+            ></div>
+            <div className="flex justify-center">
+              <div
+                className={`block w-full h-0.5 bg-gray-700 transition-opacity duration-300 ${
+                  open ? "opacity-0" : "opacity-100"
+                }`}
+              ></div>
+            </div>
+            <div
+              className={`block w-full h-0.5 bg-gray-700 transition-transform duration-300 transform ${
+                open ? "-rotate-45 translate-y-1.5" : "rotate-0 translate-y-0"
+              }`}
+            ></div>
+          </div>
+        </button> */}
       </nav>
     </>
   );
