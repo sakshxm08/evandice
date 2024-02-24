@@ -61,7 +61,7 @@ const Header = () => {
     }
   };
   return (
-    <>
+    <div>
       <nav
         className="w-screen fixed top-0 left-0 bg-transparent z-50 transition-all duration-300 flex items-center justify-between"
         ref={nav_ref}
@@ -119,87 +119,6 @@ const Header = () => {
         </div>
 
         <div
-          className={`h-fit flex flex-col justify-between py-12 gap-6 lg:hidden fixed top-3 right-3  w-2/3 bg-black/40 backdrop-blur-3xl max-w-[350px] shadow-2xl rounded-2xl ${
-            open ? "scale-100" : "scale-0"
-          } transition-all duration-500 px-8 origin-top-right text-lg`}
-          ref={dropdown}
-        >
-          <div className="flex flex-col gap-6 text-base">
-            <div className="flex items-center gap-4 pb-8 border-b border-b-gray-600">
-              {!user ? (
-                <>
-                  <Link
-                    to="/auth/login"
-                    onClick={openMenu}
-                    className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white text-white font-semibold hover:bg-white hover:text-primary transition-all"
-                  >
-                    Login
-                  </Link>
-                  <Link
-                    to="/auth/signup"
-                    onClick={openMenu}
-                    className="w-1/2 text-base py-2 flex items-center justify-center border-[1.5px] border-white bg-white text-primary font-semibold hover:bg-white/75 hover:border-primary/75 transition-all"
-                  >
-                    Sign Up
-                  </Link>
-                </>
-              ) : (
-                <>
-                  <div className=" flex flex-col">
-                    <span className="font-titleFont font-light text-lg whitespace-nowrap">
-                      Hello,{" "}
-                      <span className="font-medium text-xl">
-                        {user.name.split(" ")[0]}
-                      </span>
-                    </span>
-                    <span className="text-xs text-gray-300">{user.email}</span>
-                    <NavLink
-                      to="/profile"
-                      className={({ isActive, isPending }) =>
-                        isPending
-                          ? "text-white  cursor-pointer transition-all duration-200 mt-4"
-                          : isActive
-                          ? "text-primary cursor-pointer transition-all duration-200 mt-4"
-                          : "text-white hover:text-primary cursor-pointer transition-all duration-200 mt-4"
-                      }
-                    >
-                      Edit Profile
-                    </NavLink>
-                  </div>
-                </>
-              )}
-            </div>
-            {nav_links.map((item) => (
-              <NavLink
-                key={item.link}
-                to={item.link}
-                onClick={openMenu}
-                className={({ isActive, isPending }) =>
-                  isPending
-                    ? "text-white  cursor-pointer transition-all duration-200"
-                    : isActive
-                    ? "text-primary  cursor-pointer transition-all duration-200 "
-                    : "text-white hover:text-primary cursor-pointer transition-all duration-200 "
-                }
-              >
-                {item.route}
-              </NavLink>
-            ))}
-          </div>
-          {user && (
-            <div className="flex flex-col gap-4 pt-8 border-t border-t-gray-600">
-              <span
-                className="text-red-500 bg-white/20 backdrop-blur-xl w-full py-2 text-center text-base rounded-full justify-center active:text-red-800 cursor-pointer flex gap-2 items-center"
-                onClick={signout}
-              >
-                <CiLogout size={20} />
-                Signout
-              </span>
-            </div>
-          )}
-        </div>
-
-        <div
           className="flex lg:hidden flex-col gap-2 w-8 mr-8 transition-all z-[100]"
           onClick={openMenu}
           ref={hamburger}
@@ -246,7 +165,88 @@ const Header = () => {
           </div>
         </button> */}
       </nav>
-    </>
+      <div
+        className={`h-fit flex flex-col justify-between py-12 gap-6 lg:hidden fixed top-20 translate-y-2 right-3 z-[10000]  w-2/3 bg-black/40 backdrop-blur-3xl max-w-[350px] shadow-2xl rounded-2xl ${
+          open ? "scale-100" : "scale-0"
+        } transition-all duration-500 px-8 origin-top-right text-lg`}
+        ref={dropdown}
+      >
+        <div className="flex flex-col gap-6 text-base">
+          {user && (
+            <div className="flex items-center gap-4 pb-8 border-b border-b-gray-600">
+              <>
+                <div className=" flex flex-col">
+                  <span className="font-titleFont font-light text-lg whitespace-nowrap">
+                    Hello,{" "}
+                    <span className="font-medium text-xl">
+                      {user.name.split(" ")[0]}
+                    </span>
+                  </span>
+                  <span className="text-xs text-gray-300">{user.email}</span>
+                  <NavLink
+                    to="/profile"
+                    className={({ isActive, isPending }) =>
+                      isPending
+                        ? "text-white  cursor-pointer transition-all duration-200 mt-4"
+                        : isActive
+                        ? "text-primary cursor-pointer transition-all duration-200 mt-4"
+                        : "text-white hover:text-primary cursor-pointer transition-all duration-200 mt-4"
+                    }
+                  >
+                    Edit Profile
+                  </NavLink>
+                </div>
+              </>
+            </div>
+          )}
+          {nav_links.map((item) => (
+            <NavLink
+              key={item.link}
+              to={item.link}
+              onClick={openMenu}
+              className={({ isActive, isPending }) =>
+                isPending
+                  ? "text-white  cursor-pointer transition-all duration-200"
+                  : isActive
+                  ? "text-primary  cursor-pointer transition-all duration-200 "
+                  : "text-white hover:text-primary cursor-pointer transition-all duration-200 "
+              }
+            >
+              {item.route}
+            </NavLink>
+          ))}
+          {!user && (
+            <div className="flex items-center gap-4 pt-8 border-t border-t-gray-600">
+              <Link
+                to="/auth/login"
+                onClick={openMenu}
+                className="w-1/2 text-sm py-2 flex items-center justify-center border-[1.5px] border-primary text-primary font-medium hover:bg-white transition-all"
+              >
+                Login
+              </Link>
+              <Link
+                to="/auth/signup"
+                onClick={openMenu}
+                className="w-1/2 text-sm py-2 flex items-center justify-center border-[1.5px] border-primary bg-primary text-black font-medium hover:bg-white/75 hover:border-primary/75 transition-all"
+              >
+                Sign Up
+              </Link>
+            </div>
+          )}
+        </div>
+        {user && (
+          <div className="flex flex-col gap-4 pt-8 border-t border-t-gray-600">
+            <span
+              className="text-red-500 bg-white/20 backdrop-blur-xl w-full py-2 text-center text-base rounded-full justify-center active:text-red-800 cursor-pointer flex gap-2 items-center"
+              onClick={signout}
+            >
+              <CiLogout size={20} />
+              Signout
+            </span>
+          </div>
+        )}
+      </div>
+    </div>
   );
 };
 
