@@ -27,11 +27,9 @@ const EventSearches = ({ type, rows = 2 }) => {
       ? rows * 5
       : mediaQueries.tablets.matches
       ? rows * 4
-      : mediaQueries.md.matches
+      : mediaQueries.sm.matches
       ? rows * 3
-      : mediaQueries.mobiles.matches
-      ? rows * 2
-      : rows
+      : rows * 2
   );
 
   for (let i = 0; i < Object.keys(mediaQueries).length; i++) {
@@ -41,11 +39,9 @@ const EventSearches = ({ type, rows = 2 }) => {
           ? rows * 5
           : mediaQueries.tablets.matches
           ? rows * 4
-          : mediaQueries.md.matches
+          : mediaQueries.sm.matches
           ? rows * 3
-          : mediaQueries.mobiles.matches
-          ? rows * 2
-          : rows
+          : rows * 2
       )
     );
   }
@@ -77,7 +73,7 @@ const EventSearches = ({ type, rows = 2 }) => {
       {events.length > 0 ? (
         <>
           <div
-            className={`max-w-[300px] mobiles:max-w-full w-5/6 mx-auto mobiles:w-full grid grid-cols-1 mobiles:grid-cols-2 md:grid-cols-3 tablets:grid-cols-4 xl:grid-cols-5 gap-4 grid-rows-${rows}`}
+            className={`mx-auto:w-full grid grid-cols-2 sm:grid-cols-3 tablets:grid-cols-4 xl:grid-cols-5 gap-4 grid-rows-${rows}`}
           >
             {currentEvents.map((value, index) =>
               types.NORMAL === type ? (

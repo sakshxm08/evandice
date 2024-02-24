@@ -59,7 +59,7 @@ const Home = () => {
       <Carousel />
       <div className="flex flex-col items-center justify-center py-12 gap-16 px-8 text-center">
         <div className="flex flex-col items-center justify-center gap-4">
-          <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+          <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
             featured live events
           </h1>
           <div className="md:text-base text-sm">
@@ -71,7 +71,7 @@ const Home = () => {
       </div>
       <div className="max-w-7xl w-11/12 mx-auto">
         <div className="flex flex-col items-center justify-center py-12 gap-12 text-center px-8">
-          <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+          <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
             join a{" "}
             <span className=" bg-gradient-to-br from-[#FF4545] from-20% via-[#DF9438] to-[#FBBC05] bg-clip-text text-transparent">
               community
@@ -80,15 +80,19 @@ const Home = () => {
           </h1>
           <div className="grid grid-cols-1 gap-8 sm:gap-0 sm:grid-cols-3 w-full items-center">
             <div className="flex flex-col gap-2 w-full items-center">
-              <div className="text-5xl md:text-7xl font-medium ">11.5M+</div>
+              <div className="text-3xl sm:text-5xl md:text-7xl font-medium ">
+                11.5M+
+              </div>
               <div>active accounts</div>
             </div>
             <div className="flex flex-col gap-2 w-full items-center">
-              <div className="text-5xl md:text-7xl font-medium ">21.9M</div>
+              <div className="text-3xl sm:text-5xl md:text-7xl font-medium ">
+                21.9M
+              </div>
               <div>registrations till date</div>
             </div>
             <div className="flex flex-col gap-2 w-full items-center">
-              <div className="text-5xl md:text-7xl font-medium">
+              <div className="text-3xl sm:text-5xl md:text-7xl font-medium">
                 &#8377;4,000
               </div>
               <div>avergae cost per ticket</div>
@@ -97,7 +101,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+            <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
               Search for fests
             </h1>
             <div className="md:text-base text-sm">
@@ -106,11 +110,11 @@ const Home = () => {
             </div>
           </div>
           <Search searches={searches} />
-          <EventSearches type={cardTypes.NORMAL} />
+          <EventSearches type={cardTypes.NORMAL} rows={1} />
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+            <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
               Events around you
             </h1>
             <div className="md:text-base text-sm">
@@ -119,14 +123,14 @@ const Home = () => {
             </div>
           </div>
           <Search searches={searches} />
-          <EventSearches type={cardTypes.NORMAL} />
+          <EventSearches type={cardTypes.NORMAL} rows={1} />
         </div>
 
-        <h1 className="uppercase text-5xl md:text-title font-title text-center">
+        <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title text-center">
           Participate in Competitions
         </h1>
-        <div className="flex flex-col items-center justify-center py-12 gap-8">
-          <h2 className="uppercase text-4xl font-title text-center md:text-left w-full">
+        <div className="flex flex-col items-center justify-center py-4 sm:py-12 gap-4 sm:gap-8">
+          <h2 className="uppercase text-2xl sm:text-4xl font-title text-center md:text-left w-full">
             Cultural
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
@@ -135,8 +139,8 @@ const Home = () => {
             ))}
           </div>
         </div>
-        <div className="flex flex-col items-center justify-center py-12 gap-8">
-          <h2 className="uppercase text-4xl font-title text-center md:text-left w-full mt-8">
+        <div className="flex flex-col items-center justify-center py-4 sm:py-12 gap-4 sm:gap-8">
+          <h2 className="uppercase text-2xl sm:text-4xl font-title text-center md:text-left w-full mt-8">
             Hackathons
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
@@ -148,7 +152,7 @@ const Home = () => {
 
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+            <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
               College List
             </h1>
             <div className="md:text-base text-sm">
@@ -162,7 +166,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+            <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
               Your favorite artists
             </h1>
             <div className="md:text-base text-sm">
@@ -176,7 +180,7 @@ const Home = () => {
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h1 className="uppercase text-5xl md:text-title font-title mx-auto">
+            <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title mx-auto">
               Laughter is the best medicine
             </h1>
             <div className="md:text-base text-sm">

@@ -18,12 +18,14 @@ const EventCard = ({ width = "w-full", event = [] }) => {
         className="object-cover h-full -z-20 absolute top-0 group-hover:scale-110 transition-all duration-500"
       />
       <div className="h-full w-full transition-all group-hover:bg-black/40 absolute inset-0"></div>
-      <div className="relative h-full w-full bg-gradient-to-t text-sm from-black to-transparent transition-all flex flex-col justify-end p-4 gap-2">
-        <div className="absolute top-2 right-2 flex flex-col items-center justify-center p-1 gap-0 rounded-2xl bg-white/70 aspect-square h-16 text-black">
-          <span className="text-2xl font-bold">22</span>
-          <span className="text-sm uppercase font-light">oct</span>
+      <div className="relative h-full w-full bg-gradient-to-t text-sm from-black to-transparent transition-all flex flex-col justify-end px-2 py-4 sm:p-4 gap-2">
+        <div className="absolute top-2 right-2 flex flex-col items-center justify-center p-1 gap-0 rounded-2xl bg-white/70 aspect-square h-12 mobiles:h-16 text-black">
+          <span className="text-xl mobiles:text-2xl font-bold">22</span>
+          <span className="text-xs mobiles:text-sm uppercase font-light">
+            oct
+          </span>
         </div>
-        <div className="flex flex-wrap gap-2 items-center justify-center overflow-hidden mt-[150%] duration-500 opacity-0 group-hover:opacity-100 group-hover:mt-0 transition-all ease-in-out">
+        <div className="hidden md:flex flex-wrap gap-2 items-center justify-center overflow-hidden mt-[150%] duration-500 opacity-0 group-hover:opacity-100 group-hover:mt-0 transition-all ease-in-out">
           {/* Keywords greater than 3 are sliced */}
           {keywords.slice(0, 3).map((keyword, index) => (
             <span
@@ -44,15 +46,17 @@ const EventCard = ({ width = "w-full", event = [] }) => {
             </Link>
           )}
         </div>
-        <h2 className="font-bold text-2xl text-center">Neon Da Vista</h2>
-        <div className="flex justify-around font-semibold">
+        <h2 className="font-semibold sm:font-bold text-lg mobiles:text-2xl text-center">
+          Neon Da Vista
+        </h2>
+        <div className="flex text-sm sm:text-base justify-around font-medium sm:font-semibold">
           <span>Pilani</span>
           <span className=" text-green-600">Rs. 3400</span>
         </div>
         <div className="flex flex-col justify-end gap-2 overflow-hidden">
           <Link
             to={`/events/${event._id}`}
-            className="border flex items-center justify-center rounded-full py-2 hover:bg-white transition-all hover:text-black  opacity-0 group-hover:opacity-100 ease-in-out  duration-500"
+            className="border flex items-center sm:text-sm justify-center rounded-full py-1 sm:py-2 hover:bg-white transition-all hover:text-black  opacity-0 group-hover:opacity-100 ease-in-out  duration-500"
           >
             Get Now
           </Link>

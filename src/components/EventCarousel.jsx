@@ -16,7 +16,7 @@ function NextArrow(props) {
       } flex items-center justify-center`}
       onClick={onClick}
     >
-      <EvRightArrow fill={onClick ? "white" : "none"} />
+      <EvRightArrow fill={onClick ? "white" : "none"} width={14} />
     </button>
   );
 }
@@ -30,7 +30,7 @@ function PrevArrow(props) {
       } flex items-center justify-center`}
       onClick={onClick}
     >
-      <EvLeftArrow fill={onClick ? "white" : "none"} />
+      <EvLeftArrow fill={onClick ? "white" : "none"} width={14} />
     </button>
   );
 }
@@ -67,26 +67,27 @@ const EventCarousel = () => {
       {
         breakpoint: 868,
         settings: {
-          slidesToShow: 2,
-          slidesToScroll: 1,
+          slidesToShow: 2.5,
+          slidesToScroll: 2,
           infinite: false,
           dots: true,
         },
       },
       {
-        breakpoint: 500,
+        breakpoint: 640,
         settings: {
-          slidesToShow: 1.2,
-          slidesToScroll: 1,
+          slidesToShow: 2.5,
+          slidesToScroll: 2,
           infinite: false,
           dots: true,
+          arrows: false,
         },
       },
       {
         breakpoint: 380,
         settings: {
-          slidesToShow: 1,
-          slidesToScroll: 1,
+          slidesToShow: 2.2,
+          slidesToScroll: 2,
           infinite: false,
           dots: true,
         },
@@ -94,7 +95,7 @@ const EventCarousel = () => {
     ],
   };
   return (
-    <div className="w-5/6 mx-auto max-w-5xl">
+    <div className="sm:w-5/6 w-full mx-auto max-w-5xl">
       <Slider {...settings}>
         {events.map((event, index) => (
           // mx-auto centering and w-11/12 for gap between cards -------------------------------------------
