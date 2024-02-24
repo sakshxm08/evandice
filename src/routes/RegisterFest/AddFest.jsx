@@ -76,7 +76,7 @@ export const AddFest = () => {
 
   return (
     <div className="relative">
-      <form className="flex flex-col gap-4 my-4 lg:text-sm">
+      <form className="flex flex-col gap-4 my-4 lg:text-sm w-full">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 w-full relative gap-10 ">
           <div className="flex flex-col gap-1">
             <Label value={"Fest Name"} htmlFor={"festName"} />
@@ -182,7 +182,7 @@ export const AddFest = () => {
             </div>
           </div>
           <div className="flex flex-col gap-1 col-span-1 md:col-span-2 lg:col-span-3">
-            <div className="grid grid-cols-2 w-full relative gap-10 mt-4">
+            <div className="grid tablets:grid-cols-2 w-full relative gap-10 mt-4">
               <div className="flex flex-col gap-2">
                 <Label value={"Add my interests"} />
 
@@ -210,7 +210,7 @@ export const AddFest = () => {
               <div className="flex flex-col gap-2">
                 <Label value={"Relevant College Departments"} />
 
-                <div className="grid grid-cols-3 w-full gap-1">
+                <div className="grid grid-cols-2 mobiles:grid-cols-3 w-full gap-1">
                   {depts.map((dept, index) => (
                     <div key={index} className="flex gap-2 items-center">
                       <input
@@ -292,16 +292,18 @@ export const AddFest = () => {
               }}
             />
             {formData.pictures.length > 0 ? (
-              <div className="grid grid-cols-6 items-center gap-3">
+              <div className="grid grid-cols-3 sm:grid-cols-6 items-center gap-3">
                 {formData.pictures.map((picture, index) => (
                   <div
                     key={index}
                     className="bg-white rounded-full py-2 px-3 hover:bg-gray-200 text-black cursor-pointer transition-all w-full flex items-center justify-between text-sm gap-1"
                   >
-                    <BsImageFill className="w-8" />
-                    <span className="text-ellipsis text-xs font-semibold whitespace-nowrap overflow-hidden max-w-[40px]">
-                      {picture.name}
-                    </span>
+                    <div className="flex items-center gap-1 w-[120px] overflow-hidden">
+                      <BsImageFill className="w-8" />
+                      <span className="text-ellipsis text-xs font-semibold whitespace-nowrap overflow-hidden max-w-[100px] sm:max-w-[40px]">
+                        {picture.name}
+                      </span>
+                    </div>
                     <RxCross2
                       className="w-8"
                       onClick={() => {
