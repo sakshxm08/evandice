@@ -17,10 +17,14 @@ import { handleCheck, setValues } from "../../services/helperFunctions";
 import { BsImageFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { GoPlus } from "react-icons/go";
+// import { apiConnector } from "../../services/apiConnector";
+// import { endpoints } from "../../services/apiRoutes";
 
 export const AddEvent = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
+  // const [isLoading, setIsLoading] = useState(false);
+  // const [err, setErr] = useState(null);
 
   const { dispatch, event } = useAddEventOrFestContext();
 
@@ -52,6 +56,23 @@ export const AddEvent = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.state]);
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   setIsLoading(true);
+  //   apiConnector("POST", endpoints.EVENT.ADD, formData, {
+  //     "Content-Type": "multipart/form-data",
+  //   })
+  //     .then((res) => {
+  //       const response = res.data;
+  //       // RESPONSE LOGIC
+  //       console.log(response);
+  //       dispatch({ type: "EVENT", payload: formData });
+  //       navigate("/add_fest/verify");
+  //       setIsLoading(false);
+  //     })
+  //     .catch((err) => setErr(err));
+  // };
 
   return (
     <div className="relative">
