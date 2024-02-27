@@ -107,10 +107,7 @@ const Carousel = () => {
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos himenaeos. Curabitur tempus urna at turpis condimentum
-            lobortis.
+            vulputate libero et velit interdum, ac aliquet odio mattis.
           </div>
           <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
             register now
@@ -131,10 +128,7 @@ const Carousel = () => {
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos himenaeos. Curabitur tempus urna at turpis condimentum
-            lobortis.
+            vulputate libero et velit interdum, ac aliquet odio mattis.
           </div>
           <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
             register now
@@ -155,10 +149,7 @@ const Carousel = () => {
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
             Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Class
-            aptent taciti sociosqu ad litora torquent per conubia nostra, per
-            inceptos himenaeos. Curabitur tempus urna at turpis condimentum
-            lobortis.
+            vulputate libero et velit interdum, ac aliquet odio mattis.
           </div>
           <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
             register now
@@ -174,17 +165,17 @@ const Carousel = () => {
 
   // Returning the carousel -----------------------------------------------------------------------------
   return (
-    <div className=" min-h-[400px] md:min-h-0 md:min-w-screen md:aspect-video overflow-hidden relative">
+    <div className=" min-h-[320px] md:min-h-0 md:min-w-screen md:aspect-video overflow-hidden relative">
       <Slider className="h-full" {...settings}>
         {carousel_data.map((slide) => (
           <div
             key={slide.alt}
-            className="relative min-h-[400px] md:min-h-0  md:min-w-screen md:aspect-video"
+            className="relative min-h-[320px] md:min-h-0  md:min-w-screen md:aspect-video"
           >
             <img
               src={slide.src}
               alt={slide.alt}
-              className="w-full min-h-[400px] md:min-h-0 h-full object-cover"
+              className="w-full min-h-[320px] md:min-h-0 h-full object-cover"
             />
             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-20 bg-black/60 w-full h-full flex items-center justify-center flex-col">
               {slide.desc}
