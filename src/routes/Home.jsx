@@ -109,7 +109,7 @@ const Home = () => {
               velit.
             </div>
           </div>
-          <Search searches={searches} />
+          <Search searches={searches} options />
           <EventSearches type={cardTypes.NORMAL} rows={1} />
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
@@ -126,7 +126,7 @@ const Home = () => {
           <EventSearches type={cardTypes.NORMAL} rows={1} />
         </div>
 
-        <h1 className="uppercase text-3xl sm:text-5xl md:text-title font-title text-center">
+        <h1 className="mt-8 uppercase text-3xl sm:text-5xl md:text-title font-title text-center">
           Participate in Competitions
         </h1>
         <div className="flex flex-col items-center justify-center py-4 sm:py-12 gap-4 sm:gap-8">
