@@ -248,7 +248,7 @@ const EventSearches = ({ type = "normal" }) => {
               {types.NORMAL === type ? (
                 <EventCard key={index} event={event} width="w-11/12" />
               ) : (
-                <BlurCard key={index} width="w-11/12" />
+                <BlurCard key={index} width="w-11/12" event={event} />
               )}
             </div>
             // -----------------------------------------------------------------------------------------------
