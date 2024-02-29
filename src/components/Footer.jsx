@@ -10,10 +10,15 @@ const Footer = () => {
       <div className="flex flex-col gap-4 lg:gap-0 lg:grid grid-cols-4">
         <div className="flex flex-col gap-3 sm:gap-6 w-full col-span-3 pr-0 lg:pr-48">
           <EvLogo className="w-48 md:w-60" />
-          <div>
-            Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis. Class
-            aptent taciti sociosqu ad litora torquent per .
+          <div className="text-lg text-justify">
+            <div>
+              We&apos;d love to hear from you! Whether you have questions,
+              comments, or just want to say hello, we&apos;re here to help.
+            </div>
+            <div>
+              Fill out our quick and easy form or get on a call with us we look
+              forward to connecting with you.
+            </div>
           </div>
         </div>
         <div className="flex flex-col w-full gap-6 h-full">

@@ -205,17 +205,34 @@ const Event = () => {
           More About <span className="text-white">Neon Da Fiesta</span>
         </h3>
         <div>
-          Lorem, ipsum dolor sit amet consectetur adipisicing elit. Unde
-          delectus consequatur libero architecto temporibus magnam omnis nostrum
-          vel officiis reprehenderit placeat quos nemo, harum, doloribus
-          quisquam ratione blanditiis iure voluptatum. Ullam, ipsam dolorem
-          aliquid, eaque neque ipsa at illo odio hic expedita, a omnis alias ut
-          quisquam fugiat culpa in laboriosam sit impedit quos quibusdam iste
-          qui adipisci! Fuga nisi fugit a non, illo quibusdam ratione repellat
-          maxime explicabo itaque! Blanditiis ducimus sunt eum animi reiciendis
-          dolorum iusto, mollitia natus id temporibus nisi commodi sapiente, nam
-          voluptatibus, repudiandae illo! Dolorum quod accusamus eveniet nisi a
-          earum rerum asperiores autem optio.
+          <div>
+            Unleash your inner music lover and prepare to be captivated by the
+            magic of live vocals at Singer&apos;s Night!
+          </div>
+          <div>
+            This intimate and enchanting event will showcase the diverse talents
+            of local singers, each bringing their unique voice and style to the
+            stage. Immerse yourself in a spectrum of musical genres, from
+            soulful ballads and heart-thumping anthems to electrifying pop tunes
+            and soothing jazz melodies.
+          </div>
+          <div>
+            Here&apos;s what awaits you:
+            <ul className="list-inside">
+              <li className=" list-disc">
+                Mesmerizing performances by a lineup of talented singers
+              </li>
+              <li className=" list-disc">
+                A captivating journey through various musical genres
+              </li>
+              <li className=" list-disc">
+                An intimate setting for an unforgettable experience
+              </li>
+              <li className=" list-disc">
+                Food and beverages available for purchase
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
 

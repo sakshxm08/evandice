@@ -105,8 +105,8 @@ const Home = () => {
               Search for fests
             </h1>
             <div className="md:text-base text-sm">
-              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
-              velit.
+              Discover & stay connected through live streams of your favorite
+              music artist!
             </div>
           </div>
           <Search searches={searches} options />
@@ -118,8 +118,8 @@ const Home = () => {
               Events around you
             </h1>
             <div className="md:text-base text-sm">
-              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
-              velit.
+              Search for something you love or check out popular events in your
+              area.
             </div>
           </div>
           <Search searches={searches} />
@@ -156,8 +156,8 @@ const Home = () => {
               College List
             </h1>
             <div className="md:text-base text-sm">
-              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
-              velit.
+              Find events and fests happening in your dream college and attend
+              them on the go.
             </div>
           </div>
           <Search searches={["IITs", "Medical", "Business"]} />
@@ -170,8 +170,8 @@ const Home = () => {
               Your favorite artists
             </h1>
             <div className="md:text-base text-sm">
-              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
-              velit.
+              Find your favourite artists performing in events near you and
+              attend them with one click.
             </div>
           </div>
           <Search searches={["IITs", "Medical", "Business"]} />
@@ -184,8 +184,9 @@ const Home = () => {
               Laughter is the best medicine
             </h1>
             <div className="md:text-base text-sm">
-              Lorem ipsum dolor sit amet consectetur. Aliquam dignissim mauris
-              velit.
+              Get ready for a night of side-splitting laughter with our
+              incredible lineup of hilarious stand-up comedy shows happening
+              around you.
             </div>
           </div>
           <Search searches={["IITs", "Medical", "Business"]} />
@@ -200,8 +201,9 @@ const Home = () => {
               Boost your visibility by registering your events here
             </h3>
             <div className="text-sm mobiles:text-base">
-              Lorem ipsum dolor sit amet consectetur. Odio enim ac venenatis sed
-              vulputate volutpat sit.
+              Easily register for the events you or your college might be
+              organizing and get a wider reach of audience to come and attend
+              them.
             </div>
           </div>
           <button className="w-fit px-6 py-3 rounded bg-[#FBBC05] font-medium text-black text-sm hover:bg-[#FBBC05]/80 active:bg-[#FBBC05]/60 transition-all">

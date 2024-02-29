@@ -63,7 +63,7 @@ const Carousel = () => {
     speed: 500,
     slidesToShow: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 5000,
     pauseOnHover: false,
     slidesToScroll: 1,
     // To determine the Current Slide
@@ -106,8 +106,10 @@ const Carousel = () => {
             </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
-            Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis.
+            Join us for a fun-filled festival celebrating [theme of the
+            festival] with live music, delicious food, and exciting activities
+            for all ages. Don&apos;t miss out on this chance to create lasting
+            memories with your friends and family!
           </div>
           <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
             register now
