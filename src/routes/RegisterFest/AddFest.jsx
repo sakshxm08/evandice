@@ -16,14 +16,10 @@ import {
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
 import { handleCheck, setValues } from "../../services/helperFunctions";
-// import { apiConnector } from "../../services/apiConnector";
-// import { endpoints } from "../../services/apiRoutes";
 
 export const AddFest = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
-  // const [isLoading, setIsLoading] = useState(false);
-  // const [err, setErr] = useState(null);
 
   const { dispatch, fest } = useAddEventOrFestContext();
 
@@ -56,23 +52,6 @@ export const AddFest = () => {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.state]);
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   setIsLoading(true);
-  //   apiConnector("POST", endpoints.FEST.ADD, formData, {
-  //     "Content-Type": "multipart/form-data",
-  //   })
-  //     .then((res) => {
-  //       const response = res.data;
-  //       // RESPONSE LOGIC
-  //       console.log(response);
-  //       dispatch({ type: "FEST", payload: formData });
-  //       navigate("/add_fest/verify");
-  //       setIsLoading(false);
-  //     })
-  //     .catch((err) => setErr(err));
-  // };
 
   return (
     <div className="relative">
