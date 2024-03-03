@@ -18,17 +18,28 @@ import { AllEvents } from "./routes/AllEvents";
 import { useAuthContext } from "./hooks/useAuthContext";
 import { AddFest } from "./routes/RegisterFest/AddFest";
 import { Verify } from "./routes/AddEvent/Verify";
-import { background } from "./assets/images/images";
+import { background, gallery_bg } from "./assets/images/images";
 import { PropTypes } from "prop-types";
 import Auth from "./routes/Auth";
 import { AllCompetitions } from "./routes/AllCompetitions";
 import { CreatePlan } from "./routes/RegisterFest/CreatePlan";
 import { ScreenLoader } from "./components/ScreenLoader";
+import Gallery from "./components/Gallery";
 const Layout = () => (
   <>
     <Header />
     <ScrollRestoration />
     <Outlet />
+    <div className="w-full md:h-[420px] relative  overflow-y-hidden gallery">
+      <img
+        src={gallery_bg}
+        alt="Background"
+        className="absolute inset-0 w-full h-auto object-cover mt-48"
+      />
+      <div className="mt-10 overflow-visible">
+        <Gallery />
+      </div>
+    </div>
     <Footer />
   </>
 );

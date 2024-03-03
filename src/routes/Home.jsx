@@ -1,13 +1,8 @@
-import {
-  competition_img,
-  gallery_bg,
-  hero_img_2,
-} from "../assets/images/images";
+import { competition_img, hero_img_2 } from "../assets/images/images";
 import Carousel from "../components/Carousel";
 import CompetitionCard from "../components/CompetitionCard";
 import EventSearches from "../components/EventSearches";
 import EventCarousel from "../components/EventCarousel";
-import Gallery from "../components/Gallery";
 import Search from "../components/Search";
 
 const Home = () => {
@@ -215,16 +210,6 @@ const Home = () => {
           alt=""
           className="w-full mobiles:w-3/4 sm:w-2/5 md:w-1/3"
         />
-      </div>
-      <div className="w-full md:h-[420px] relative  overflow-y-hidden gallery">
-        <img
-          src={gallery_bg}
-          alt="Background"
-          className="absolute inset-0 w-full h-auto object-cover mt-48"
-        />
-        <div className="mt-10 overflow-visible">
-          <Gallery />
-        </div>
       </div>
     </div>
   );
