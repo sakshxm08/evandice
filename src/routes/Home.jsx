@@ -4,8 +4,19 @@ import CompetitionCard from "../components/CompetitionCard";
 import EventSearches from "../components/EventSearches";
 import EventCarousel from "../components/EventCarousel";
 import Search from "../components/Search";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apiRoutes";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const Home = () => {
+  const [fests, setFests] = useState([]);
+  useEffect(() => {
+    apiConnector("GET", endpoints.FESTS.GET_ALL).then((res) => {
+      setFests(res.data);
+      console.log(res.data);
+    });
+  }, []);
   const cardTypes = { NORMAL: "normal", BLUR: "blur" };
 
   const searches = [
@@ -105,7 +116,7 @@ const Home = () => {
             </div>
           </div>
           <Search searches={searches} options />
-          <EventSearches type={cardTypes.NORMAL} rows={1} />
+          <EventSearches type={cardTypes.NORMAL} rows={1} events={fests} />
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">

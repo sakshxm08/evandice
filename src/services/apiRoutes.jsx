@@ -14,5 +14,6 @@ export const endpoints = {
   },
   FESTS: {
     ADD: BASE_URL + "/fest/add",
+    GET_ALL: BASE_URL + "/fest/get",
   },
 };

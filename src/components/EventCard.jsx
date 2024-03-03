@@ -3,7 +3,7 @@ import { card_img } from "../assets/images/images";
 import { Link } from "react-router-dom";
 
 // Width as prop because of use of component in different sections ------------------------------------------------------
-const EventCard = ({ width = "w-full", event = [] }) => {
+const EventCard = ({ width = "w-full", event = {} }) => {
   // Keywords for the event - Fetched from Props ------------------------------------------------------------------------
   const keywords = ["live", "trending", "paid", "fest"];
 
@@ -15,7 +15,7 @@ const EventCard = ({ width = "w-full", event = [] }) => {
       <img
         src={card_img}
         alt=""
-        className="object-cover h-full -z-20 absolute top-0 group-hover:scale-110 transition-all duration-500"
+        className="object-cover h-full -z-20 absolute top-0 group-hover:scale-110 transition-all duration-500 w-full"
       />
       <div className="h-full w-full transition-all group-hover:bg-black/40 absolute inset-0"></div>
       <div className="relative h-full w-full bg-gradient-to-t text-sm from-black to-transparent transition-all flex flex-col justify-end px-2 py-4 sm:p-4 gap-2">
