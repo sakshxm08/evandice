@@ -14,7 +14,16 @@ export const Verify = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
-    apiConnector("POST", endpoints.FESTS.ADD, fest, {
+    const formData = new FormData();
+
+    Object.entries(fest).forEach(([key, value]) => {
+      if (Array.isArray(value)) {
+        value.forEach((item) => formData.append(key, item));
+      } else {
+        formData.append(key, value);
+      }
+    });
+    apiConnector("POST", endpoints.FESTS.ADD, formData, {
       "Content-Type": "multipart/form-data",
     })
       .then((res) => {

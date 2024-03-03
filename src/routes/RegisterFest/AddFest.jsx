@@ -262,11 +262,10 @@ export const AddFest = () => {
               id="pictures"
               multiple
               className="hidden"
-              onChange={(event) => {
-                const filesArray = Array.from(event.target.files);
+              onChange={(e) => {
                 setFormData({
                   ...formData,
-                  pictures: [...formData.pictures, ...filesArray],
+                  pictures: [...formData.pictures, ...e.target.files],
                 });
               }}
             />
@@ -415,7 +414,7 @@ export const AddFest = () => {
         </div>
 
         <button
-          onClick={(e) => {
+          onClick={async (e) => {
             e.preventDefault();
             dispatch({ type: "FEST", payload: formData });
             navigate("/add_fest/verify");
