@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Dropdown from "../../components/Dropdown";
 import { Link, useNavigate } from "react-router-dom";
 import { State, City } from "country-state-city";
@@ -10,13 +10,16 @@ import {
   depts,
   event_types,
   fees_plans,
-  tags,
+  genres,
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
 import { handleCheck, setValues } from "../../services/helperFunctions";
 import { BsImageFill } from "react-icons/bs";
 import { RxCross2 } from "react-icons/rx";
 import { GoPlus } from "react-icons/go";
+import { FaAngleDown } from "react-icons/fa6";
+import { IoIosClose } from "react-icons/io";
+import { FiPlus } from "react-icons/fi";
 // import { apiConnector } from "../../services/apiConnector";
 // import { endpoints } from "../../services/apiRoutes";
 
@@ -26,6 +29,15 @@ export const AddEvent = () => {
   // const [isLoading, setIsLoading] = useState(false);
   // const [err, setErr] = useState(null);
 
+  const [sponsor, setSponsor] = useState("");
+  const [foodStall, setFoodStall] = useState("");
+
+  const [deptsCollapsed, setDeptsCollapsed] = useState(true);
+  const [genreCollapsed, setGenreCollapsed] = useState(true);
+
+  const sponsorRef = useRef(null);
+  const foodStallRef = useRef(null);
+
   const { dispatch, event } = useAddEventOrFestContext();
 
   const navigate = useNavigate();
@@ -34,7 +46,7 @@ export const AddEvent = () => {
 
   const [checked, setChecked] = useState({
     relevantCollegeDepartment: formData.relevantCollegeDepartment,
-    selectTags: formData.selectTags,
+    eventGenre: formData.eventGenre,
   });
 
   useEffect(() => {
@@ -73,6 +85,87 @@ export const AddEvent = () => {
   //     })
   //     .catch((err) => setErr(err));
   // };
+
+  function checkFieldsNotEmpty(obj) {
+    // Iterate through each key in the obj object
+    for (let key in obj) {
+      // Skip specific keys
+      if (
+        [
+          "instagramLink",
+          "facebookLink",
+          "twitterLink",
+          "eventSponsor",
+          "eventFoodStalls",
+          "eventAccomodation",
+        ].includes(key)
+      ) {
+        continue;
+      }
+
+      // Check if the value is an array or object
+      if (Array.isArray(obj[key])) {
+        // If it's an array, check if it's empty
+        if (obj[key].length === 0) {
+          alert("Please fill in all fields.");
+          return false;
+        }
+      } else if (typeof obj[key] === "object") {
+        // If it's an object, check if any key has an empty value
+        for (let subKey in obj[key]) {
+          if (Object.prototype.hasOwnProperty.call(obj[key], subKey)) {
+            if (
+              obj[key][subKey] === "" ||
+              obj[key][subKey] === undefined ||
+              obj[key][subKey] === null
+            ) {
+              alert("Please fill in all fields.");
+              return false;
+            }
+          }
+        }
+      } else {
+        // For other types (string, null, undefined), check if it's empty or null
+        if (obj[key] === "" || obj[key] === undefined || obj[key] === null) {
+          alert("Please fill in all fields.");
+          return false;
+        }
+      }
+    }
+    // If all fields are filled, show success message or perform desired action
+    return true;
+  }
+
+  const addSponsors = (e) => {
+    e.preventDefault();
+    if (
+      formData.eventSponsor.find(
+        (key) => key.toLowerCase() === sponsor.toLowerCase()
+      ) ||
+      sponsor === ""
+    )
+      return alert("Enter unique keywords");
+    setFormData({
+      ...formData,
+      eventSponsor: [...formData.eventSponsor, sponsor],
+    });
+    setSponsor("");
+  };
+  const addFoodStalls = (e) => {
+    e.preventDefault();
+    if (
+      formData.eventFoodStalls.find(
+        (key) => key.toLowerCase() === foodStall.toLowerCase()
+      ) ||
+      foodStall === ""
+    )
+      return alert("Enter unique keywords");
+    setFormData({
+      ...formData,
+      eventFoodStalls: [...formData.eventFoodStalls, foodStall],
+    });
+    setFoodStall("");
+  };
 
   return (
     <div className="relative">
@@ -232,32 +325,54 @@ export const AddEvent = () => {
             <div className="grid tablets:grid-cols-2 w-full relative gap-10 mt-4">
               <div className="flex flex-col gap-2">
                 <Label value={"Add my interests"} />
-
-                <div className="grid grid-cols-3 w-full gap-1">
-                  {tags.map((tag, index) => (
+                <div
+                  className={`grid grid-cols-2 mobiles:grid-cols-3 w-full gap-y-1 ${
+                    genreCollapsed
+                      ? "h-[4.5rem] sm:h-[4.8rem"
+                      : "h-[17rem] mobiles:h-[12rem] sm:h-[11rem]"
+                  } transition-all overflow-hidden ease duration-500 select-none`}
+                >
+                  {genres.map((tag, index) => (
                     <div key={index} className="flex gap-2 items-center">
                       <input
                         type="checkbox"
-                        name="selectTags"
+                        name="eventGenre"
                         value={tag}
                         id={tag}
                         className="accent-yellow w-3"
-                        checked={formData.selectTags.includes(tag)}
+                        checked={formData.eventGenre.includes(tag)}
                         onChange={(e) =>
                           handleCheck(e, checked, setChecked, formData)
                         }
                       />
-                      <label htmlFor={tag} className="text-sm capitalize">
+                      <label htmlFor={tag} className="text-xs capitalize">
                         {tag}
                       </label>
                     </div>
                   ))}
                 </div>
+                <span
+                  className="text-yellow flex items-center gap-1 text-xs cursor-pointer"
+                  onClick={() => setGenreCollapsed(!genreCollapsed)}
+                >
+                  See {genreCollapsed ? "more" : "less"}{" "}
+                  <FaAngleDown
+                    className={`${
+                      setGenreCollapsed ? "rotate-0" : "rotate-180"
+                    } transition-all`}
+                  />
+                </span>
               </div>
               <div className="flex flex-col gap-2">
                 <Label value={"Relevant College Departments"} />
 
-                <div className="grid grid-cols-2 mobiles:grid-cols-3 w-full gap-1">
+                <div
+                  className={`grid grid-cols-2 mobiles:grid-cols-3 w-full gap-y-1 ${
+                    deptsCollapsed
+                      ? "h-20"
+                      : "h-[26.2rem] mobiles:h-[18rem] sm:h-[16.4rem]"
+                  } transition-all overflow-hidden ease duration-500 select-none`}
+                >
                   {depts.map((dept, index) => (
                     <div key={index} className="flex gap-2 items-center">
                       <input
@@ -273,12 +388,23 @@ export const AddEvent = () => {
                         }
                         className="accent-yellow w-3"
                       />
-                      <label htmlFor={dept} className="text-sm capitalize">
+                      <label htmlFor={dept} className="text-xs capitalize">
                         {dept}
                       </label>
                     </div>
                   ))}
                 </div>
+                <span
+                  className="text-yellow flex items-center gap-1 text-xs cursor-pointer"
+                  onClick={() => setDeptsCollapsed(!deptsCollapsed)}
+                >
+                  See {deptsCollapsed ? "more" : "less"}{" "}
+                  <FaAngleDown
+                    className={`${
+                      deptsCollapsed ? "rotate-0" : "rotate-180"
+                    } transition-all`}
+                  />
+                </span>
               </div>
             </div>
           </div>
@@ -330,11 +456,10 @@ export const AddEvent = () => {
               id="pictures"
               multiple
               className="hidden"
-              onChange={(event) => {
-                const filesArray = Array.from(event.target.files);
+              onChange={(e) => {
                 setFormData({
                   ...formData,
-                  pictures: [...formData.pictures, ...filesArray],
+                  pictures: [...formData.pictures, ...e.target.files],
                 });
               }}
             />
@@ -409,21 +534,103 @@ export const AddEvent = () => {
           </div>
           <div className="flex flex-col gap-1">
             <Label value={"Event Sponsors"} htmlFor={"eventSponsor"} />
-            <InputText
-              name={"eventSponsor"}
-              id={"eventSponsor"}
-              onChange={(e) => setValues(e, formData, setFormData)}
-              value={formData.eventSponsor}
-            />
+            <div className="relative">
+              <input
+                value={sponsor}
+                ref={sponsorRef}
+                id="eventSponsor"
+                onChange={(e) => setSponsor(e.target.value)}
+                name="eventSponsor"
+                type="text"
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "Enter" &&
+                    document.activeElement === sponsorRef.current
+                  ) {
+                    addSponsors(e);
+                  }
+                }}
+                className="rounded py-2 pl-4 pr-10 border bg-transparent focus-visible:border-yellow disabled:border-gray-600 disabled:text-gray-500 disabled:cursor-not-allowed outline-none w-full"
+              />
+              <button
+                onClick={addSponsors}
+                type="button"
+                className="text-xs rounded-full border  p-1 transition-all absolute right-2 top-2 hover:bg-white hover:text-gray-800"
+              >
+                <FiPlus />
+              </button>
+            </div>
+            <div className="flex gap-2 flex-wrap mt-2">
+              {formData.eventSponsor.map((sponsor) => (
+                <span
+                  className="bg-gray-200/40 flex gap-1 items-center justify-center py-1 pl-2 rounded w-fit text-xs"
+                  key={sponsor}
+                  onClick={() => {
+                    setFormData(() => {
+                      return {
+                        ...formData,
+                        eventSponsor: formData.eventSponsor.filter(
+                          (key) => key !== sponsor
+                        ),
+                      };
+                    });
+                  }}
+                >
+                  {sponsor}
+                  <IoIosClose size={20} className="cursor-pointer" />
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex flex-col gap-1">
             <Label value={"Event Food Stalls"} htmlFor={"eventFoodStalls"} />
-            <InputText
-              name={"eventFoodStalls"}
-              id={"eventFoodStalls"}
-              onChange={(e) => setValues(e, formData, setFormData)}
-              value={formData.eventFoodStalls}
-            />
+            <div className="relative">
+              <input
+                ref={foodStallRef}
+                value={foodStall}
+                id="eventFoodStalls"
+                onChange={(e) => setFoodStall(e.target.value)}
+                name="eventFoodStalls"
+                type="text"
+                onKeyDown={(e) => {
+                  if (
+                    e.key === "Enter" &&
+                    document.activeElement === foodStallRef.current
+                  ) {
+                    addFoodStalls(e);
+                  }
+                }}
+                className="rounded py-2 pl-4 pr-10 border bg-transparent focus-visible:border-yellow disabled:border-gray-600 disabled:text-gray-500 disabled:cursor-not-allowed outline-none w-full"
+              />
+              <button
+                onClick={addFoodStalls}
+                type="button"
+                className="text-xs rounded-full border  p-1 transition-all absolute right-2 top-2 hover:bg-white hover:text-gray-800"
+              >
+                <FiPlus />
+              </button>
+            </div>
+            <div className="flex gap-2 flex-wrap mt-2">
+              {formData.eventFoodStalls.map((foodStall) => (
+                <span
+                  className="bg-gray-200/40 flex gap-1 items-center justify-center py-1 pl-2 rounded w-fit text-xs"
+                  key={foodStall}
+                  onClick={() => {
+                    setFormData(() => {
+                      return {
+                        ...formData,
+                        eventFoodStalls: formData.eventFoodStalls.filter(
+                          (key) => key !== foodStall
+                        ),
+                      };
+                    });
+                  }}
+                >
+                  {foodStall}
+                  <IoIosClose size={20} className="cursor-pointer" />
+                </span>
+              ))}
+            </div>
           </div>
           <div className="flex flex-col gap-1">
             <Label
@@ -517,8 +724,11 @@ export const AddEvent = () => {
         <button
           onClick={(e) => {
             e.preventDefault();
-            dispatch({ type: "EVENT", payload: formData });
-            navigate("/add_event/verify");
+            const readyToSubmit = checkFieldsNotEmpty(formData);
+            if (readyToSubmit) {
+              dispatch({ type: "EVENT", payload: formData });
+              navigate("/add_event/verify");
+            }
           }}
           className="mx-auto py-3 px-32 text-black bg-yellow mt-8 hover:bg-yellow/90 transition-all font-bold text-base rounded-md"
         >

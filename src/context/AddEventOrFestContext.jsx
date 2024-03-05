@@ -42,7 +42,7 @@ export const AddEventOrFestContextProvider = ({ children }) => {
       contactNumber: "",
       eventType: null,
       accomodationProvided: null,
-      selectTags: [],
+      eventGenre: [],
       relevantCollegeDepartment: [],
       mainPoster: null,
       pictures: [],
