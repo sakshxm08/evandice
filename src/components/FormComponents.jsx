@@ -13,6 +13,7 @@ export const InputText = ({
   onChange,
   disabled = false,
   value,
+  required = true,
 }) => (
   <input
     type={type}
@@ -22,6 +23,7 @@ export const InputText = ({
     onChange={onChange}
     disabled={disabled}
     value={value}
+    required={required}
   />
 );
 
@@ -33,6 +35,7 @@ export const InputRadio = ({
   value,
   checked = false,
   label,
+  required = true,
 }) => (
   <div className="flex gap-2 items-center">
     <input
@@ -44,6 +47,7 @@ export const InputRadio = ({
       checked={checked}
       value={value}
       disabled={disabled}
+      required={required}
     />
     <label htmlFor={id} className="capitalize">
       {label}
@@ -62,6 +66,7 @@ InputText.propTypes = {
   onChange: PropTypes.func,
   disabled: PropTypes.bool,
   value: PropTypes.string,
+  required: PropTypes.bool,
 };
 InputRadio.propTypes = {
   name: PropTypes.string,
@@ -71,4 +76,5 @@ InputRadio.propTypes = {
   value: PropTypes.string,
   label: PropTypes.string,
   checked: PropTypes.bool,
+  required: PropTypes.bool,
 };

@@ -39,6 +39,35 @@ const depts = [
   "BioTechnology",
   "Agricultural",
 ];
+const genres = [
+  "Technical",
+  "Conferences",
+  "Webinar",
+  "Entrepreneurship Summit",
+  "Cultural",
+  "Faculty Development Program",
+  "Model United Nations",
+  "Medical",
+  "Management",
+  "Seminar",
+  "TEDx",
+  "Pharma",
+  "Sports",
+  "Workshop",
+  "Summit",
+  "Bio Medical",
+  "Literary",
+  "Symposium",
+  "Conclave",
+  "Online Events",
+  "Trainings",
+  "Youth Summit",
+  "Convention",
+  "Internship",
+  "Hackathon",
+  "Guest Lectures",
+  "Short Term Course",
+];
 const tags = [
   "music",
   "comedy",
@@ -75,6 +104,7 @@ const genders = ["Male", "Female", "Prefer not to say"];
 
 export {
   depts,
+  genres,
   tags,
   interests,
   event_types,

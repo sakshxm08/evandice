@@ -13,7 +13,7 @@ const EventCard = ({ width = "w-full", event = {} }) => {
       className={`${width} max-h-96 aspect-[3/5] relative mx-auto rounded-2xl overflow-hidden group`}
     >
       <img
-        src={card_img}
+        src={event?.mainPoster || card_img}
         alt=""
         className="object-cover h-full -z-20 absolute top-0 group-hover:scale-110 transition-all duration-500 w-full"
       />
