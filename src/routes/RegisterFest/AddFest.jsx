@@ -291,7 +291,7 @@ export const AddFest = () => {
                   See {genreCollapsed ? "more" : "less"}{" "}
                   <FaAngleDown
                     className={`${
-                      setGenreCollapsed ? "rotate-0" : "rotate-180"
+                      genreCollapsed ? "rotate-0" : "rotate-180"
                     } transition-all`}
                   />
                 </span>
@@ -302,7 +302,7 @@ export const AddFest = () => {
                 <div
                   className={`grid grid-cols-2 mobiles:grid-cols-3 w-full gap-y-1 ${
                     deptsCollapsed
-                      ? "h-20"
+                      ? "h-[4.8rem]"
                       : "h-[26.2rem] mobiles:h-[18rem] sm:h-[16.4rem]"
                   } transition-all overflow-hidden ease duration-500 select-none`}
                 >

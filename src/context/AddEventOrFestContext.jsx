@@ -51,7 +51,7 @@ export const AddEventOrFestContextProvider = ({ children }) => {
       twitterLink: "",
       eventSponsor: [],
       eventFoodStalls: [],
-      eventAccomodation: [],
+      eventAccomodation: "",
       registrationFees: null,
       desc: "",
       winner: "",
