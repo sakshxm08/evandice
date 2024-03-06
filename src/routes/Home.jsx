@@ -4,19 +4,19 @@ import CompetitionCard from "../components/CompetitionCard";
 import EventSearches from "../components/EventSearches";
 import EventCarousel from "../components/EventCarousel";
 import Search from "../components/Search";
-import { apiConnector } from "../services/apiConnector";
-import { endpoints } from "../services/apiRoutes";
-import { useState } from "react";
-import { useEffect } from "react";
+// import { apiConnector } from "../services/apiConnector";
+// import { endpoints } from "../services/apiRoutes";
+// import { useState } from "react";
+// import { useEffect } from "react";
 
 const Home = () => {
-  const [fests, setFests] = useState([]);
-  useEffect(() => {
-    apiConnector("GET", endpoints.FESTS.GET_ALL).then((res) => {
-      setFests(res.data);
-      console.log(res.data);
-    });
-  }, []);
+  // const [fests, setFests] = useState([]);
+  // useEffect(() => {
+  //   apiConnector("GET", endpoints.FESTS.GET_ALL).then((res) => {
+  //     setFests(res.data);
+  //     console.log(res.data);
+  //   });
+  // }, []);
   const cardTypes = { NORMAL: "normal", BLUR: "blur" };
 
   const searches = [
@@ -33,32 +33,68 @@ const Home = () => {
     "Competitions",
     "Hackathons",
   ];
-  const competitions = [
-    {
-      img: competition_img,
-      name: "Hackathons",
-      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
-      link: "",
-    },
-    {
-      img: competition_img,
-      name: "Hackathons",
-      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
-      link: "",
-    },
-    {
-      img: competition_img,
-      name: "Hackathons",
-      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
-      link: "",
-    },
-    {
-      img: competition_img,
-      name: "Hackathons",
-      desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
-      link: "",
-    },
-  ];
+  const competitions = {
+    cultural: [
+      {
+        img: competition_img,
+        name: "Dance",
+        // desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+        desc: "",
+        link: "",
+      },
+      {
+        img: competition_img,
+        name: "Music",
+        // desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+        desc: "",
+        link: "",
+      },
+      {
+        img: competition_img,
+        name: "eSports",
+        // desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+        desc: "",
+        link: "",
+      },
+      {
+        img: competition_img,
+        name: "Hackathons",
+        // desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+        desc: "",
+        link: "",
+      },
+    ],
+    competitions: [
+      {
+        img: competition_img,
+        name: "Hackathons",
+        // desc: "Ready to be part of a community that thrives on innovation and challenges the boundaries of what's possible? Dive into the world of Hackathons, where code is not just a tool but a force that transforms ideas into reality. Join the digital revolution, and let the lines of code you write today be the keystrokes that shape the future!",
+        desc: "",
+        link: "",
+      },
+      {
+        img: competition_img,
+        name: "Quizes",
+        // desc: "From history to pop culture, science to literature, Quiz Competitions cover a spectrum of topics, ensuring there's always something new to learn. Expand your knowledge horizons and become a walking encyclopedia of fun facts!",
+        desc: "",
+        link: "",
+      },
+      {
+        img: competition_img,
+        name: "Brainstormers",
+        // desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+        desc: "",
+        link: "",
+      },
+      {
+        img: competition_img,
+        name: "Hackathons",
+        // desc: "Lorem ipsum dolor sit amet consectetur. Enim duis pellentesque lacinia sed faucibus at sapien sed. Odio morbi amet ultrices tempus ac sagittis risus viverra egestas. Nisl feugiat viverra orci arcu in sit euismod nunc sed. Volutpat nibh phasellus vitae habitant ullamcorper facilisi habitanterit.",
+        desc: "",
+        link: "",
+      },
+    ],
+  };
 
   return (
     <div className="select-none">
@@ -116,7 +152,7 @@ const Home = () => {
             </div>
           </div>
           <Search searches={searches} options />
-          <EventSearches type={cardTypes.NORMAL} rows={1} events={fests} />
+          <EventSearches type={cardTypes.NORMAL} rows={1} />
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">
@@ -133,14 +169,14 @@ const Home = () => {
         </div>
 
         <h1 className="mt-8 uppercase text-3xl sm:text-5xl md:text-title font-title text-center">
-          Participate in Competitions
+          Challenge Yourself
         </h1>
         <div className="flex flex-col items-center justify-center py-4 sm:py-12 gap-4 sm:gap-8">
           <h2 className="uppercase text-2xl sm:text-4xl font-title text-center md:text-left w-full">
             Cultural
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
-            {competitions.slice(0, 3).map((competition, index) => (
+            {competitions.cultural.slice(0, 3).map((competition, index) => (
               <CompetitionCard key={index} competition={competition} />
             ))}
           </div>
@@ -150,7 +186,7 @@ const Home = () => {
             Hackathons
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 w-5/6 md:w-full mx-auto gap-8">
-            {competitions.slice(0, 3).map((competition, index) => (
+            {competitions.competitions.slice(0, 3).map((competition, index) => (
               <CompetitionCard key={index} competition={competition} />
             ))}
           </div>

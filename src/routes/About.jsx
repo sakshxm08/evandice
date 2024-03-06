@@ -1,10 +1,11 @@
 import { FiInstagram } from "react-icons/fi";
 import { FaLinkedin } from "react-icons/fa";
 import { background, who_are_we } from "../assets/images/images";
-import TeamCard from "../components/TeamCard";
+import { Link } from "react-router-dom";
+// import TeamCard from "../components/TeamCard";
 
 const About = () => {
-  const team_members = ["", "", "", "", "", ""];
+  // const team_members = ["", "", "", "", "", ""];
   return (
     <div className=" relative">
       <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden object-cover">
@@ -19,7 +20,7 @@ const About = () => {
         <h1 className="text-5xl md:text-title uppercase font-title">
           About us
         </h1>
-        <div className="w-full bg-gray-100/40 backdrop-blur-2xl rounded-2xl p-6 xl:p-2 flex items-center justify-between text-black gap-6">
+        <div className="w-11/12 bg-gray-100/40 backdrop-blur-2xl rounded-2xl p-6 xl:px-2 xl:py-4 flex items-center justify-between text-black gap-6">
           <div className="flex flex-col justify-center gap-4 xl:pl-6 w-full lg:w-2/3">
             <div className="flex sm:flex-row flex-col sm:items-center gap-6">
               <img
@@ -34,21 +35,19 @@ const About = () => {
               </div>
             </div>
             <div className="text-sm">
-              Lorem ipsum dolor sit amet consectetur. Sit fermentum sed lobortis
-              massa adipiscing sed vel. Pretium quis orci eget tincidunt libero
-              et. At varius sit velit nisl eu cursus nec laoreet nibh. Purus
-              semper maecenas ut viverra hac. Eget diam cras est viverra ut
-              consectetur. Est blandit aliquam ut sit sit. Ultrices et eget
-              venenatis nunc diam faucibus netus amet nibh. Vitae mauris
-              tincidunt fringilla fermentum lobortis nisl. Hendrerit consequat
-              facilisis amet cursus cras. Sit pharetra semper neque consequat
-              maecenas pharetra est luctus. Mi aenean auctor consectetur aliquet
-              ut odio ullamcorper. Sed donec sit id sit arcu et varius sapien
-              laoreet. Id risus iaculis posuere nec enim id facilisis nascetur.
-              Placerat.
+              <p>
+                Gear up for a festival frenzy like never before! Evandize is not
+                just about events; it&apos;s about creating memories that will
+                have people talking for years. Come join the party where
+                innovation meets celebration - because regular festivals are so
+                last season!
+              </p>
             </div>
-            <div className="flex gap-4 items-center pt-6 md:justify-start justify-center sm:flex-row flex-col">
-              <button className="text-black flex items-center justify-start text-sm font-medium h-10 w-36 bg-[#FBBC05] rounded-full group overflow-hidden relative">
+            <div className="flex gap-4 items-center md:justify-start justify-center pt-6 sm:flex-row flex-col">
+              <Link
+                to="https://www.instagram.com/evandize__?igsh=MXgzM3JpN29zZ3p0cA=="
+                className="text-black flex items-center justify-start text-sm font-medium h-10 w-36 bg-[#FBBC05] rounded-full group overflow-hidden relative"
+              >
                 <div className="group-hover:-translate-x-ful min-w-[9rem] h-full whitespace-nowrap transition-all duration-500 flex items-center justify-center mx-auto">
                   Our Instagram
                 </div>
@@ -56,8 +55,12 @@ const About = () => {
                   <FiInstagram size={20} />
                   @evandize_
                 </div>
-              </button>
-              <button className="text-white flex items-center justify-start text-sm font-medium h-10 w-36 bg-[#4E54C8] rounded-full group overflow-hidden relative">
+              </Link>
+              <Link
+                to="https://www.linkedin.com/company/evandize/"
+                target="_blank"
+                className="text-white flex items-center justify-start text-sm font-medium h-10 w-36 bg-[#4E54C8] rounded-full group overflow-hidden relative"
+              >
                 <div className="group-hover:-translate-x-ful min-w-[9rem] h-full whitespace-nowrap transition-all duration-500 flex items-center justify-center mx-auto">
                   Our Linkedin
                 </div>
@@ -65,40 +68,40 @@ const About = () => {
                   <FaLinkedin size={20} />
                   @evandize_
                 </div>
-              </button>
-              <button className="text-white text-sm font-medium h-10 w-36 bg-[#0163E0] rounded-full">
+              </Link>
+              {/* <button className="text-white text-sm font-medium h-10 w-36 bg-[#0163E0] rounded-full">
                 Read More
-              </button>
+              </button> */}
             </div>
           </div>
           <img src={who_are_we} className=" hidden lg:block w-1/3" alt="" />
         </div>
-        <div className=" drop-shadow-sm">
-          Lorem ipsum dolor sit amet consectetur. Massa nunc blandit justo
-          auctor ac nisi. Lobortis aliquam placerat at eu. Nisi porta nunc quis
-          ipsum praesent quis risus risus aliquet. Quam ornare proin orci sed
-          consequat. Id morbi purus aliquet cursus aliquet iaculis habitasse
-          tellus. Ultricies magna ligula at habitant fermentum nunc lacinia.
-          Libero laoreet sit lobortis non a viverra at purus. Odio ut maecenas
-          cursus in. Arcu quam enim metus amet enim amet. Nisi sed pharetra nunc
-          a vel nullam adipiscing id. Elit orci facilisi venenatis at velit
-          felis nulla. Eget augue semper malesuada eros leo sit. Dui tellus odio
-          tincidunt odio diam proin laoreet quisque. Phasellus risus pretium
-          ultricies nibh libero. Aliquet dapibus posuere ut amet nunc aliquam
-          amet odio bibendum. Cursus et nulla maecenas suspendisse. Phasellus
-          netus vulputate quis a sit sem venenatis viverra hendrerit. Id
-          suscipit nisi arcu sed turpis quam et porttitor. Mi faucibus massa
-          pharetra phasellus interdum id nunc mattis urna. Turpis risus viverra
-          in velit sollicitudin massa nisl dictumst vitae. Non vitae orci
-          bibendum vitae. Ut montes curabitur sagittis fusce sed urna. Odio
-          facilisis et tincidunt et. Ut urna luctus et vel a sagittis volutpat
-          duis. Fames velit velit augue tortor scelerisque libero. Tempor augue
-          mi eget gravida tellus in. Vehicula pharetra a dui a scelerisque ac.
-          Integer platea ac in pellentesque diam eu. In auctor non lectus augue
-          nisi neque venenatis duis. Nunc turpis pellentesque dis morbi
-          suspendisse vitae risus posuere. At eget volutpat porttitor egestas.
+        <div className=" drop-shadow-sm w-3/4 mx-auto text-center flex flex-col justify-center items-center gap-4">
+          <p>
+            We specialize in turning ordinary events into mind-blowing
+            experiences with themes so wild, you&apos;ll wonder why you ever
+            settled for the ordinary. Planning, promoting, executing -
+            we&apos;re the wizards behind the curtain handling it all. You focus
+            on the fun; we&apos;ll handle the rest. It&apos;s a festival.
+            Let&apos;s keep it stress-free!
+          </p>
+          <p>
+            We&apos;re not just event planners; wevre your partners in crime. We
+            collaborate with colleges to capture their vibe and inject it into
+            festivals that scream personality. Tech geeks? Guilty as charged! We
+            use the latest wizardry to streamline everything - from ticketing to
+            social media hype. Let&apos;s make your festival as smooth as a
+            perfectly mixed beat.
+          </p>
+          <p>
+            Join us in redefining the landscape of college festivals. Let
+            Evandize be the catalyst for an era where each festival is not just
+            an event but an immersive experience that sparks inspiration and
+            leaves a legacy. Elevate your celebrations with us - where
+            innovation meets celebration!
+          </p>
         </div>
-        <div className="w-full flex flex-col items-center justify-center gap-4">
+        {/* <div className="w-full flex flex-col items-center justify-center gap-4">
           <h1 className="text-5xl md:text-title uppercase font-title">
             the team
           </h1>
@@ -107,7 +110,7 @@ const About = () => {
               <TeamCard key={index} />
             ))}
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );

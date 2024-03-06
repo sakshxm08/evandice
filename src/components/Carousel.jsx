@@ -6,6 +6,7 @@ import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import PropTypes from "prop-types";
 import { useState } from "react";
+import { Link } from "react-router-dom";
 
 // Custom Arrows for Slick Carousel ------------------------------------------------------------------
 
@@ -100,20 +101,23 @@ const Carousel = () => {
     {
       desc: (
         <div className="flex flex-col items-center justify-center gap-6 lg:gap-8">
-          <div className="flex flex-col  text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
+          <div className="flex flex-col  text-3xl sm:text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
-              Joy at our <span className="text-primary">Oasis</span>.
+              Joy at our <span className="text-primary">Evandize</span>.
             </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
-            Join us for a fun-filled festival celebrating [theme of the
-            festival] with live music, delicious food, and exciting activities
-            for all ages. Don&apos;t miss out on this chance to create lasting
-            memories with your friends and family!
+            Come celebrate with us at this amazing festival including wonderful
+            cuisine, live music, and fun activities for all ages. Don&apos;t
+            pass up this opportunity to spend time with your loved ones and make
+            lifelong memories!
           </div>
-          <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
+          <Link
+            to="/all_events"
+            className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all"
+          >
             register now
-          </button>
+          </Link>
         </div>
       ),
 
@@ -123,18 +127,22 @@ const Carousel = () => {
     {
       desc: (
         <div className="flex flex-col items-center justify-center gap-6 lg:gap-8">
-          <div className="flex flex-col  text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
+          <div className="flex flex-col  text-3xl sm:text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
-              Joy at our <span className="text-primary">Oasis</span>.
+              Joy at our <span className="text-primary">Evandize</span>.
             </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
-            Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis.
+            Come celebrate a lively atmosphere with us at the Exciting Fest
+            Updates and Registrations event. Our event programme is jam-packed
+            with exciting activities!
           </div>
-          <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
+          <Link
+            to="/all_events"
+            className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all"
+          >
             register now
-          </button>
+          </Link>
         </div>
       ),
 
@@ -144,18 +152,24 @@ const Carousel = () => {
     {
       desc: (
         <div className="flex flex-col items-center justify-center gap-6 lg:gap-8">
-          <div className="flex flex-col text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
+          <div className="flex flex-col text-3xl sm:text-4xl xl:text-7xl md:text-5xl items-center justify-center font-bold text-white drop-shadow-2xl">
             <div>
-              Joy at our <span className="text-primary">Oasis</span>.
+              Joy at our <span className="text-primary">Evandize</span>.
             </div>
           </div>
           <div className="flex justify-center items-center max-w-xl text-center text-white text-sm md:text-base lg:text-lg font-light px-8">
-            Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-            vulputate libero et velit interdum, ac aliquet odio mattis.
+            Get ready for the year&apos;s most exciting festival!
+            <br />
+            Come celebrate an evening of effort and artistic expression!
+            Investigate other media and get inspiration. Get to know the artist
+            and other art lovers.
           </div>
-          <button className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all">
+          <Link
+            to="/all_events"
+            className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all"
+          >
             register now
-          </button>
+          </Link>
         </div>
       ),
 
