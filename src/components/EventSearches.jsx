@@ -160,6 +160,6 @@ PrevArrow.propTypes = {
 };
 EventSearches.propTypes = {
   type: PropTypes.string,
-  events: PropTypes.array,
+  events: PropTypes.arrayOf(PropTypes.object),
 };
 export default EventSearches;

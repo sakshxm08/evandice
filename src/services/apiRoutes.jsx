@@ -9,7 +9,7 @@ export const endpoints = {
   },
   // EVENTS ENDPOINTS
   EVENTS: {
-    GET_ALL: BASE_URL + "/event/getevents",
+    GET_BY_GENRE: BASE_URL + "/event/getevents",
     ADD: BASE_URL + "/event/add",
   },
   FESTS: {

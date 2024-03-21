@@ -294,7 +294,7 @@ export const AddEvent = () => {
               {event_types.map((type, index) => (
                 <InputRadio
                   key={index + type}
-                  id={type}
+                  id={type + index}
                   name="eventType"
                   onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.eventType === type}
@@ -310,7 +310,7 @@ export const AddEvent = () => {
               {accomodations.map((accomodation, index) => (
                 <InputRadio
                   key={index + accomodation.id}
-                  id={accomodation.id}
+                  id={accomodation.id + index}
                   name="accomodationProvided"
                   onChange={(e) => setValues(e, formData, setFormData)}
                   checked={formData.accomodationProvided === accomodation.value}
@@ -338,14 +338,17 @@ export const AddEvent = () => {
                         type="checkbox"
                         name="eventGenre"
                         value={tag}
-                        id={tag}
+                        id={tag + index}
                         className="accent-yellow w-3"
                         checked={formData.eventGenre.includes(tag)}
                         onChange={(e) =>
                           handleCheck(e, checked, setChecked, formData)
                         }
                       />
-                      <label htmlFor={tag} className="text-xs capitalize">
+                      <label
+                        htmlFor={tag + index}
+                        className="text-xs capitalize"
+                      >
                         {tag}
                       </label>
                     </div>
@@ -379,7 +382,7 @@ export const AddEvent = () => {
                         type="checkbox"
                         name="relevantCollegeDepartment"
                         value={dept}
-                        id={dept}
+                        id={dept + index}
                         checked={formData.relevantCollegeDepartment.includes(
                           dept
                         )}
@@ -388,7 +391,10 @@ export const AddEvent = () => {
                         }
                         className="accent-yellow w-3"
                       />
-                      <label htmlFor={dept} className="text-xs capitalize">
+                      <label
+                        htmlFor={dept + index}
+                        className="text-xs capitalize"
+                      >
                         {dept}
                       </label>
                     </div>

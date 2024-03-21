@@ -4,6 +4,9 @@ import CompetitionCard from "../components/CompetitionCard";
 import EventSearches from "../components/EventSearches";
 import EventCarousel from "../components/EventCarousel";
 import Search from "../components/Search";
+import { useEffect } from "react";
+import { fetchEventsByGenre } from "../services/helperFunctions";
+import { useState } from "react";
 // import { apiConnector } from "../services/apiConnector";
 // import { endpoints } from "../services/apiRoutes";
 // import { useState } from "react";
@@ -19,6 +22,64 @@ const Home = () => {
   // }, []);
   const cardTypes = { NORMAL: "normal", BLUR: "blur" };
 
+  const [allEvents, setAllEvents] = useState([]);
+  const [eventsByGenre, setEventsByGenre] = useState({});
+  const [searchResults, setSearchResults] = useState([]);
+  const [selectTagsGenres, setSelectTagsGenres] = useState([]);
+  const [relevantCollegeDepartmentGenres, setRelevantCollegeDepartmentGenres] =
+    useState([]);
+  const [combinedGenres, setCombinedGenres] = useState([]);
+
+  useEffect(() => {
+    const genres = ["dance", "music", "comedy", "art", "sports", "food"];
+
+    const fetchData = async () => {
+      const promises = genres.map((genre) =>
+        fetchEventsByGenre(genre).then((events) => ({ [genre]: events }))
+      );
+      fetchEventsByGenre().then((events) => {
+        setAllEvents(events);
+        setSearchResults(events.slice(0, 8));
+        // Extract unique genres from selectTags field
+        const selectTagsGenres = [
+          ...new Set(events.flatMap((event) => event.selectTags)),
+        ];
+
+        // Extract unique genres from relevantCollegeDepartment field
+        const relevantCollegeDepartmentGenres = [
+          ...new Set(
+            events.flatMap((event) => event.relevantCollegeDepartment)
+          ),
+        ];
+
+        // Combine both arrays and extract unique genres
+        const combinedGenres = [
+          ...new Set([...selectTagsGenres, ...relevantCollegeDepartmentGenres]),
+        ];
+        setSelectTagsGenres(selectTagsGenres);
+        setRelevantCollegeDepartmentGenres(relevantCollegeDepartmentGenres);
+        setCombinedGenres(combinedGenres);
+      });
+      Promise.all(promises)
+        .then((responses) => {
+          const updatedEventsByGenre = responses.reduce((acc, response) => {
+            return { ...acc, ...response };
+          }, {});
+
+          setEventsByGenre(updatedEventsByGenre);
+        })
+        .catch((error) => {
+          console.error("Error fetching events:", error);
+        });
+    };
+
+    fetchData();
+  }, []);
+  console.log(eventsByGenre);
+  console.log(allEvents);
+  console.log(selectTagsGenres);
+  console.log(relevantCollegeDepartmentGenres);
+  console.log(combinedGenres);
   const searches = [
     "Sports",
     "Music",
@@ -151,8 +212,16 @@ const Home = () => {
               music artist!
             </div>
           </div>
-          <Search searches={searches} options />
-          <EventSearches type={cardTypes.NORMAL} rows={1} />
+          <Search
+            searches={searches}
+            options
+            setSearchResults={setSearchResults}
+          />
+          <EventSearches
+            type={cardTypes.NORMAL}
+            rows={1}
+            events={searchResults}
+          />
         </div>
         <div className="flex flex-col gap-8 py-12 items-center justify-center px-8 text-center">
           <div className="flex flex-col items-center justify-center gap-4">

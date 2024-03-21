@@ -113,7 +113,7 @@ const Carousel = () => {
             lifelong memories!
           </div>
           <Link
-            to="/all_events"
+            to="/add_event/form"
             className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all"
           >
             register now
@@ -138,7 +138,7 @@ const Carousel = () => {
             with exciting activities!
           </div>
           <Link
-            to="/all_events"
+            to="/add_event/form"
             className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all"
           >
             register now
@@ -165,7 +165,7 @@ const Carousel = () => {
             and other art lovers.
           </div>
           <Link
-            to="/all_events"
+            to="/add_event/form"
             className=" uppercase text-sm px-4 py-2 font-medium text-black bg-primary outline outline-1 outline-primary/70 outline-offset-2 hover:scale-105 hover:outline-offset-0 transition-all"
           >
             register now

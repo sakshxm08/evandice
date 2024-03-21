@@ -3,9 +3,19 @@ import PropTypes from "prop-types";
 import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import EvSearch from "../assets/icons/EvSearch";
+import { fetchEventsByGenre } from "../services/helperFunctions";
 
-const Search = ({ searches = [], options = false }) => {
+const Search = ({ searches = [], options = false, setSearchResults }) => {
   const suggestions = useRef();
+
+  const handleSearch = async (genre) => {
+    try {
+      const events = await fetchEventsByGenre(genre);
+      setSearchResults(events);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+    }
+  };
 
   const left_click = () => {
     suggestions.current.scrollTo({
@@ -53,6 +63,7 @@ const Search = ({ searches = [], options = false }) => {
             {searches.map((search, index) => (
               <span
                 key={index}
+                onClick={() => handleSearch(search)}
                 className="rounded-full px-6 py-1 texsm font-medium border border-white snap-start snap-always hover:bg-white hover:text-black transition-all cursor-pointer"
               >
                 {search}
@@ -73,6 +84,7 @@ const Search = ({ searches = [], options = false }) => {
 
 Search.propTypes = {
   searches: PropTypes.array,
+  setSearchResults: PropTypes.func.isRequired,
   options: PropTypes.bool,
 };
 
