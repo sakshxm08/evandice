@@ -268,14 +268,20 @@ export const AddFest = () => {
                   {genres.map((tag, index) => (
                     <div key={index} className="flex gap-2 items-center">
                       <input
-                        type="checkbox"
+                        type="radio"
                         name="festGenre"
                         value={tag}
                         id={tag}
                         className="accent-yellow w-3"
                         checked={formData.festGenre.includes(tag)}
+                        // onChange={(e) =>
+                        //   handleCheck(e, checked, setChecked, formData)
+                        // }
                         onChange={(e) =>
-                          handleCheck(e, checked, setChecked, formData)
+                          setFormData({
+                            ...formData,
+                            festGenre: [e.target.value],
+                          })
                         }
                       />
                       <label htmlFor={tag} className="text-xs capitalize">
@@ -344,7 +350,7 @@ export const AddFest = () => {
           </div>
           <div className="flex flex-col gap-1">
             <Label
-              value={"Add Main Poster"}
+              value={"Add Main Poster (Portrait preferred)"}
               htmlFor={"mainPoster"}
               className={"mb-2"}
             />

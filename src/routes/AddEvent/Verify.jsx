@@ -4,14 +4,18 @@ import { useAddEventOrFestContext } from "../../hooks/useAddEventOrFestContext";
 import { apiConnector } from "../../services/apiConnector";
 import { endpoints } from "../../services/apiRoutes";
 import { useState } from "react";
+import { BeatLoader } from "react-spinners";
 export const Verify = () => {
   const navigate = useNavigate();
   const { dispatch, fest } = useAddEventOrFestContext();
   console.log(fest);
   const [isLoading, setIsLoading] = useState(false);
-  const [err, setErr] = useState(null);
+  const [otherEmail, setOtherEmail] = useState("");
+  const [code, setCode] = useState("");
+  const [codeSent, setCodeSent] = useState(false);
+  const [codeSentErr, setCodeSentErr] = useState(null);
 
-  const handleSubmit = async (e) => {
+  const handleAddFest = (e) => {
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData();
@@ -31,62 +35,112 @@ export const Verify = () => {
         // RESPONSE LOGIC
         console.log(response);
         dispatch({ type: "FEST", payload: fest });
-        navigate("/add_fest/verify");
+        navigate("/");
         setIsLoading(false);
       })
       .catch((err) => {
-        setErr(err);
+        setCodeSentErr("Fest not added successfully.");
+        setIsLoading(false);
         console.log(err);
       });
   };
 
+  const handleSendCode = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    apiConnector("POST", endpoints.FESTS.SEND_CODE, {
+      pocEmail: fest.poc_email,
+      userEmail1: otherEmail === "" ? otherEmail : fest.poc_email,
+    })
+      .then((res) => {
+        console.log(res);
+        setCodeSent(true);
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.error(err);
+        setCodeSentErr("Code not sent successfully.");
+        setIsLoading(false);
+      });
+  };
+  const handleVerifyCode = (e) => {
+    e.preventDefault();
+    setIsLoading(true);
+    apiConnector("POST", endpoints.FESTS.VERIFY_CODE, {
+      code,
+    })
+      .then(() => {
+        handleAddFest();
+      })
+      .catch((err) => {
+        console.error(err);
+        setCodeSentErr("Code not verified");
+        setIsLoading(false);
+      });
+  };
   return (
     <div>
-      <Link
-        to={-1}
-        className="absolute left-10 top-36 flex font-bold hover:text-yellow transition-all cursor-pointer justify-center items-center gap-2 text-xl"
-      >
-        <IoIosArrowRoundBack size={40} />
-        Back
-      </Link>
-      <div className="max-w-lg mx-auto w-screen flex flex-col gap-8 justify-center items-center">
-        <div className="flex flex-col gap-2 w-full">
-          <label htmlFor="map_link" className="text-yellow text-xs">
-            Add Email IDs to send this code
-          </label>
-          <input
-            type="text"
-            className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-            name="map_link"
-            id="map_link"
-          />
+      {isLoading && (
+        <div className="h-screen w-screen fixed inset-0 flex items-center justify-center bg-black/60 z-[1000]">
+          <BeatLoader color="#FBBC05" />
         </div>
-        <Link className="mx-auto py-3 px-16 text-center max-w-xs w-full text-black bg-green-700 hover:bg-green-800 transition-all font-bold text-base rounded-md">
-          Send Code
-        </Link>
-        <div className="flex flex-col gap-2 w-full">
-          <label htmlFor="map_link" className="text-yellow text-xs">
-            Enter the unique Evandize code for your fest
-          </label>
-          <input
-            type="text"
-            className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
-            name="map_link"
-            id="map_link"
-          />
-        </div>
-        <Link className="mx-auto py-3 px-16 text-center max-w-xs w-full text-black bg-yellow hover:bg-yellow/80 transition-all font-bold text-base rounded-md">
-          Go Ahead
-        </Link>
-        <button
-          onClick={handleSubmit}
-          className="bg-yellow py-2 px-12 mx-auto my-8 text-black"
+      )}
+      <div>
+        <Link
+          to={-1}
+          className="absolute left-10 top-36 flex font-bold hover:text-yellow transition-all cursor-pointer justify-center items-center gap-2 text-xl"
         >
-          Submit
-        </button>
+          <IoIosArrowRoundBack size={40} />
+          Back
+        </Link>
+        <div className="max-w-lg mx-auto w-screen flex flex-col gap-8 justify-center items-center">
+          <div className="flex flex-col gap-2 w-full">
+            <label htmlFor="email" className="text-yellow text-xs">
+              Add Email IDs to send this code
+            </label>
+            <input
+              type="email"
+              className="py-2 px-4 rounded bg-transparent border disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
+              name="email"
+              id="email"
+              value={otherEmail}
+              onChange={(e) => setOtherEmail(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={handleSendCode}
+            disabled={codeSent}
+            className="mx-auto py-3 px-16 text-center disabled:opacity-50 max-w-xs w-full text-black bg-green-700 hover:bg-green-800 transition-all font-bold text-base rounded-md"
+          >
+            Send Code
+          </button>
+          {codeSentErr && (
+            <div className="text-red-600 text-sm text-center">
+              {codeSentErr}
+            </div>
+          )}
+          <div className="flex flex-col gap-2 w-full">
+            <label htmlFor="code" className="text-yellow text-xs">
+              Enter the unique Evandize code for your fest
+            </label>
+            <input
+              type="text"
+              className="py-2 px-4 rounded bg-transparent border  disabled:border-gray-600 disabled:text-gray-500 outline-none focus-visible:border-yellow"
+              name="code"
+              id="code"
+              value={code}
+              onChange={(e) => setCode(e.target.value)}
+            />
+          </div>
+          <button
+            onClick={handleVerifyCode}
+            disabled={!codeSent}
+            className="mx-auto py-3 px-16 text-center disabled:opacity-50 max-w-xs w-full text-black bg-yellow disabled:bg-yellow hover:bg-yellow/80 transition-all font-bold text-base rounded-md"
+          >
+            Go Ahead
+          </button>
+        </div>
       </div>
-      {isLoading && <>Loading...</>}
-      {err && <>Error</>}
     </div>
   );
 };
