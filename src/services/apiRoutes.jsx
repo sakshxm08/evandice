@@ -9,13 +9,16 @@ export const endpoints = {
   },
   // EVENTS ENDPOINTS
   EVENTS: {
-    GET_BY_GENRE: BASE_URL + "/event/getevents",
     ADD: BASE_URL + "/event/add",
   },
   FESTS: {
     ADD: BASE_URL + "/fest/add",
-    GET_ALL: BASE_URL + "/fest/get",
     SEND_CODE: BASE_URL + "/verify/send-code",
     VERIFY_CODE: BASE_URL + "/verify/verify-code",
+  },
+  GET_DATA: {
+    GET_FESTS_BY_GENRE: BASE_URL + "/fest/getfest",
+    GET_EVENTS_BY_GENRE: BASE_URL + "/event/getevents",
+    GET_UPC_AND_LIVE: BASE_URL + "/event/upc-live",
   },
 };

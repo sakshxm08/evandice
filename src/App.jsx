@@ -25,25 +25,34 @@ import { AllCompetitions } from "./routes/AllCompetitions";
 import { CreatePlan } from "./routes/RegisterFest/CreatePlan";
 import { ScreenLoader } from "./components/ScreenLoader";
 import Gallery from "./components/Gallery";
-const Layout = () => (
-  <>
-    <Header />
-    <ScrollRestoration />
-    <Outlet />
-    <div className="w-full md:h-[420px] relative  overflow-y-hidden gallery">
-      <img
-        src={gallery_bg}
-        alt="Background"
-        className="absolute inset-0 w-full h-auto object-cover mt-48"
-      />
-      <div className="mt-10 overflow-visible">
-        <Gallery />
-      </div>
-    </div>
-    <Footer />
-  </>
-);
+import { useEventsContext } from "./hooks/useEventsContext";
+import { BeatLoader } from "react-spinners";
+const Layout = () => {
+  const Events = useEventsContext();
 
+  return Events.events_promise_resolved ? (
+    <>
+      <Header />
+      <ScrollRestoration />
+      <Outlet />
+      <div className="w-full md:h-[420px] relative  overflow-y-hidden gallery">
+        <img
+          src={gallery_bg}
+          alt="Background"
+          className="absolute inset-0 w-full h-auto object-cover mt-48"
+        />
+        <div className="mt-10 overflow-visible">
+          <Gallery />
+        </div>
+      </div>
+      <Footer />
+    </>
+  ) : (
+    <div className="h-screen w-screen fixed inset-0 flex items-center justify-center bg-black/60 z-[1000]">
+      <BeatLoader color="#FBBC05" />
+    </div>
+  );
+};
 const AddBgLayout = ({ heading, mHeading = "mb-16" }) => (
   <div className="relative">
     <div className="absolute top-0 left-0 h-full -z-50 overflow-hidden object-cover">

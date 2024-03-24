@@ -26,13 +26,39 @@ export const handleCheck = (event, checked, setChecked, formData) => {
 };
 
 export const fetchEventsByGenre = (genre) => {
-  return apiConnector("get", endpoints.EVENTS.GET_BY_GENRE, null, null, {
-    genre: genre,
-  })
+  return apiConnector(
+    "GET",
+    endpoints.GET_DATA.GET_EVENTS_BY_GENRE,
+    null,
+    null,
+    {
+      genre: genre,
+    }
+  )
     .then((response) => {
       const { events } = response.data;
       console.log(events); // Handle the response data here
       return events;
+    })
+    .catch((error) => {
+      console.error("There was a problem with the request:", error);
+      throw error;
+    });
+};
+export const fetchFestsByGenre = (genre) => {
+  return apiConnector(
+    "GET",
+    endpoints.GET_DATA.GET_FESTS_BY_GENRE,
+    null,
+    null,
+    {
+      genre: genre,
+    }
+  )
+    .then((response) => {
+      const { festivals } = response.data;
+      console.log(festivals); // Handle the response data here
+      return festivals;
     })
     .catch((error) => {
       console.error("There was a problem with the request:", error);

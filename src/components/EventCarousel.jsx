@@ -37,12 +37,12 @@ function PrevArrow(props) {
 // ----------------------------------------------------------------------------------------------------------
 
 // Component ------------------------------------------------------------------------------------------------
-const EventCarousel = () => {
+const EventCarousel = ({ events }) => {
   // Event for prop in event card ---------------------------------------------------------------------------
-  const events = [];
-  for (let i = 0; i < 8; i++) {
-    events.push({ _id: i });
-  }
+  // const events = [];
+  // for (let i = 0; i < 8; i++) {
+  //   events.push({ _id: i });
+  // }
 
   // Settings for Slick Carousel ----------------------------------------------------------------------------
   const settings = {
@@ -115,5 +115,7 @@ NextArrow.propTypes = {
 PrevArrow.propTypes = {
   onClick: PropTypes.func,
 };
-
+EventCarousel.propTypes = {
+  events: PropTypes.array,
+};
 export default EventCarousel;
