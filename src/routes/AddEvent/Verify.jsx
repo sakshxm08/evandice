@@ -5,22 +5,23 @@ import { apiConnector } from "../../services/apiConnector";
 import { endpoints } from "../../services/apiRoutes";
 import { useState } from "react";
 import { BeatLoader } from "react-spinners";
+import { fetchAllData } from "../../services/helperFunctions";
+import { useEventsContext } from "../../hooks/useEventsContext";
 export const Verify = () => {
   const navigate = useNavigate();
-  const { dispatch, fest } = useAddEventOrFestContext();
-  console.log(fest);
+  const AddEventOrFest = useAddEventOrFestContext();
+  const Events = useEventsContext();
   const [isLoading, setIsLoading] = useState(false);
   const [otherEmail, setOtherEmail] = useState("");
   const [code, setCode] = useState("");
   const [codeSent, setCodeSent] = useState(false);
   const [codeSentErr, setCodeSentErr] = useState(null);
-
   const handleAddFest = (e) => {
     e.preventDefault();
     setIsLoading(true);
     const formData = new FormData();
 
-    Object.entries(fest).forEach(([key, value]) => {
+    Object.entries(AddEventOrFest.fest).forEach(([key, value]) => {
       if (Array.isArray(value)) {
         value.forEach((item) => formData.append(key, item));
       } else {
@@ -34,23 +35,27 @@ export const Verify = () => {
         const response = res.data;
         // RESPONSE LOGIC
         console.log(response);
-        dispatch({ type: "FEST", payload: fest });
+        AddEventOrFest.dispatch({ type: "FEST", payload: {} });
+      })
+      .then(() => {
+        fetchAllData(Events.dispatch);
         navigate("/");
-        setIsLoading(false);
       })
       .catch((err) => {
         setCodeSentErr("Fest not added successfully.");
-        setIsLoading(false);
+
         console.log(err);
-      });
+      })
+      .finally(() => setIsLoading(false));
   };
 
   const handleSendCode = (e) => {
     e.preventDefault();
     setIsLoading(true);
     apiConnector("POST", endpoints.FESTS.SEND_CODE, {
-      pocEmail: fest.poc_email,
-      userEmail1: otherEmail === "" ? otherEmail : fest.poc_email,
+      pocEmail: AddEventOrFest.fest.poc_email,
+      userEmail1:
+        otherEmail === "" ? otherEmail : AddEventOrFest.fest.poc_email,
     })
       .then((res) => {
         console.log(res);
