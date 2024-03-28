@@ -54,8 +54,8 @@ const Header = () => {
   const dropdown = useRef(null);
   document.onclick = function (e) {
     if (
-      !hamburger.current.contains(e.target) &&
-      !dropdown.current.contains(e.target)
+      !hamburger.current?.contains(e.target) &&
+      !dropdown.current?.contains(e.target)
     ) {
       setOpen(false);
     }
