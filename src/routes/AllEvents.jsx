@@ -15,7 +15,7 @@ export const AllEvents = () => {
   return (
     <>
       <div className="w-4/5">
-        <Search />
+        <Search searches={[]} />
       </div>
       {types.map((type, index) => (
         <div key={index} className="w-full flex flex-col gap-10">
