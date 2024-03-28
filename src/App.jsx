@@ -20,13 +20,14 @@ import { AddFest } from "./routes/RegisterFest/AddFest";
 import { Verify } from "./routes/AddEvent/Verify";
 import { background, gallery_bg } from "./assets/images/images";
 import { PropTypes } from "prop-types";
-import Auth from "./routes/Auth";
+import AuthComponent from "./routes/AuthComponent";
 import { AllCompetitions } from "./routes/AllCompetitions";
 import { CreatePlan } from "./routes/RegisterFest/CreatePlan";
 import { ScreenLoader } from "./components/ScreenLoader";
 import Gallery from "./components/Gallery";
 import { useEventsContext } from "./hooks/useEventsContext";
 import { BeatLoader } from "react-spinners";
+
 const Layout = () => {
   const Events = useEventsContext();
 
@@ -76,7 +77,7 @@ const AddBgLayout = ({ heading, mHeading = "mb-16" }) => (
   </div>
 );
 function App() {
-  const { user, userFetched } = useAuthContext();
+  const Auth = useAuthContext();
 
   const router = createBrowserRouter([
     {
@@ -92,9 +93,9 @@ function App() {
           children: [
             {
               path: "",
-              element: !userFetched ? (
+              element: !Auth.userFetched ? (
                 <ScreenLoader />
-              ) : user ? (
+              ) : Auth.user ? (
                 <Navigate to={"/"} />
               ) : (
                 <Navigate to="login" />
@@ -102,22 +103,22 @@ function App() {
             },
             {
               path: "login",
-              element: !userFetched ? (
+              element: !Auth.userFetched ? (
                 <ScreenLoader />
-              ) : user ? (
+              ) : Auth.user ? (
                 <Navigate to={"/"} />
               ) : (
-                <Auth type="login" />
+                <AuthComponent type="login" />
               ),
             },
             {
               path: "signup",
-              element: !userFetched ? (
+              element: !Auth.userFetched ? (
                 <ScreenLoader />
-              ) : user ? (
+              ) : Auth.user ? (
                 <Navigate to={"/"} />
               ) : (
-                <Auth type="signup" />
+                <AuthComponent type="signup" />
               ),
             },
           ],
@@ -193,9 +194,9 @@ function App() {
         {
           // Make the "profile" route protected
           path: "profile",
-          element: !userFetched ? (
+          element: !Auth.userFetched ? (
             <ScreenLoader />
-          ) : !user ? (
+          ) : !Auth.user ? (
             <Navigate to="/auth/login" replace />
           ) : (
             <AddBgLayout heading={"my profile"} mHeading="mb-0" />
