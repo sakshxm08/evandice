@@ -5,7 +5,7 @@ import { PropTypes } from "prop-types";
 import Signup from "./Signup";
 import Login from "./Login";
 
-const Auth = ({ type }) => {
+const AuthComponent = ({ type }) => {
   const loginScreen = useRef();
   const imgText = useRef();
 
@@ -65,8 +65,8 @@ const Auth = ({ type }) => {
   );
 };
 
-export default Auth;
+export default AuthComponent;
 
-Auth.propTypes = {
+AuthComponent.propTypes = {
   type: PropTypes.string,
 };
