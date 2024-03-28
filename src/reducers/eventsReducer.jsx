@@ -55,7 +55,7 @@ export const eventsReducer = (state, action) => {
           ]),
         ],
       };
-    case "SET_LOADING":
+    case "SET_PROMISE_RESOLVED":
       return {
         ...state,
         events_promise_resolved: action.payload,
