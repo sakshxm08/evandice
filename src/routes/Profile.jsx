@@ -12,6 +12,8 @@ import { InputText, Label } from "../components/FormComponents";
 import { depts, genders, interests } from "../assets/values";
 import { useAuthContext } from "../hooks/useAuthContext";
 import { setValues } from "../services/helperFunctions";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apiRoutes";
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -79,6 +81,27 @@ const Profile = () => {
       }
     }
   }, [stateData, formData.state, cities]);
+
+  // const handleSave = (e) => {
+  //   e.preventDefault();
+  //   apiConnector("PUT", endpoints.AUTH.PROFILE, formData, {
+  //     Authorization: localStorage.getItem("token").replace(/['"]+/g, ""),
+  //     "Content-Type": "application/json",
+  //   }).then((res) => console.log(res));
+  // };
+  const handleSave = async (e) => {
+    e.preventDefault();
+    const token = window.localStorage.getItem("token");
+    const headers = {
+      Authorization: token,
+      "Content-Type": "application/json",
+    };
+    // const response = await axios.post(
+    //   `${baseUrl}/getAssignmentKPIData`,
+    //   res,
+    //   { headers }
+    // );
+  };
   return (
     <div className="w-full">
       <div className="hover:bg-gray-400 bg-gray-200  mx-auto my-4  rounded-full  w-32 aspect-square transition-all overflow-hidden group">
@@ -124,7 +147,7 @@ const Profile = () => {
           <div className="right-0 -top-12 flex justify-center items-center gap-4">
             <div
               className="border flex items-center justify-center h-8 gap-2 px-4 rounded cursor-pointer border-yellow text-yellow hover:bg-yellow hover:text-black transition-all"
-              onClick={() => setIsEditable(false)}
+              onClick={handleSave}
             >
               <IoMdSave size={20} />
               Save

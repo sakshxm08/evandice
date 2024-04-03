@@ -6,6 +6,7 @@ export const endpoints = {
     SIGNUP_API: BASE_URL + "/auth/signup",
     LOGIN_API: BASE_URL + "/auth/login",
     GET_USER: BASE_URL + "/auth/user-data",
+    PROFILE: BASE_URL + "/auth/profile",
   },
   // EVENTS ENDPOINTS
   EVENTS: {
