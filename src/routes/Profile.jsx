@@ -14,6 +14,7 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { setValues } from "../services/helperFunctions";
 import { apiConnector } from "../services/apiConnector";
 import { endpoints } from "../services/apiRoutes";
+import axios from "axios";
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -91,16 +92,15 @@ const Profile = () => {
   // };
   const handleSave = async (e) => {
     e.preventDefault();
-    const token = window.localStorage.getItem("token");
+    const token = localStorage.getItem("token").replace(/['"]+/g, "");
     const headers = {
       Authorization: token,
       "Content-Type": "application/json",
     };
-    // const response = await axios.post(
-    //   `${baseUrl}/getAssignmentKPIData`,
-    //   res,
-    //   { headers }
-    // );
+    const response = await axios.put(endpoints.AUTH.PROFILE, formData, {
+      headers,
+    });
+    console.log(response);
   };
   return (
     <div className="w-full">
