@@ -12,12 +12,16 @@ import dayjs from "dayjs";
 import { gallery_1, gallery_2, gallery_3 } from "../assets/images/images";
 
 const Event = () => {
+  const otherEvents = [];
+  for (let i = 0; i < 8; i++) {
+    otherEvents.push({ _id: i });
+  }
+
   const params = useParams();
   const navigate = useNavigate();
 
   const Events = useEventsContext();
   const Auth = useAuthContext();
-  console.log(Auth.user);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -32,12 +36,13 @@ const Event = () => {
       event.registrationFees === "free" ? "Free" : "Rs. " + event.price;
   }
   // const categories = ["music", "art", "paid", "offline", "fun"];
+
   const [images] = useState(
     event?.mainPoster
-      ? [...[event?.mainPoster], ...[event?.picture]]
+      ? [...[event?.mainPoster], ...event["pictures"]]
       : [gallery_1, gallery_2, gallery_3]
   );
-  console.log(images);
+
   const [currImg, setCurrImg] = useState(images[0]);
   const [allImgs, setAllImgs] = useState(false);
 
@@ -95,7 +100,7 @@ const Event = () => {
       })
       .finally(() => setIsLoading(false));
   };
-  console.log(event);
+
   return (
     <>
       <div className="grid tablets:grid-cols-5 gap-y-6 gap-x-4 w-full">
@@ -317,7 +322,7 @@ const Event = () => {
         <h3 className="text-3xl font-semibold capitalize text-yellow">
           More like <span className="text-white">{event?.name}</span>
         </h3>
-        <EventCarousel />
+        <EventCarousel events={otherEvents} />
       </div>
     </>
   );

@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
 import dayjs from "dayjs";
 export const RegisteredOrSubmittedEventCard = ({ event, type }) => {
-  console.log(event);
   return (
     <Link
       to={type === "event" ? `/events/${event._id}` : `/fests/${event._id}`}

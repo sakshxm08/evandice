@@ -9,6 +9,10 @@ export const AllEvents = () => {
     { heading: "dance", type: "dance", events: [] },
     { heading: "comedy", type: "comedy", events: [] },
   ];
+  const events = [];
+  for (let i = 0; i < 8; i++) {
+    events.push({ _id: i });
+  }
   // apiConnector("GET", endpoints.EVENTS.GET_ALL).then((res) =>
   //   console.log(res.data.events)
   // );
@@ -22,7 +26,7 @@ export const AllEvents = () => {
           <h2 className="font-title w-4/5 mx-auto text-4xl uppercase">
             {type.heading}
           </h2>
-          <EventCarousel />
+          <EventCarousel events={events} />
         </div>
       ))}
     </>

@@ -33,6 +33,8 @@ export const AddFest = () => {
   const [sponsor, setSponsor] = useState("");
   const [foodStall, setFoodStall] = useState("");
 
+  const [isLoading, setIsLoading] = useState(false);
+
   const [deptsCollapsed, setDeptsCollapsed] = useState(true);
   const [genreCollapsed, setGenreCollapsed] = useState(true);
 
@@ -644,8 +646,10 @@ export const AddFest = () => {
           </div>
         </div>
         <button
+          disabled={isLoading}
           onClick={async (e) => {
             e.preventDefault();
+            setIsLoading(true);
             const readyToSubmit = checkFieldsNotEmpty(formData);
             if (readyToSubmit) {
               dispatch({ type: "FEST", payload: formData });
@@ -665,7 +669,6 @@ export const AddFest = () => {
                   Object.entries(value).forEach(([nestedKey, nestedValue]) => {
                     formDataType.append(`${key}[${nestedKey}]`, nestedValue);
                   });
-                  console.log(key);
                 } else {
                   // Append non-array and non-object values directly
                   formDataType.append(key, value);
@@ -687,15 +690,14 @@ export const AddFest = () => {
                   // setCodeSentErr("Fest not added successfully.");
 
                   console.log(err);
-                });
-              // .finally(() => setIsLoading(false));
-              console.log(formData);
+                })
+                .finally(() => setIsLoading(false));
             }
             return;
           }}
-          className="mx-auto py-3 px-32 text-black bg-yellow mt-8 hover:bg-yellow/90 transition-all font-bold text-base rounded-md"
+          className="mx-auto py-3 px-32 text-black bg-yellow mt-8 hover:bg-yellow/90 transition-all font-bold text-base rounded-md disabled:bg-yellow/90"
         >
-          Submit
+          {isLoading ? "Submitting..." : "Submit"}
         </button>
       </form>
     </div>

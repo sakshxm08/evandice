@@ -323,7 +323,6 @@ const Profile = () => {
                     checked={formData.dept === department}
                     // onChange={handleCheck}
                     onChange={(e) => {
-                      console.log(formData.dept, department);
                       setValues(e, formData, setFormData);
                     }}
                     id={department}

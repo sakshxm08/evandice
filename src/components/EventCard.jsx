@@ -5,8 +5,7 @@ import { Link } from "react-router-dom";
 // Width as prop because of use of component in different sections ------------------------------------------------------
 const EventCard = ({ width = "w-full", event = {} }) => {
   // Keywords for the event - Fetched from Props ------------------------------------------------------------------------
-  const keywords = ["live", "trending", "paid", "fest"];
-
+  // const keywords = ["live", "trending", "paid", "fest"];
   // Component Starts ---------------------------------------------------------------------------------------------------
   return (
     <div
@@ -26,8 +25,7 @@ const EventCard = ({ width = "w-full", event = {} }) => {
           </span>
         </div>
         <div className="hidden md:flex flex-wrap gap-2 items-center justify-center overflow-hidden mt-[150%] duration-500 opacity-0 group-hover:opacity-100 group-hover:mt-0 transition-all ease-in-out">
-          {/* Keywords greater than 3 are sliced */}
-          {keywords.slice(0, 3).map((keyword, index) => (
+          {/* {keywords.slice(0, 3).map((keyword, index) => (
             <span
               key={index}
               className="rounded-full text-xs uppercase py-1 px-4 border font-medium hover:bg-white transition-all hover:text-black cursor-pointer"
@@ -36,7 +34,6 @@ const EventCard = ({ width = "w-full", event = {} }) => {
             </span>
           ))}
 
-          {/* More keywords open the event page */}
           {keywords.length > 3 && (
             <Link
               to={`/events/${event._id}`}
@@ -44,18 +41,22 @@ const EventCard = ({ width = "w-full", event = {} }) => {
             >
               more...
             </Link>
-          )}
+          )} */}
         </div>
         <h2 className="font-semibold sm:font-bold text-lg mobiles:text-2xl text-center">
-          Neon Da Vista
+          {event?.eventName || event?.festName || "Neon Da Vista"}
         </h2>
-        <div className="flex text-sm sm:text-base justify-around font-medium sm:font-semibold">
-          <span>Pilani</span>
-          <span className=" text-green-600">Rs. 3400</span>
+        <div className="flex flex-col gap-2 sm:flex-row text-sm sm:text-base justify-around font-medium sm:font-semibold">
+          <span className="overflow-hidden whitespace-nowrap text-ellipsis max-w-[150px]">
+            {event?.address || "Pilani"}
+          </span>
+          <span className=" text-green-600">
+            {event?.registrationFees === "free" ? "Free" : "Rs. 3400"}
+          </span>
         </div>
         <div className="flex flex-col justify-end gap-2 overflow-hidden">
           <Link
-            to={`/events/${event._id}`}
+            to={`/${event?.festName ? "fests" : "events"}/${event._id}`}
             className="border flex items-center sm:text-sm justify-center rounded-full py-1 sm:py-2 hover:bg-white transition-all hover:text-black  opacity-0 group-hover:opacity-100 ease-in-out  duration-500"
           >
             Get Now

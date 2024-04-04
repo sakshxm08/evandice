@@ -11,6 +11,10 @@ export const AllCompetitions = () => {
     { heading: "workshops", type: "workshops", competitions: [] },
     { heading: "hackathons", type: "hackathons", competitions: [] },
   ];
+  const events = [];
+  for (let i = 0; i < 8; i++) {
+    events.push({ _id: i });
+  }
   return (
     <>
       <div className="w-4/5">
@@ -21,7 +25,7 @@ export const AllCompetitions = () => {
           <h2 className="font-title w-4/5 mx-auto text-4xl uppercase">
             {type.heading}
           </h2>
-          <EventCarousel />
+          <EventCarousel events={events} />
         </div>
       ))}
     </>
