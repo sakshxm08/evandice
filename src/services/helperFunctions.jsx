@@ -37,7 +37,6 @@ export const fetchEventsByGenre = async (genre) => {
       }
     );
     const { events } = response.data;
-    console.log(events); // Handle the response data here
     return events;
   } catch (error) {
     console.error("There was a problem with the request:", error);
@@ -56,7 +55,6 @@ export const fetchFestsByGenre = async (genre) => {
       }
     );
     const { festivals } = response.data;
-    console.log(festivals); // Handle the response data here
     return festivals;
   } catch (error) {
     console.error("There was a problem with the request:", error);

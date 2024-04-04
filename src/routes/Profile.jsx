@@ -14,7 +14,9 @@ import { useAuthContext } from "../hooks/useAuthContext";
 import { setValues } from "../services/helperFunctions";
 import { apiConnector } from "../services/apiConnector";
 import { endpoints } from "../services/apiRoutes";
-import axios from "axios";
+import { toast } from "react-toastify";
+import { GridLoader } from "react-spinners";
+import { RegisteredOrSubmittedEventCard } from "../components/RegisteredOrSubmittedEventCard";
 
 const Profile = () => {
   const { user } = useAuthContext();
@@ -24,26 +26,27 @@ const Profile = () => {
 
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
-  const [stateData, setStateData] = useState([]);
+
+  const [isLoading, setIsLoading] = useState(false);
+  const [showRegisteredEvents, setShowRegisteredEvents] = useState(false);
 
   const initialValues = {
     name: user?.name || "",
-    clgName: "",
+    clgName: user?.clgName || "",
     email: user?.email || "",
-    gender: "",
-    state: "",
-    city: "",
-    contactNo: "",
-    instagram: "",
-    depts: [],
-    interests: [],
+    gender: user?.gender || "",
+    state: user?.state || "",
+    city: user?.city || "",
+    contactNo: user?.contactNo || "",
+    instagram: user?.instagram || "",
+    dept: user?.dept || "",
+    interests: user?.interests || [],
   };
 
   const [formData, setFormData] = useState(initialValues);
 
   const [checked, setChecked] = useState({
-    depts: formData.depts,
-    interests: formData.tags,
+    interests: formData.interests,
   });
   // Add/Remove checked item from list
   const handleCheck = (event) => {
@@ -67,43 +70,59 @@ const Profile = () => {
   }, [states]);
 
   useEffect(() => {
-    setFormData({ ...formData, city: "" });
-    setCities([]);
-    setStateData(
-      State.getStatesOfCountry("IN").filter((s) => s.name === formData.state)
-    );
+    // Check if selected state has changed
+    const citiesOfState = State.getStatesOfCountry("IN")
+      .filter((s) => s.name === formData.state)
+      .flatMap((s) => City.getCitiesOfState("IN", s.isoCode))
+      .map((city) => city.name);
+
+    setCities(citiesOfState);
+    if (formData.state !== user?.state) {
+      setFormData({ ...formData, city: "" }); // Reset city when state changes
+    }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [formData.state]);
 
-  useEffect(() => {
-    if (stateData.length > 0) {
-      for (let city of City.getCitiesOfState("IN", stateData[0].isoCode)) {
-        cities.push(city.name);
-      }
-    }
-  }, [stateData, formData.state, cities]);
-
-  // const handleSave = (e) => {
-  //   e.preventDefault();
-  //   apiConnector("PUT", endpoints.AUTH.PROFILE, formData, {
-  //     Authorization: localStorage.getItem("token").replace(/['"]+/g, ""),
-  //     "Content-Type": "application/json",
-  //   }).then((res) => console.log(res));
-  // };
-  const handleSave = async (e) => {
+  const handleSave = (e) => {
     e.preventDefault();
-    const token = localStorage.getItem("token").replace(/['"]+/g, "");
-    const headers = {
-      Authorization: token,
+    setIsLoading(true);
+    apiConnector("PUT", endpoints.AUTH.PROFILE, formData, {
       "Content-Type": "application/json",
-    };
-    const response = await axios.put(endpoints.AUTH.PROFILE, formData, {
-      headers,
-    });
-    console.log(response);
+    })
+      .then(() => {
+        setIsEditable(false);
+        toast.success("Details updated successfully", {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .finally(() => setIsLoading(false));
   };
   return (
     <div className="w-full">
+      {isLoading && (
+        <div className="fixed bg-black/60 inset-0  w-screen h-screen flex items-center justify-center z-[1000] ">
+          <GridLoader color="#DF9438" />
+        </div>
+      )}
       <div className="hover:bg-gray-400 bg-gray-200  mx-auto my-4  rounded-full  w-32 aspect-square transition-all overflow-hidden group">
         {userImg ? (
           <>
@@ -280,7 +299,7 @@ const Profile = () => {
                   />
                   <label
                     htmlFor={interest}
-                    className="text-sm capitalize peer-disabled:text-gray-400"
+                    className="text-sm capitalize peer-disabled:text-gray-400 peer-disabled:cursor-not-allowed peer-checked:peer-disabled:font-black peer-checked:peer-disabled:text-gray-100"
                   >
                     {interest}
                   </label>
@@ -292,35 +311,55 @@ const Profile = () => {
             <Label value={"College Department"} />
 
             <div className="grid grid-cols-3 w-full gap-1">
-              {depts.map((dept, index) => (
+              {depts.map((department, index) => (
                 <div key={index} className="flex gap-2 items-center">
                   <input
-                    type="checkbox"
-                    name="depts"
-                    value={dept}
+                    type="radio"
+                    name="dept"
+                    value={department}
                     disabled={!isEditable}
-                    checked={formData.depts.includes(dept)}
-                    onChange={handleCheck}
-                    id={dept}
+                    checked={formData.dept === department}
+                    // onChange={handleCheck}
+                    onChange={(e) => {
+                      console.log(formData.dept, department);
+                      setValues(e, formData, setFormData);
+                    }}
+                    id={department}
                     className="accent-yellow w-3 disabled:cursor-not-allowed peer"
                   />
                   <label
-                    htmlFor={dept}
-                    className="text-sm capitalize peer-disabled:text-gray-400"
+                    htmlFor={department}
+                    className="text-sm capitalize peer-disabled:text-gray-400 peer-disabled:cursor-not-allowed peer-checked:peer-disabled:font-black peer-checked:peer-disabled:text-gray-100"
                   >
-                    {dept}
+                    {department}
                   </label>
                 </div>
               ))}
             </div>
           </div>
         </div>
-        <div className="grid grid-cols-3 w-full relative gap-10 mt-4">
-          <div className="flex flex-col gap-1">
-            <div className="text-yellow text-xs">Show my registered events</div>
-          </div>
-        </div>
       </form>
+
+      <div className="text-yellow text-base flex items-center gap-4 font-bold uppercase mt-8">
+        <div>You registered for...</div>
+        <button
+          type
+          onClick={() => setShowRegisteredEvents((prev) => !prev)}
+          className="text-white text-sm underline underline-offset-1 hover:text-yellow transition-all"
+        >
+          {showRegisteredEvents ? "Hide" : "Show"}
+        </button>
+      </div>
+      {showRegisteredEvents && (
+        <div className="grid grid-cols-4 w-full relative gap-10 mt-4">
+          <RegisteredOrSubmittedEventCard />
+          <RegisteredOrSubmittedEventCard />
+          <RegisteredOrSubmittedEventCard />
+          <RegisteredOrSubmittedEventCard />
+          <RegisteredOrSubmittedEventCard />
+          <RegisteredOrSubmittedEventCard />
+        </div>
+      )}
     </div>
   );
 };

@@ -52,11 +52,19 @@ export const Verify = () => {
   const handleSendCode = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    apiConnector("POST", endpoints.FESTS.SEND_CODE, {
-      pocEmail: AddEventOrFest.fest.poc_email,
-      userEmail1:
-        otherEmail === "" ? otherEmail : AddEventOrFest.fest.poc_email,
-    })
+    apiConnector(
+      "POST",
+      endpoints.FESTS.SEND_CODE,
+      {
+        pocEmail: AddEventOrFest.fest.poc_email,
+        userEmail1:
+          otherEmail === "" ? otherEmail : AddEventOrFest.fest.poc_email,
+      },
+      {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token").replace(/['"]+/g, ""),
+      }
+    )
       .then((res) => {
         console.log(res);
         setCodeSent(true);
@@ -71,9 +79,17 @@ export const Verify = () => {
   const handleVerifyCode = (e) => {
     e.preventDefault();
     setIsLoading(true);
-    apiConnector("POST", endpoints.FESTS.VERIFY_CODE, {
-      code,
-    })
+    apiConnector(
+      "POST",
+      endpoints.FESTS.VERIFY_CODE,
+      {
+        code,
+      },
+      {
+        "Content-Type": "application/json",
+        Authorization: localStorage.getItem("token").replace(/['"]+/g, ""),
+      }
+    )
       .then(() => {
         handleAddFest();
       })

@@ -51,14 +51,14 @@ export const AddFest = () => {
   }, [states]);
 
   useEffect(() => {
-    if (formData.state !== fest.state) {
-      // Check if selected state has changed
-      const citiesOfState = State.getStatesOfCountry("IN")
-        .filter((s) => s.name === formData.state)
-        .flatMap((s) => City.getCitiesOfState("IN", s.isoCode))
-        .map((city) => city.name);
+    // Check if selected state has changed
+    const citiesOfState = State.getStatesOfCountry("IN")
+      .filter((s) => s.name === formData.state)
+      .flatMap((s) => City.getCitiesOfState("IN", s.isoCode))
+      .map((city) => city.name);
 
-      setCities(citiesOfState);
+    setCities(citiesOfState);
+    if (formData.state !== fest.state) {
       setFormData({ ...formData, city: "" }); // Reset city when state changes
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps

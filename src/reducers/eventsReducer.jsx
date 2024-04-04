@@ -24,7 +24,7 @@ export const eventsReducer = (state, action) => {
         ],
         all_genres: [
           ...new Set([
-            ...new Set(action.payload.flatMap((event) => event.selectTags)),
+            ...new Set(action.payload.flatMap((event) => event.festGenre)),
             ...new Set(
               action.payload.flatMap((event) => event.relevantCollegeDepartment)
             ),
@@ -37,7 +37,7 @@ export const eventsReducer = (state, action) => {
         all_fests: action.payload,
         select_tags: [
           ...state.select_tags,
-          ...new Set(action.payload.flatMap((event) => event.selectTags)),
+          ...new Set(action.payload.flatMap((event) => event.festGenre)),
         ],
         relevant_depts: [
           ...state.relevant_depts,
@@ -48,7 +48,7 @@ export const eventsReducer = (state, action) => {
         all_genres: [
           ...new Set([
             ...state.all_genres,
-            ...new Set(action.payload.flatMap((event) => event.selectTags)),
+            ...new Set(action.payload.flatMap((event) => event.festGenre)),
             ...new Set(
               action.payload.flatMap((event) => event.relevantCollegeDepartment)
             ),

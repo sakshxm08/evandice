@@ -84,7 +84,7 @@ const Search = ({ searches = [], options = false, setSearchResults }) => {
 
 Search.propTypes = {
   searches: PropTypes.array,
-  setSearchResults: PropTypes.func.isRequired,
+  setSearchResults: PropTypes.func,
   options: PropTypes.bool,
 };
 

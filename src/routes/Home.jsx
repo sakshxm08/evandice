@@ -20,7 +20,7 @@ const Home = () => {
   //   });
   // }, []);
   const Events = useEventsContext();
-
+  console.log(Events);
   const cardTypes = { NORMAL: "normal", BLUR: "blur" };
 
   const [searchResults, setSearchResults] = useState([]);
