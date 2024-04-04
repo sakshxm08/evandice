@@ -44,6 +44,7 @@ const AuthComponent = ({ type }) => {
               <Link
                 to="/auth/login"
                 replace
+                state={{ redirect: location.state?.redirect }}
                 className="py-2 px-20 border border-white text-white hover:text-black hover:border-yellow font-medium mt-6 hover:bg-yellow transition-all rounded-full shadow-lg"
               >
                 Login
@@ -57,6 +58,7 @@ const AuthComponent = ({ type }) => {
               <Link
                 to="/auth/signup"
                 replace
+                state={{ redirect: location.state?.redirect }}
                 className="py-2 px-20 border border-white text-white hover:text-black hover:border-yellow font-medium mt-6 hover:bg-yellow transition-all rounded-full shadow-lg"
               >
                 Sign Up
@@ -74,7 +76,11 @@ const AuthComponent = ({ type }) => {
             <Signup />
             <div className="flex items-center justify-center mt-4 gap-2">
               Already a user?
-              <Link to="/auth/login" className="underline text-yellow">
+              <Link
+                to="/auth/login"
+                state={{ redirect: location.state?.redirect }}
+                className="underline text-yellow"
+              >
                 Login
               </Link>
             </div>
@@ -84,7 +90,11 @@ const AuthComponent = ({ type }) => {
             <Login />
             <div className="flex items-center justify-center mt-4 gap-2">
               New here?
-              <Link to="/auth/signup" className="underline text-yellow">
+              <Link
+                to="/auth/signup"
+                state={{ redirect: location.state?.redirect }}
+                className="underline text-yellow"
+              >
                 Signup
               </Link>
             </div>

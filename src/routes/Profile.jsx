@@ -18,10 +18,12 @@ import { toast } from "react-toastify";
 import { GridLoader } from "react-spinners";
 import { RegisteredOrSubmittedEventCard } from "../components/RegisteredOrSubmittedEventCard";
 import { useEventsContext } from "../hooks/useEventsContext";
+import { useNavigate } from "react-router-dom";
 
 const Profile = () => {
-  const { user } = useAuthContext();
+  const { user, dispatch } = useAuthContext();
   const Events = useEventsContext();
+  const navigate = useNavigate();
 
   const [userImg] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
@@ -89,6 +91,7 @@ const Profile = () => {
     e.preventDefault();
     setIsLoading(true);
     apiConnector("PUT", endpoints.AUTH.PROFILE, formData, {
+      Authorization: JSON.parse(localStorage.getItem("token")),
       "Content-Type": "application/json",
     })
       .then(() => {
@@ -103,6 +106,19 @@ const Profile = () => {
           progress: undefined,
           theme: "dark",
         });
+        apiConnector("GET", endpoints.AUTH.GET_USER, null, {
+          Authorization: JSON.parse(localStorage.getItem("token")), // Replace with the actual JWT token
+        })
+          .then((res) => {
+            console.log(res.data);
+            dispatch({
+              type: "LOGIN",
+              payload: { user: res.data.user, userFetched: true },
+            });
+          })
+          .then(() => {
+            if (location.state?.redirect) navigate(location.state.redirect);
+          });
       })
       .catch((err) => {
         toast.error(err.response.data.message, {

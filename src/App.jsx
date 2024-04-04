@@ -98,7 +98,7 @@ function App() {
               ) : Auth.user ? (
                 <Navigate to={"/"} />
               ) : (
-                <Navigate to="login" />
+                <Navigate to="login" state={location?.state} />
               ),
             },
             {
@@ -215,7 +215,6 @@ function App() {
   return (
     <>
       <ToastContainer style={{ top: "100px" }} />
-
       <RouterProvider router={router} />
     </>
   );

@@ -68,7 +68,9 @@ export const useSignup = () => {
         });
 
         // React Toast
-        navigate(location.state?.redirect || "/");
+        navigate(location.state?.redirect ? "/profile" : "/", {
+          state: { redirect: location.state?.redirect },
+        });
         toast.success("Signed up successfully", {
           position: "top-right",
           autoClose: 3000,

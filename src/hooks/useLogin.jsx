@@ -12,6 +12,7 @@ export const useLogin = () => {
 
   const { dispatch } = useAuthContext();
 
+  console.log(location.state?.redirect);
   const navigate = useNavigate();
 
   const login = async (details) => {
@@ -38,7 +39,8 @@ export const useLogin = () => {
 
         setIsLoading(false);
         // Redirect to the dashboard or any desired page after successful signup
-        navigate(location.state?.redirect || "/");
+        console.log(location.state);
+
         toast.success("Logged in successfully", {
           position: "top-right",
           autoClose: 5000,
@@ -48,6 +50,9 @@ export const useLogin = () => {
           draggable: true,
           progress: undefined,
           theme: "dark",
+        });
+        navigate(location.state?.redirect ? "/profile" : "/", {
+          state: { redirect: location.state?.redirect || null },
         });
       })
       .catch((err) => {
