@@ -15,10 +15,17 @@ import {
   genres,
 } from "../../assets/values";
 import Datepicker from "react-tailwindcss-datepicker";
-import { handleCheck, setValues } from "../../services/helperFunctions";
+import {
+  fetchAllData,
+  handleCheck,
+  setValues,
+} from "../../services/helperFunctions";
 import { FiPlus } from "react-icons/fi";
 import { IoIosClose } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
+import { apiConnector } from "../../services/apiConnector";
+import { endpoints } from "../../services/apiRoutes";
+import { useEventsContext } from "../../hooks/useEventsContext";
 export const AddFest = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
@@ -31,6 +38,8 @@ export const AddFest = () => {
 
   const sponsorRef = useRef(null);
   const foodStallRef = useRef(null);
+
+  const Events = useEventsContext();
 
   const { dispatch, fest } = useAddEventOrFestContext();
 
@@ -640,7 +649,47 @@ export const AddFest = () => {
             const readyToSubmit = checkFieldsNotEmpty(formData);
             if (readyToSubmit) {
               dispatch({ type: "FEST", payload: formData });
-              navigate("/add_fest/verify");
+              const formDataType = new FormData();
+              Object.entries(formData).forEach(([key, value]) => {
+                if (Array.isArray(value)) {
+                  value.forEach((item) => {
+                    // Append array items directly
+                    formDataType.append(key, item);
+                  });
+                } else if (
+                  typeof value === "object" &&
+                  value !== null &&
+                  key !== "mainPoster"
+                ) {
+                  // Flatten nested objects
+                  Object.entries(value).forEach(([nestedKey, nestedValue]) => {
+                    formDataType.append(`${key}[${nestedKey}]`, nestedValue);
+                  });
+                  console.log(key);
+                } else {
+                  // Append non-array and non-object values directly
+                  formDataType.append(key, value);
+                }
+              });
+              // navigate("/add_fest/verify");
+              apiConnector("POST", endpoints.FESTS.ADD, formDataType, {
+                "Content-Type": "multipart/form-data",
+              })
+                .then(() => {
+                  // RESPONSE LOGIC
+                  dispatch({ type: "FEST", payload: {} });
+                })
+                .then(() => {
+                  fetchAllData(Events.dispatch);
+                  navigate("/");
+                })
+                .catch((err) => {
+                  // setCodeSentErr("Fest not added successfully.");
+
+                  console.log(err);
+                });
+              // .finally(() => setIsLoading(false));
+              console.log(formData);
             }
             return;
           }}

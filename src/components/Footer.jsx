@@ -30,19 +30,29 @@ const Footer = () => {
         </div>
         <div className="flex flex-col w-full gap-6 h-full">
           <div className="pt-6 lg:pt-16 pb-6 flex flex-col gap-2 border-b-gray-600 border-b-[0.5px]">
-            <Link className="capitalize hover:text-primary transition font-light">
+            <Link
+              to="/about"
+              className="capitalize hover:text-primary transition font-light"
+            >
               About us
             </Link>
-            <Link className="capitalize hover:text-primary transition font-light">
+            <Link
+              to="/add_fest/form"
+              className="capitalize hover:text-primary transition font-light"
+            >
               Register a fest
             </Link>
-            <Link className="capitalize hover:text-primary transition font-light">
+            <Link
+              to="add_event/form"
+              className="capitalize hover:text-primary transition font-light"
+            >
               Add an event
             </Link>
           </div>
           <div className="flex flex-col gap-3 justify-center font-light">
             <Link
               to="#"
+              target="_blank"
               onClick={() =>
                 (window.location = "mailto:evandize.management@gmail.com")
               }

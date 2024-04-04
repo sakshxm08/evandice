@@ -23,7 +23,7 @@ const Home = () => {
   console.log(Events);
   const cardTypes = { NORMAL: "normal", BLUR: "blur" };
 
-  const [searchResults, setSearchResults] = useState([]);
+  const [searchResults, setSearchResults] = useState(Events.all_fests);
 
   const searches = [
     "Sports",

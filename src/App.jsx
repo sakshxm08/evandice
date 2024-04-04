@@ -128,7 +128,7 @@ function App() {
           element: <About />,
         },
         {
-          path: "events/:id",
+          path: ":type/:id",
           element: <AddBgLayout />,
           children: [
             {

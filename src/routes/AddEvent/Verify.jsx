@@ -62,7 +62,7 @@ export const Verify = () => {
       },
       {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token").replace(/['"]+/g, ""),
+        Authorization: JSON.parse(localStorage.getItem("token")),
       }
     )
       .then((res) => {
@@ -87,7 +87,7 @@ export const Verify = () => {
       },
       {
         "Content-Type": "application/json",
-        Authorization: localStorage.getItem("token").replace(/['"]+/g, ""),
+        Authorization: JSON.parse(localStorage.getItem("token")),
       }
     )
       .then(() => {

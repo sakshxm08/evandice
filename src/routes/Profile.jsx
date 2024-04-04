@@ -17,9 +17,11 @@ import { endpoints } from "../services/apiRoutes";
 import { toast } from "react-toastify";
 import { GridLoader } from "react-spinners";
 import { RegisteredOrSubmittedEventCard } from "../components/RegisteredOrSubmittedEventCard";
+import { useEventsContext } from "../hooks/useEventsContext";
 
 const Profile = () => {
   const { user } = useAuthContext();
+  const Events = useEventsContext();
 
   const [userImg] = useState(false);
   const [isEditable, setIsEditable] = useState(false);
@@ -343,7 +345,7 @@ const Profile = () => {
       <div className="text-yellow text-base flex items-center gap-4 font-bold uppercase mt-8">
         <div>You registered for...</div>
         <button
-          type
+          type="button"
           onClick={() => setShowRegisteredEvents((prev) => !prev)}
           className="text-white text-sm underline underline-offset-1 hover:text-yellow transition-all"
         >
@@ -351,13 +353,21 @@ const Profile = () => {
         </button>
       </div>
       {showRegisteredEvents && (
-        <div className="grid grid-cols-4 w-full relative gap-10 mt-4">
-          <RegisteredOrSubmittedEventCard />
-          <RegisteredOrSubmittedEventCard />
-          <RegisteredOrSubmittedEventCard />
-          <RegisteredOrSubmittedEventCard />
-          <RegisteredOrSubmittedEventCard />
-          <RegisteredOrSubmittedEventCard />
+        <div className="grid mobiles:grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 w-full relative gap-10 mt-4">
+          {user.festIds.map((id) => (
+            <RegisteredOrSubmittedEventCard
+              key={id}
+              type={"fest"}
+              event={Events.all_fests.find((fest) => fest._id === id)}
+            />
+          ))}
+          {user.eventIds.map((id) => (
+            <RegisteredOrSubmittedEventCard
+              key={id}
+              type={"event"}
+              event={Events.all_events.find((event) => event._id === id)}
+            />
+          ))}
         </div>
       )}
     </div>

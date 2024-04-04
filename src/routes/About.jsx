@@ -46,6 +46,7 @@ const About = () => {
             <div className="flex gap-4 items-center md:justify-start justify-center pt-6 sm:flex-row flex-col">
               <Link
                 to="https://www.instagram.com/evandize__?igsh=MXgzM3JpN29zZ3p0cA=="
+                target="_blank"
                 className="text-black flex items-center justify-start text-sm font-medium h-10 w-36 bg-[#FBBC05] rounded-full group overflow-hidden relative"
               >
                 <div className="group-hover:-translate-x-ful min-w-[9rem] h-full whitespace-nowrap transition-all duration-500 flex items-center justify-center mx-auto">

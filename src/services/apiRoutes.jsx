@@ -22,4 +22,7 @@ export const endpoints = {
     GET_EVENTS_BY_GENRE: BASE_URL + "/event/getevents",
     GET_UPC_AND_LIVE: BASE_URL + "/event/upc-live",
   },
+  REGISTER: {
+    SENDCONMAIL: BASE_URL + "/ticket/sendconmail",
+  },
 };

@@ -1,47 +1,109 @@
 import { useState } from "react";
-import {
-  background,
-  card_img,
-  competition_img,
-  gallery_1,
-  gallery_2,
-  gallery_3,
-  gallery_4,
-  gallery_bg,
-  hero_img_1,
-  hero_img_2,
-  hero_img_3,
-} from "../assets/images/images";
 import EvRightArrow from "../assets/icons/EvRightArrow";
 import EvLeftArrow from "../assets/icons/EvLeftArrow";
 import EventCarousel from "../components/EventCarousel";
+import { useNavigate, useParams } from "react-router-dom";
+import { useEventsContext } from "../hooks/useEventsContext";
+import { useAuthContext } from "../hooks/useAuthContext";
+import { apiConnector } from "../services/apiConnector";
+import { endpoints } from "../services/apiRoutes";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { gallery_1, gallery_2, gallery_3 } from "../assets/images/images";
 
 const Event = () => {
-  const categories = ["music", "art", "paid", "offline", "fun"];
-  const images = [
-    gallery_1,
-    gallery_2,
-    gallery_3,
-    gallery_4,
-    hero_img_2,
-    hero_img_1,
-    hero_img_3,
-    card_img,
-    background,
-    competition_img,
-    gallery_bg,
-  ];
+  const params = useParams();
+  const navigate = useNavigate();
+
+  const Events = useEventsContext();
+  const Auth = useAuthContext();
+  console.log(Auth.user);
+
+  const [isLoading, setIsLoading] = useState(false);
+
+  const event = Events[
+    params.type === "events" ? "all_events" : "all_fests"
+  ].find((event) => event._id === params.id);
+  if (event) {
+    event.name =
+      event?.[params.type === "events" ? "eventName" : "festName"] ||
+      "Neon Da Fiesta";
+    event.fees =
+      event.registrationFees === "free" ? "Free" : "Rs. " + event.price;
+  }
+  // const categories = ["music", "art", "paid", "offline", "fun"];
+  const [images] = useState(
+    event?.mainPoster
+      ? [...[event?.mainPoster], ...[event?.picture]]
+      : [gallery_1, gallery_2, gallery_3]
+  );
+  console.log(images);
   const [currImg, setCurrImg] = useState(images[0]);
   const [allImgs, setAllImgs] = useState(false);
 
-  const colors = ["red", "lime", "fuchsia", "aqua"];
+  // const colors = ["red", "lime", "fuchsia", "aqua"];
 
+  const handleRegister = (e) => {
+    setIsLoading(true);
+    e.preventDefault();
+    apiConnector(
+      "POST",
+      endpoints.REGISTER.SENDCONMAIL,
+      {
+        email: Auth.user.email,
+        username: Auth.user.name,
+        address: event.address,
+        [params.type === "events" ? "eventprice" : "festprice"]: event.fees,
+        time: "7:00 PM onwards",
+        date: "22nd October 2024",
+        [params.type === "events" ? "eventName" : "festname"]: event.name,
+        [params.type === "events" ? "eventid" : "festid"]: event._id,
+      },
+      {
+        Authorization: JSON.parse(localStorage.getItem("token")),
+        "Content-Type": "application/json",
+      }
+    )
+      .then(() => {
+        toast.success(
+          "Registered for " +
+            event[params.type === "events" ? "eventName" : "festName"],
+          {
+            position: "top-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "dark",
+          }
+        );
+        navigate("/");
+      })
+      .catch((err) => {
+        toast.error(err.response.data.message, {
+          position: "top-right",
+          autoClose: 3000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+          theme: "dark",
+        });
+      })
+      .finally(() => setIsLoading(false));
+  };
+  console.log(event);
   return (
     <>
-      <div className="grid tablets:grid-cols-5 gap-y-6 gap-x-4">
+      <div className="grid tablets:grid-cols-5 gap-y-6 gap-x-4 w-full">
         <div className="tablets:col-span-3 flex flex-col gap-3">
-          <h1 className="text-5xl font-bold drop-shadow">Neon Da Fista</h1>
-          <div className="flex gap-2">
+          <h1 className="text-5xl font-bold drop-shadow">
+            {event?.name || "Neon Da Fiesta"}
+          </h1>
+          {/* <div className="flex gap-2">
             {categories.map((category, index) => (
               <span
                 key={index}
@@ -55,11 +117,15 @@ const Event = () => {
                 {category}
               </span>
             ))}
-          </div>
+          </div> */}
         </div>
         <div className="tablets:col-span-2 flex tablets:items-end tablets:justify-end flex-col gap-1">
-          <h1 className="text-xl font-semibold">St. Stephens College</h1>
-          <h3 className="text-sm">New Delhi</h3>
+          <h1 className="text-xl font-semibold">
+            {event?.address || "St. Stephens College"}
+          </h1>
+          <h3 className="text-sm">
+            {event?.city || "New Delhi"}, {event?.state || "Delhi"}
+          </h3>
         </div>
         <div className="tablets:col-span-3 flex flex-col w-full h-max">
           <div className="w-full aspect-video relative rounded-lg overflow-hidden bg-black/60 backdrop-blur object-fit flex justify-center items-center">
@@ -162,20 +228,27 @@ const Event = () => {
             )}
           </div>
         </div>
-        <div className="tablets:col-span-2 w-full max-h-[600px] bg-black/60 p-4 rounded-lg flex flex-col items-center gap-4 justify-evenly">
+        <div className="tablets:col-span-2 w-full max-h-[600px] bg-black/60 py-12 px-4 rounded-lg flex flex-col items-center gap-4 justify-start">
           <div className="flex flex-col items-center justify-center gap-4">
-            <h4 className="font-semibold text-yellow text-xl">Date and Time</h4>
+            <h4 className="font-semibold text-yellow text-xl">Date</h4>
             <div className="flex flex-col gap-2 items-center justify-center text-xl font-medium">
-              <span>22nd October 2024</span>
+              <span>
+                {event?.dates.startDate === event?.dates.endDate
+                  ? dayjs(event?.dates.startDate).format("D MMMM YYYY")
+                  : dayjs(event?.dates.startDate).format("D MMM YYYY") +
+                    "-" +
+                    dayjs(event?.dates.endDate).format("D MMM YYYY")}
+                {/* 22nd October 2024 */}
+              </span>
 
-              <span>7 PM onwards</span>
+              {/* <span>7 PM onwards</span> */}
             </div>
           </div>
           <div className="flex flex-col items-center justify-center gap-4">
             <h4 className="font-semibold text-yellow text-xl">Event Venue</h4>
 
             <div className="flex gap-3 items-center justify-center font-light text-center text-lg">
-              Audiotorium No. 7, St. Stephens North Campus
+              {event?.address || "Audiotorium No. 7, St. Stephens North Campus"}
             </div>
           </div>
           <div className="flex flex-col items-center justify-center gap-4 w-full">
@@ -184,61 +257,65 @@ const Event = () => {
               <span className="text-xs">(subject to change)</span>
             </h4>
             <div className="flex gap-3 items-center justify-evenly text-2xl font-medium w-full mx-auto text-center">
-              <span>Rs. 4,200</span>
-              <span>Rs. 1,100</span>
-              <span>Rs. 850</span>
+              {event?.fees || "Free"}
             </div>
           </div>
           <div className="flex flex-col gap-4 items-center justify-center w-full tablets:mt-4 mt-10">
-            <button className="w-2/3 py-3 border-2 border-yellow text-yellow hover:bg-yellow/20 hover:text- font-semibold text-center rounded-lg transition-all">
+            {/* <button className="w-2/3 py-3 border-2 border-yellow text-yellow hover:bg-yellow/20 hover:text- font-semibold text-center rounded-lg transition-all">
               Save this event for later
-            </button>
-            <button className="w-2/3 py-3 border-2 border-yellow bg-yellow text-black hover:opacity-70 font-semibold text-center rounded-lg transition-all">
-              Register for the event
+            </button> */}
+            <button
+              onClick={handleRegister}
+              disabled={isLoading}
+              className="w-2/3 py-3 border-2 border-yellow bg-yellow text-black hover:opacity-70 font-semibold text-center rounded-lg transition-all"
+            >
+              {isLoading ? "Registering..." : "Register for the event"}
             </button>
           </div>
         </div>
       </div>
 
-      <div className="flex flex-col gap-4 my-10">
-        <h3 className="text-2xl font-semibold text-yellow capitalize">
-          More About <span className="text-white">Neon Da Fiesta</span>
-        </h3>
-        <div>
+      {event?.desc && (
+        <div className="flex flex-col gap-4 my-10">
+          <h3 className="text-2xl font-semibold text-yellow capitalize">
+            More About <span className="text-white">Neon Da Fiesta</span>
+          </h3>
           <div>
-            Unleash your inner music lover and prepare to be captivated by the
-            magic of live vocals at Singer&apos;s Night!
-          </div>
-          <div>
-            This intimate and enchanting event will showcase the diverse talents
-            of local singers, each bringing their unique voice and style to the
-            stage. Immerse yourself in a spectrum of musical genres, from
-            soulful ballads and heart-thumping anthems to electrifying pop tunes
-            and soothing jazz melodies.
-          </div>
-          <div>
-            Here&apos;s what awaits you:
-            <ul className="list-inside">
-              <li className=" list-disc">
-                Mesmerizing performances by a lineup of talented singers
-              </li>
-              <li className=" list-disc">
-                A captivating journey through various musical genres
-              </li>
-              <li className=" list-disc">
-                An intimate setting for an unforgettable experience
-              </li>
-              <li className=" list-disc">
-                Food and beverages available for purchase
-              </li>
-            </ul>
+            <div>
+              Unleash your inner music lover and prepare to be captivated by the
+              magic of live vocals at Singer&apos;s Night!
+            </div>
+            <div>
+              This intimate and enchanting event will showcase the diverse
+              talents of local singers, each bringing their unique voice and
+              style to the stage. Immerse yourself in a spectrum of musical
+              genres, from soulful ballads and heart-thumping anthems to
+              electrifying pop tunes and soothing jazz melodies.
+            </div>
+            <div>
+              Here&apos;s what awaits you:
+              <ul className="list-inside">
+                <li className=" list-disc">
+                  Mesmerizing performances by a lineup of talented singers
+                </li>
+                <li className=" list-disc">
+                  A captivating journey through various musical genres
+                </li>
+                <li className=" list-disc">
+                  An intimate setting for an unforgettable experience
+                </li>
+                <li className=" list-disc">
+                  Food and beverages available for purchase
+                </li>
+              </ul>
+            </div>
           </div>
         </div>
-      </div>
+      )}
 
-      <div className="flex flex-col w-full items-center justify-center gap-8">
+      <div className="flex flex-col w-full items-center justify-center gap-8 mt-8">
         <h3 className="text-3xl font-semibold capitalize text-yellow">
-          More like <span className="text-white">Neon Da Fiesta</span>
+          More like <span className="text-white">{event?.name}</span>
         </h3>
         <EventCarousel />
       </div>
