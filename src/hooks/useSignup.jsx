@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { apiConnector } from "../services/apiConnector";
 import { endpoints } from "../services/apiRoutes";
 
@@ -9,6 +9,7 @@ export const useSignup = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
 
+  const location = useLocation();
   const { dispatch } = useAuthContext();
 
   const navigate = useNavigate();
@@ -67,7 +68,7 @@ export const useSignup = () => {
         });
 
         // React Toast
-        navigate("/");
+        navigate(location.state?.redirect || "/");
         toast.success("Signed up successfully", {
           position: "top-right",
           autoClose: 3000,

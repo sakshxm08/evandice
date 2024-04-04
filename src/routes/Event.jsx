@@ -51,29 +51,44 @@ const Event = () => {
   const handleRegister = (e) => {
     setIsLoading(true);
     e.preventDefault();
-    apiConnector(
-      "POST",
-      endpoints.REGISTER.SENDCONMAIL,
-      {
-        email: Auth.user.email,
-        username: Auth.user.name,
-        address: event.address,
-        [params.type === "events" ? "eventprice" : "festprice"]: event.fees,
-        time: "7:00 PM onwards",
-        date: "22nd October 2024",
-        [params.type === "events" ? "eventName" : "festname"]: event.name,
-        [params.type === "events" ? "eventid" : "festid"]: event._id,
-      },
-      {
-        Authorization: JSON.parse(localStorage.getItem("token")),
-        "Content-Type": "application/json",
-      }
-    )
-      .then(() => {
-        toast.success(
-          "Registered for " +
-            event[params.type === "events" ? "eventName" : "festName"],
-          {
+    if (Auth.user) {
+      apiConnector(
+        "POST",
+        endpoints.REGISTER.SENDCONMAIL,
+        {
+          email: Auth.user.email,
+          username: Auth.user.name,
+          address: event.address,
+          [params.type === "events" ? "eventprice" : "festprice"]: event.fees,
+          time: "7:00 PM onwards",
+          date: "22nd October 2024",
+          [params.type === "events" ? "eventName" : "festname"]: event.name,
+          [params.type === "events" ? "eventid" : "festid"]: event._id,
+        },
+        {
+          Authorization: JSON.parse(localStorage.getItem("token")),
+          "Content-Type": "application/json",
+        }
+      )
+        .then(() => {
+          toast.success(
+            "Registered for " +
+              event[params.type === "events" ? "eventName" : "festName"],
+            {
+              position: "top-right",
+              autoClose: 3000,
+              hideProgressBar: false,
+              closeOnClick: true,
+              pauseOnHover: true,
+              draggable: true,
+              progress: undefined,
+              theme: "dark",
+            }
+          );
+          navigate("/");
+        })
+        .catch((err) => {
+          toast.error(err.response.data.message, {
             position: "top-right",
             autoClose: 3000,
             hideProgressBar: false,
@@ -82,23 +97,12 @@ const Event = () => {
             draggable: true,
             progress: undefined,
             theme: "dark",
-          }
-        );
-        navigate("/");
-      })
-      .catch((err) => {
-        toast.error(err.response.data.message, {
-          position: "top-right",
-          autoClose: 3000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          progress: undefined,
-          theme: "dark",
-        });
-      })
-      .finally(() => setIsLoading(false));
+          });
+        })
+        .finally(() => setIsLoading(false));
+    } else {
+      navigate("/auth/login", { state: { redirect: location.pathname } });
+    }
   };
 
   return (

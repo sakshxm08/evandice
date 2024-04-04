@@ -1,12 +1,14 @@
 import { useState } from "react";
 import { useAuthContext } from "./useAuthContext";
 import { toast } from "react-toastify";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { apiConnector } from "../services/apiConnector";
 import { endpoints } from "../services/apiRoutes";
 export const useLogin = () => {
   const [error, setError] = useState(null);
   const [isLoading, setIsLoading] = useState(null);
+
+  const location = useLocation();
 
   const { dispatch } = useAuthContext();
 
@@ -36,7 +38,7 @@ export const useLogin = () => {
 
         setIsLoading(false);
         // Redirect to the dashboard or any desired page after successful signup
-        navigate("/");
+        navigate(location.state?.redirect || "/");
         toast.success("Logged in successfully", {
           position: "top-right",
           autoClose: 5000,
