@@ -30,8 +30,8 @@ import { BeatLoader } from "react-spinners";
 
 const Layout = () => {
   const Events = useEventsContext();
-
-  return Events.events_promise_resolved ? (
+  const Auth = useAuthContext();
+  return Events.events_promise_resolved && Auth.userFetched ? (
     <>
       <Header />
       <ScrollRestoration />
@@ -96,7 +96,7 @@ function App() {
               element: !Auth.userFetched ? (
                 <ScreenLoader />
               ) : Auth.user ? (
-                <Navigate to={"/"} />
+                <Navigate to={"/"} state={location?.state} />
               ) : (
                 <Navigate to="login" state={location?.state} />
               ),
@@ -106,7 +106,7 @@ function App() {
               element: !Auth.userFetched ? (
                 <ScreenLoader />
               ) : Auth.user ? (
-                <Navigate to={"/"} />
+                <Navigate to={"/"} state={location?.state} />
               ) : (
                 <AuthComponent type="login" />
               ),
@@ -116,7 +116,7 @@ function App() {
               element: !Auth.userFetched ? (
                 <ScreenLoader />
               ) : Auth.user ? (
-                <Navigate to={"/"} />
+                <Navigate to={"/"} state={location?.state} />
               ) : (
                 <AuthComponent type="signup" />
               ),
@@ -197,7 +197,7 @@ function App() {
           element: !Auth.userFetched ? (
             <ScreenLoader />
           ) : !Auth.user ? (
-            <Navigate to="/auth/login" replace />
+            <Navigate to="/auth/login" replace state={location?.state} />
           ) : (
             <AddBgLayout heading={"my profile"} mHeading="mb-0" />
           ),

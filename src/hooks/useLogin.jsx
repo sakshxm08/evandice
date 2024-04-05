@@ -12,7 +12,6 @@ export const useLogin = () => {
 
   const { dispatch } = useAuthContext();
 
-  console.log(location.state?.redirect);
   const navigate = useNavigate();
 
   const login = async (details) => {
@@ -29,7 +28,7 @@ export const useLogin = () => {
         // Store the token in local storage or cookies for authentication
         localStorage.setItem("token", JSON.stringify(user.token));
         apiConnector("GET", endpoints.AUTH.GET_USER, null, {
-          Authorization: user.token, // Replace with the actual JWT token
+          Authorization: user.token,
         }).then((res) => {
           dispatch({
             type: "LOGIN",
@@ -39,7 +38,6 @@ export const useLogin = () => {
 
         setIsLoading(false);
         // Redirect to the dashboard or any desired page after successful signup
-        console.log(location.state);
 
         toast.success("Logged in successfully", {
           position: "top-right",
@@ -51,8 +49,9 @@ export const useLogin = () => {
           progress: undefined,
           theme: "dark",
         });
+        console.log(location.state?.redirect ? "/profile" : "/");
         navigate(location.state?.redirect ? "/profile" : "/", {
-          state: { redirect: location.state?.redirect || null },
+          state: { ...location?.state, userExists: true },
         });
       })
       .catch((err) => {

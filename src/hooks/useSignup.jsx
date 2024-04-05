@@ -69,7 +69,7 @@ export const useSignup = () => {
 
         // React Toast
         navigate(location.state?.redirect ? "/profile" : "/", {
-          state: { redirect: location.state?.redirect },
+          state: location?.state,
         });
         toast.success("Signed up successfully", {
           position: "top-right",

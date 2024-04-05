@@ -39,7 +39,7 @@ export const Verify = () => {
       })
       .then(() => {
         fetchAllData(Events.dispatch);
-        navigate("/");
+        navigate("/", { state: null });
       })
       .catch((err) => {
         setCodeSentErr("Fest not added successfully.");

@@ -117,7 +117,8 @@ const Profile = () => {
             });
           })
           .then(() => {
-            if (location.state?.redirect) navigate(location.state.redirect);
+            if (location.state?.redirect)
+              navigate(location.state.redirect, { state: location?.state });
           });
       })
       .catch((err) => {

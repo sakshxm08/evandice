@@ -26,6 +26,8 @@ import { FaAngleDown } from "react-icons/fa6";
 import { apiConnector } from "../../services/apiConnector";
 import { endpoints } from "../../services/apiRoutes";
 import { useEventsContext } from "../../hooks/useEventsContext";
+import { useAuthContext } from "../../hooks/useAuthContext";
+import { toast } from "react-toastify";
 export const AddFest = () => {
   const [states] = useState([]);
   const [cities, setCities] = useState([]);
@@ -44,8 +46,10 @@ export const AddFest = () => {
   const Events = useEventsContext();
 
   const { dispatch, fest } = useAddEventOrFestContext();
+  const Auth = useAuthContext();
 
   const navigate = useNavigate();
+  const location = useNavigate();
 
   const [formData, setFormData] = useState(fest);
 
@@ -87,6 +91,8 @@ export const AddFest = () => {
           "festSponsor",
           "festFoodStalls",
           "festAccomodation",
+          "googleMapsLink",
+          "pictures",
         ].includes(key)
       ) {
         continue;
@@ -284,7 +290,7 @@ export const AddFest = () => {
                         value={tag}
                         id={tag}
                         className="accent-yellow w-3"
-                        checked={formData.festGenre.includes(tag)}
+                        checked={formData.festGenre?.includes(tag)}
                         // onChange={(e) =>
                         //   handleCheck(e, checked, setChecked, formData)
                         // }
@@ -650,7 +656,23 @@ export const AddFest = () => {
           onClick={async (e) => {
             e.preventDefault();
             setIsLoading(true);
+            if (!Auth.user) {
+              toast.error("Please login to continue", {
+                position: "top-right",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: "dark",
+              });
+              navigate("/auth/login", {
+                state: { redirect: location.pathname },
+              });
+            }
             const readyToSubmit = checkFieldsNotEmpty(formData);
+            if (!readyToSubmit) return setIsLoading(false);
             if (readyToSubmit) {
               dispatch({ type: "FEST", payload: formData });
               const formDataType = new FormData();
@@ -680,11 +702,38 @@ export const AddFest = () => {
               })
                 .then(() => {
                   // RESPONSE LOGIC
-                  dispatch({ type: "FEST", payload: {} });
+                  dispatch({
+                    type: "FEST",
+                    payload: {
+                      festName: "",
+                      dates: { startDate: null, endDate: null },
+                      address: "",
+                      state: "",
+                      city: "",
+                      googleMapsLink: "",
+                      contactNumber: "",
+                      festType: "",
+                      accomodationProvided: null,
+                      festGenre: [],
+                      relevantCollegeDepartment: [],
+                      mainPoster: null,
+                      pictures: [],
+                      instagramLink: "",
+                      facebookLink: "",
+                      twitterLink: "",
+                      festSponsor: [],
+                      festFoodStalls: [],
+                      festAccomodation: "",
+                      registrationFees: null,
+                      poc_name: "",
+                      poc_contact: "",
+                      poc_email: "",
+                    },
+                  });
                 })
                 .then(() => {
                   fetchAllData(Events.dispatch);
-                  navigate("/");
+                  navigate("/", { state: null });
                 })
                 .catch((err) => {
                   // setCodeSentErr("Fest not added successfully.");

@@ -87,7 +87,7 @@ const Event = () => {
                 theme: "dark",
               }
             );
-            navigate("/");
+            navigate("/", { state: null });
           })
           .catch((err) => {
             toast.error(err.response.data.message, {

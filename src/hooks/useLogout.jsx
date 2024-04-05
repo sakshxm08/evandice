@@ -9,7 +9,7 @@ export const useLogout = () => {
   const logout = () => {
     localStorage.removeItem("token");
     dispatch({ type: "LOGOUT" });
-    navigate("/");
+    navigate("/", { state: location?.state });
     toast.success("Logged out successfully", {
       position: "top-right",
       autoClose: 3000,
